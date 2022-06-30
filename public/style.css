@@ -1,0 +1,62 @@
+body{
+    background-color: var(--gray-3);
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+div{
+    width: max-content;
+}
+
+a{
+    font-family: standart;
+    color: white;
+    text-decoration: none;
+    font-size: 300%;
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 1rem 3rem;
+    margin-block: 2rem;
+    background-color: var(--gray-2);
+    box-shadow: var(--outline-1), var(--shadow-1);
+    transition: all .3s;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    border-radius: .7rem;
+}
+
+a:hover{
+    background-color: rgb(54, 54, 54);
+    box-shadow: var(--outline-2), var(--shadow-1);
+}
+
+@font-face {
+    font-family: standart;
+    src: url(./import/Roboto-Bold.ttf);
+}
+
+/**********Variables**********/
+
+:root {
+    --color-accent-1: rgb(197, 21, 206);--color-accent-2: rgb(0, 77, 178);
+    --color-contrast: white;
+
+    --gray-1:rgb(30, 30, 30);
+    --gray-2:rgb(46, 46, 46);
+    --gray-3:rgb(63, 63, 63);
+    --gray-4:rgb(86, 86, 86);
+    --gray-5:rgb(97, 97, 97);
+    --gray-6:rgb(200, 200, 200);
+
+    --outline-1:.1rem .1rem 0em var(--color-accent-1),
+    -.1rem -.1rem 0em var(--color-accent-2);
+    --outline-2:.2rem .2rem 0em var(--color-accent-1),
+    -.2rem -.2rem 0em var(--color-accent-2);
+
+    --shadow-1: 0rem 0rem 1rem .5rem rgba(24, 24, 24, 0.537);
+    --shadow-2: 0rem .3rem 0rem 0rem rgba(35, 35, 35, 0.222);
+    --shadow-3: .5rem .5rem .3rem 0rem rgba(35, 35, 35, 0.165);
+
+}

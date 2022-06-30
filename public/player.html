@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gameshow - Player</title>
+
+    <link rel="stylesheet" href="player.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="/socket.io/socket.io.min.js" defer></script>
+    <script src='./js/script.js' defer></script>
+    <script src='./js/player.js' defer></script>
+
+    <script src="https://kit.fontawesome.com/7796cb6c97.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <article id="login">
+        <div>
+            <p>Name:</p>
+            <input type="text" id="nameInput">
+            <div id="submitName" onclick="submitName()">submit</div>
+        </div>
+    </article>
+
+    <main id="main">
+        <section id="timer">
+            <div id="timer-number">
+                <div>
+                    <p><span class="material-icons">timer</span></p>
+                </div>
+            </div>
+            <div id="timer-bar-parent">
+                <div id="timer-bar"></div>
+            </div>
+        </section>
+
+        <section id="players">
+        </section>
+
+        <div id="selected"><p class="text"></p><input type="text" id="awnserInput"></div>
+
+        <p id="waiting">waiting for question..</p>
+
+        <p id="delete" onclick="deleteMe()">delete Player</p>
+    </main>
+    
+    <p id="popup"></p>
+</body>
+</html>

@@ -1,0 +1,98 @@
+[
+  {
+    "Name": "Gaming ",
+    "Text": [
+      "beliebtestes mario spiel",
+      "welcher ist der seltenste fortnite skin",
+      "in Minuten, was ist der minecraft RSG weltrekord",
+      "was war das erste computerspiel das im Weltall gespielt wurde",
+      "welches spiel war 2020 das meist downloadete"
+    ],
+    "Solution": [
+      "Tetris",
+      "lila skulltrooper/galaxie skin",
+      "9.2",
+      "8 deluxe",
+      "amogus"
+    ],
+    "Used": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "Name": "trippelwort",
+    "Text": [
+      "Wasser Hangar",
+      "Puzzle Bruch",
+      "Bei Schirm",
+      "eisen steig",
+      "Blumen kopf"
+    ],
+    "Solution": [
+      "flugzeug",
+      "stein",
+      "fall",
+      "bahn",
+      "kohl"
+    ],
+    "Used": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "Name": "STEM",
+    "Text": [
+      "Welches aus einer animationsserie bekannte wassertier besitzt kein gehirn",
+      "welcher teil eines atoms hat keine elektrische ladung",
+      "wo/welcher ist der größte Knochen im menschlichen Körper",
+      "aus welchem material war die erste computermaus",
+      "wer war die erste person jemals die 2 wissenschats nobelpreise erhielt"
+    ],
+    "Solution": [
+      "schwamm und seestern",
+      "neuron",
+      "Femur (oberschenkel)",
+      "holz",
+      "amrie curie"
+    ],
+    "Used": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "Name": "Lange vorbei",
+    "Text": [
+      "Welche farbe hatten die Pyramiden ursprünglich",
+      "Was war bevor man nach dem puls von toten fühlte ein echtes problem für tiefschläfer und gelähmte",
+      "aufgrund des Ende welches Erergniss feierten die Russen so viel, dass die Nationalen Vodkareserven aufgebraucht wurden",
+      "wer malte um 1500 das Gemälde Salvator mundi welches 2017 um 450 mio $ verkauft wurde",
+      "welcher war (aufgrund seiner hirngröße) der dümmste Dinosaurier"
+    ],
+    "Solution": [
+      "weis sandstein",
+      "lebendig begraben",
+      "WW2",
+      "Davinci",
+      "Stegosaurier 3cm"
+    ],
+    "Used": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  }
+]

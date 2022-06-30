@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "yanik",
+    "Score": 500,
+    "Specials": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "Name": "michiii",
+    "Score": -300,
+    "Specials": [
+      true,
+      true,
+      true
+    ]
+  }
+]
