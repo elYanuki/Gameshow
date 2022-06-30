@@ -32,9 +32,11 @@ a:hover{
     box-shadow: var(--outline-2), var(--shadow-1);
 }
 
+/**********Imports**********/
+
 @font-face {
     font-family: standart;
-    src: url(./import/Roboto-Bold.ttf);
+    src: url(../import/Roboto-Bold.ttf);
 }
 
 /**********Variables**********/

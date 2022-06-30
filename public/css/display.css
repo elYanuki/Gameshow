@@ -4,7 +4,7 @@
     padding: 0;
 }
 
-p,h1,h2,h3,h4,h5,h6{
+p,h1,h2,h3,h4,h5,h6, li{
     font-family: Arial;
     font-weight: bold;
     color: var(--gray-1);
@@ -14,25 +14,28 @@ img{
     width:100%
 }
 
-body{
-    overflow: auto;
+body, html{
+    overflow: hidden;
+    scroll-behavior: smooth;
 }
 
 /**********Main Style**********/
 main{
+    display: grid;
+    grid-template-columns: auto 70vw;
+    grid-template-rows: 10vw auto;
     width: 100vw;
     height: 100vh;
-    overflow-x: hidden;
 }
 
 /*---------timer---------*/
 
 #timer{
+    grid-area: 1 / 1 / 2 / 3;
     background-color: var(--gray-1);
     display: flex;
     box-shadow: var(--shadow-1);
     z-index: 5;
-    height: 8vh;
 }
 
 #timer-number{
@@ -44,12 +47,11 @@ main{
     color: var(--gray-6);
 /*     text-shadow:.1rem .1rem 0em var(--color-accent-2),
                 -.1rem -.1rem 0em var(--color-accent-2); */
-    cursor: pointer;
 }
 
 #timer-number div{
-    height: 5vh;
-    width: 5vh;
+    height: 100%;
+    width: 100%;
     background-color: var(--gray-3);
     border: .3em solid var(--color-accent-1);
     display: grid;
@@ -63,7 +65,7 @@ main{
     font-size: 5vw;
     color: var(--gray-6);
     font-family: standart;
-    text-shadow: var(--outline-1);
+    text-shadow: var(--outline-2);
     user-select: none;
     display: flex;
 }
@@ -91,17 +93,16 @@ main{
 /*---------fragen---------*/
 
 #questions{
+    grid-area: 2 / 2 / auto / auto;
     background-color: var(--gray-3);
     display: flex;
     /* padding-inline: .6em; */
-    position: relative;
-    height: auto;
-    /* padding-bottom: 2rem; */
+    position: relative; 
 }
 
 #questions h1{
     text-align: center;
-    font-size: 1em;
+    font-size: 2em;
     padding: .4em;
     background-color: var(--color-accent-1);
     color: var(--gray-1);
@@ -132,13 +133,12 @@ main{
     place-items: center;
     border-radius: 1em;
     box-shadow: var(--outline-1), var(--shadow-3);
-    cursor: pointer;
 }
 
 .catergory div p{
-    font-size: 2em;
+    font-size: 2.6em;
     text-align: center;
-    text-shadow: var(--outline-1);
+    text-shadow: var(--outline-2);
     color: var(--gray-6);
     user-select: none;
 }
@@ -146,22 +146,21 @@ main{
 #selected{
     position: absolute;
     right: 0;
+    bottom: -100%;
     background-color: var(--gray-4);
     border: 0rem solid var(--color-accent-1);
     transition: all .6s;
     padding: 2.5rem;
-    display: none;
+    display: flex;
     box-shadow: inset 0 0 1rem 1rem rgba(26, 26, 26, 0.373);
-    width: 100vw;
-    height: auto;
+    width: 70vw;
+    height: calc(100vh - 10vw);
     box-sizing: border-box;
-    margin-bottom: 3rem;
-    flex-direction: column;
 }
 
-#selected .text{
+#selected p:first-of-type{
     color: var(--gray-6);
-    text-shadow: var(--outline-1);
+    text-shadow: var(--outline-2);
     font-family: standart;
     font-size: 4vw;
     width: 100%;
@@ -175,65 +174,21 @@ main{
     line-height: 130%;
 }
 
-#selected .sol{
-    text-align: center;
-    font-size: 4vw;
-    color: white;
-}
-
-#selected .hidden{
-    position: absolute;
-    opacity: 1;
-    width: 40vw;
-    left: 0;
-}
-
-#selected .shown{
-    position: absolute;
-    opacity: 1;
-    transition: opacity 1s;
-    width: 40vw;
-    right: 0;
-}
-
-#selected .buttons{
-    display: flex;
-    position: absolute;
-    top: 100%;
-    justify-content: center;
-    width: 100%;
-    align-items: center;
-    left: 0;
-    right: 0hhh;
-}
-
-#selected .buttons p{
-    color: rgb(122, 18, 128);
-    text-align: center;
-    width: 10%;
-    font-size: 1.1rem;
-    cursor: pointer;
-    margin-inline: 2rem;
-}
-
 /*---------player---------*/
 
 #players{
+    grid-area: 2 / 1 / auto / auto;
     background-color: var(--gray-2);
     z-index: 3;
     box-shadow: var(--shadow-1);
     padding-top: .6em;
     overflow-y: auto;
     position: relative;
-    height: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    width: 100vw;
 }
 
 .player{
-    font-size: 1.3em;
+    font-size: 2.5em;
+    margin: .5em .7em;
     padding: .5em;
     background-color: var(--gray-3);
     display: grid;
@@ -242,10 +197,6 @@ main{
     border-radius: 1rem;
     box-shadow: var(--shadow-1);
     position: relative;
-    width: 45vw;
-    height: 90%;
-    margin: auto;
-    box-sizing: border-box;
 }
 
 .name{
@@ -253,7 +204,7 @@ main{
     color: var(--gray-6);
     font-weight: bold;
     text-transform: uppercase;
-    text-shadow: var(--outline-1)
+    text-shadow: var(--outline-2)
 }
 
 .player div{
@@ -272,10 +223,8 @@ main{
 .points{
     font-size: 1.4em;
     font-family: standart;
-    text-shadow:var(--outline-1);
+    text-shadow:var(--outline-2);
     color: var(--gray-6);
-    align-self: flex-start;
-    margin-top: -1rem;
 }
 
 .player div div{
@@ -295,65 +244,55 @@ main{
     pointer-events: none;
 }
 
-.add{
+#add{
     background-color: var(--gray-1);
-/*     position: fixed;
+    position: fixed;
     bottom: 0;
-    left: 0; */
-    width: 100vw;
+    width: 30vw;
     display: flex;
-    flex-wrap: wrap;
     font-size: 1.5rem;
     padding: .5rem 0;
     box-shadow: var(--shadow-1);
-    justify-content: space-around;
+    justify-content: center;
     color: var(--gray-5);
     z-index: 5;
 }
 
-.add p{
-    font-size: 1rem;
-    color: white;
-}
-
-.add input{
-    background-color: var(--gray-3);
+#add input{
+    background-color: rgb(35, 35, 35);
     border: none;
     margin-right: .5rem;
     /* border-bottom: .1rem solid var(--color-accent-1); */
-    color: var(--gray-6);
+    color: var(--gray-5);
     border-radius: .3rem;
     box-sizing: border-box;
     padding-inline: .5rem;
     transition: border .4s;
     box-shadow: inset 0 0 .2rem .2rem rgba(0, 0, 0, 0.271);
-    width: 30%;
 }
 
-.add input:focus{
+#add input:focus{
     outline: none;
     border: none;
     border-bottom: .1rem solid var(--color-accent-1);
 }
 
-/* .add i{
+#add i{
     margin-left: .5rem;
-    cursor: pointer;
     color: var(--gray-2);
     transition: all .5s;
-    min-width: 1rem;
-    min-height: 1rem;
 }
 
-.add i:hover{
+#add i:hover{
     color: var(--color-accent-1);
-} */
+}
 
-.add i:active{
+#add i:active{
     color: var(--color-accent-2);
 }
 
 .player .fa-pen-to-square{
+    opacity: 0;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -366,6 +305,10 @@ main{
     padding: .4rem;
     margin: .2rem;
     box-shadow: var(--shadow-2);
+}
+
+.player:hover .fa-pen-to-square{
+    opacity: 1;
 }
 
 .player .fa-pen-to-square:hover{
@@ -382,18 +325,8 @@ main{
     transform: scale(0);
     z-index: 10;
     padding: 1rem;
-    width: auto;
+    width: 16vw;
     border-radius: 1rem;
-    /*left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%); */
-}
-
-#score-selector .delete{
-    color: white;
-    text-align: center;
-    padding: .5rem;
-    font-size: 130%;
 }
 
 #score-selector div:first-of-type{
@@ -407,7 +340,6 @@ main{
     font-size: 1.8rem;
     padding: .1rem;
     text-align: center;
-    cursor: pointer;
     transition: all .2s;
 }
 
@@ -437,7 +369,7 @@ main{
     border-bottom: .2rem solid var(--color-accent-1);
 }
 
-#score-selector div:last-of-type{
+#score-selector div:last-child{
     display: flex;
     justify-content: space-around;
     font-size: 2.7rem;
@@ -445,13 +377,12 @@ main{
     color: var(--gray-6);
 }
 
-#score-selector div:last-of-type i{
+#score-selector div:last-child i{
     box-shadow: var(--shadow-3);
     transition: all .3s;
-    cursor: pointer;
 }
 
-#score-selector div:last-of-type i:hover{
+#score-selector div:last-child i:hover{
     box-shadow: var(--shadow-3);
     color: var(--color-accent-1);
 }
@@ -466,7 +397,6 @@ main{
     padding: 1rem;
     top: 50%;
     left: 50%;
-    width: 90vw;
     transform: translate(-50%, -50%) scale(0);
     transition: all .3s;
 }
@@ -479,72 +409,190 @@ main{
 }
 
 #editmode input{
-    font-size: 100%;
+    font-size: 170%;
     background-color: var(--gray-2);
     color: var(--gray-6);
-    width: 100%;
 }
 
 #editmode p{
-    cursor: pointer;
     background-color: var(--gray-2);
     width: fit-content;
     color: var(--gray-6);
     padding: .5rem;
 }
 
-#create-ffa{
-    background-color: var(--gray-3);
-    box-shadow: var(--shadow-1);
-    border-radius: 1rem;
-    position: absolute;
-    top: 0;
-    z-index: 10;
-    padding: 1rem;
-    top: 50%;
-    left: 50%;
-    width: 90vw;
-    transform: translate(-50%, -50%) scale(0);
-    transition: all .3s;
-}
-
-#create-ffa input{
-    font-size: 100%;
-    background-color: var(--gray-2);
-    color: var(--gray-6);
-    width: 100%;
-}
-
-#create-ffa p{
-    cursor: pointer;
-    background-color: var(--gray-2);
-    width: fit-content;
-    color: var(--gray-6);
-    padding: .5rem;
-}
-
-#awnsers{
-    position: absolute;
-    right: 10vw;
-    left: 10vw;
-    top: 10vh;
-    bottom: 30vh;
-    color: white;
+#rules{
     display: none;
-    z-index: 50;
+    position: absolute;
     background-color: var(--gray-3);
-    padding: 2rem;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 11;
+    color: var(--gray-6);
 }
 
-#awnsers p{
-    color: white;
-    font-size: 120%;
+#rules section{
+    width: 50%;
+    padding: 1rem;
+}
+
+#rules ul{
+    margin-left: 1.5rem;
+}
+
+#rules li{
+    margin-bottom: .2rem;
+    line-height: 140%;
+}
+
+#rules h1{
+    text-shadow: var(--outline-2);
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+#rules h2{
+    text-shadow: var(--outline-1);
+    font-size: 1.5rem;
+}
+
+#rules h3{
+    font-size: 1.25rem;
+    text-shadow: var(--outline-1);
+    margin-top: .3rem;
+    margin-bottom: .2rem;
+}
+
+#rules p, #rules h1, #rules h2, #rules h3, #rules li{
+    color: inherit;
+}
+
+#two-way{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    margin-bottom: 1rem;
+}
+
+#two-way .line{
+    grid-column: 1 / span 2;
+    height: 3vh;
+    width: .1rem;
+    background-color: var(--gray-6);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#two-way .split{
+    width: 60%;
+    border-top: .15rem;
+    border-left: .15rem;
+    border-right: .15rem;
+    border-color: var(--gray-6);
+    border-style: solid;
+    border-width: .15rem;
+    border-bottom: none;
+    height: 3vh;
+    margin-left: auto;
+    margin-right: auto;
+    grid-column: 1 / span 2;
+}
+
+#two-way .option{
+    border: .15rem solid var(--gray-6);
+    margin-inline: 1rem;
+    box-shadow: var(--outline-1), var(--shadow-3);
+    background-color: rgb(55, 55, 55);
+}
+
+#two-way ul{
+    margin: .5rem;
+    margin-left: 1.5rem;
+}
+
+#two-way .option p{
+    color: inherit;
+    font-size: 1.2em;
+    text-align: center;
+    border-bottom: .15rem solid var(--gray-6);
+    box-shadow: var(--outline-1);
+    text-shadow: var(--outline-1);
+    padding-bottom: .2rem;
+    margin-bottom: .2rem;
+}
+
+#categories{
+    display: none;
+    position: absolute;
+    background-color: var(--gray-3);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 11;
+    color: var(--gray-6);
+    padding: 1rem;
+}
+
+#categories ul{
+    margin-left: 1.5rem;
+}
+
+#categories li{
+    margin-bottom: .2rem;
+    line-height: 140%;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#categories h1{
+    text-shadow: var(--outline-2);
+    font-size: 1.8rem;
+}
+
+#categories h2{
+    text-shadow: var(--outline-1);
+    font-size: 1.5rem;
+}
+
+#categories h3{
+    font-size: 1.25rem;
+    text-shadow: var(--outline-1);
+    margin: 0;
+    margin-top: .3rem;
+    margin-bottom: .2rem;
+    margin-right: 0 !important;
+}
+
+#categories p, #categories h1, #categories h2, #categories h3, #categories li{
+    color: inherit;
+    text-align: center;
+}
+
+#categories p{
+    text-align: center;
+    color: var(--gray-6);
+    opacity: .5;
+}
+
+#categories h3{
+    margin-top: 1rem;
+}
+
+#categories ul li:last-of-type, .underline{
+    text-decoration:underline var(--color-accent-1) .15rem;
+    font-weight: bold;
+    background-color: transparent;
+    color: inherit;
 }
 /**********Imports**********/
 
 @font-face {
     font-family: standart;
-    src: url(./import/Roboto-Bold.ttf);
+    src: url(../import/Roboto-Bold.ttf);
 }
 
 /**********Keyframes**********/
