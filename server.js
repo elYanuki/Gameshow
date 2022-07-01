@@ -111,21 +111,17 @@ io.on("connection", (socket) => {
         manager.deletePlayer(name)
         io.emit("loadPlayers", manager.players)
 
-        fs.writeFile(playerpath, JSON.stringify(manager.players, 0, 2), 'utf8', (error => {
-            if (error) throw error;
-        }))
+        updatePlayerFile()
     })
 
     socket.on("deletePlayerID", (id) => {
         manager.deletePlayerID(id)
         io.emit("loadPlayers", manager.players)
 
-        fs.writeFile(playerpath, JSON.stringify(manager.players, 0, 2), 'utf8', (error => {
-            if (error) throw error;
-        }))
+        updatePlayerFile()
     })
 
-    socket.on("sendAwnser", (player, awnser) => {
+    socket.on("sendAwnser", (player, awnser) => { //collects awnsers for ffa
         let erg = player + ": " + awnser
         awnsers.push(erg)
     })
@@ -138,17 +134,13 @@ io.on("connection", (socket) => {
             manager.players[player].Specials[pos] = true
         }
 
-        fs.writeFile(playerpath, JSON.stringify(manager.players, 0, 2), 'utf8', (error => {
-            if (error) throw error;
-
-        }))
+        updatePlayerFile()
 
         io.emit("loadPlayers", manager.players)
     })
 
     socket.on("changeScore", (plusMinus, value, player) => {
-        if (value == "") { }
-
+        if (value == "") {}
         else if (plusMinus == "plus") {
             manager.players[player].Score = parseInt(manager.players[player].Score) + parseInt(value)
             console.log("plus");
@@ -157,9 +149,7 @@ io.on("connection", (socket) => {
             manager.players[player].Score = parseInt(manager.players[player].Score) - parseInt(value)
         }
 
-        fs.writeFile(playerpath, JSON.stringify(manager.players, 0, 2), 'utf8', (error => {
-            if (error) throw error;
-        }))
+        updatePlayerFile()
 
         io.emit("loadPlayers", manager.players)
     })
@@ -170,10 +160,7 @@ io.on("connection", (socket) => {
 
         io.emit("loadQuestions", manager.questions)
 
-        fs.writeFile(questionpath, JSON.stringify(manager.questions), 'utf8', (error=>{
-            if(error) throw error;
-            
-        }))
+        updateQuestionFile()
     })
 
     socket.on("postPlayer", (name) => {
@@ -181,15 +168,12 @@ io.on("connection", (socket) => {
         
         manager.addPlayer(name)
 
-        fs.writeFile(playerpath, JSON.stringify(manager.players), 'utf8', (error=>{
-            if(error) throw error;
-            
-        }))
+        updatePlayerFile()
         
         io.emit("loadPlayers", manager.players)
     })
 
-    socket.on("reset", () => {
+    socket.on("reset", () => { //resets all scores and specials
         for (let i = 0; i < manager.players.length; i++) {
             manager.players[i].Score = 0
             manager.players[i].Specials[0] = true
@@ -197,16 +181,16 @@ io.on("connection", (socket) => {
             manager.players[i].Specials[2] = true
          }
 
-         fs.writeFile(playerpath, JSON.stringify(manager.players, 0, 2), 'utf8', (error => {
-            if (error) throw error;
-
-        }))
+         updatePlayerFile()
 
         io.emit("loadQuestions", manager.questions)
         io.emit("loadPlayers", manager.players)
     })
 })
 
+//SAVE DATA TO JSON FILES
+
+//initially saves/updates players
 if (fs.existsSync(playerpath)) {
     fs.readFile(playerpath, 'utf-8', (err, data_string) => {
         if (err) throw err;
@@ -219,6 +203,7 @@ if (fs.existsSync(playerpath)) {
     })
 }
 
+//initially saves/updates questions
 if (fs.existsSync(questionpath)) {
     fs.readFile(questionpath, 'utf-8', (err, data_string) => {
         if (err) throw err;
@@ -231,6 +216,7 @@ if (fs.existsSync(questionpath)) {
     })
 }
 
+//initially saves/updates ffa
 if (fs.existsSync(ffAPath)) {
     fs.readFile(ffAPath, 'utf-8', (err, data_string) => {
         if (err) throw err;
@@ -243,9 +229,22 @@ if (fs.existsSync(ffAPath)) {
     })
 }
 
+function updatePlayerFile(){
+    fs.writeFile(playerpath, JSON.stringify(manager.players, 0, 2), 'utf8', (error => {
+        if (error) throw error;
+    }))
+}
+
+function updateQuestionFile(){
+    fs.writeFile(questionpath, JSON.stringify(manager.questions), 'utf8', (error=>{
+        if(error) throw error;
+    }))
+}
+
 server.listen(port, () => {
     console.log(`listenin on port ${port}`)
 })
+
 
 
 class Manager {
@@ -283,28 +282,6 @@ class Manager {
                 ],
                 Used: [
                     false, false, false, false, false
-                ]
-            };
-
-            this.questions.push(newSet);
-        }
-    }
-
-    reAddQuestionSet(name, text1, sol1, used1, text2, sol2, used2, text3, sol3, used3, text4, sol4, used4, text5, sol5, used5) {
-        if (this.questions.length < 4) {
-            console.log(name.toLowerCase());
-            name = name.toLowerCase()
-
-            let newSet = {
-                Name: name,
-                Text: [
-                    text1, text2, text3, text4, text5
-                ],
-                Solution: [
-                    sol1, sol2, sol3, sol4, sol5
-                ],
-                Used: [
-                    used1, used2, used3, used4, used5
                 ]
             };
 

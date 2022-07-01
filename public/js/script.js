@@ -23,26 +23,24 @@ let timerlenght = 30
 
 let ffaRunning = false
 
-function setTimer(time){
-        timerBar.style.transition = `all 200ms linear`
+function setTimer(){
+        timerBar.style.transition = `all 200ms linear` //to load up the bar in 200ms
         timerBar.style.width = "100%"
         timerNumber.innerText = timerlenght
 
         setTimeout(function(){
-            timerBar.style.transition = `all ${timerlenght}s linear`
-            
+            timerBar.style.transition = `all ${timerlenght}s linear` 
             timerBar.style.width = "0%"
-            
         },400)
 
         for (let i = 0; i < timerlenght; i++) {
             countDown[i] = setTimeout(function(){
-                timerNumber.innerText = timerlenght - i
+                timerNumber.innerText = timerlenght - i //decrease the timer
             },1000*i)
         }
 
         clear = setTimeout(function(){
-            if(ffaRunning == true){
+            if(ffaRunning == true){ //timer is up - players should send their awnser
                 sendAwnser()
             }
 
@@ -50,15 +48,15 @@ function setTimer(time){
             playSound("timeUp")
 
             setTimeout(function(){
-                timerNumber.style = "transition: none; opacity: 0;"
+                timerNumber.style = "transition: none; opacity: 0;" //hides the number
             },900)
 
-            setTimeout(function(){
+            setTimeout(function(){ //shows the icon again
                 timerNumber.style.transition = "all .5s"
                 timerNumber.innerHTML = '<span class="material-icons">timer</span>'
                 timerNumber.style.opacity = "1"
             },1500)
-        },1000*time)
+        },1000*timerlenght)
 }
 
 function killTimer(){
@@ -92,10 +90,6 @@ function closeQuestion(){
     textP.style.marginBottom = "5rem"
 }
 
-function toggelSpecialUsed(set, pos){
-    specialUsed(set, pos)
-}
-
 function changeScorePopup(id, event) {
     if (scoreSelHidden == true) {
         document.removeEventListener("click", closeScorePopup);
@@ -123,6 +117,8 @@ function changeScorePopup(id, event) {
 function closeScorePopup(ev) {
     // If user clicks inside the element, do nothing
     if (ev.target.closest('#score-selector')) return
+
+    //if click is outside - close popup
     scoreSel.style.transform = "scale(0)"
     scoreSelHidden = true
   

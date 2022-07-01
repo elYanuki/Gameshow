@@ -42,7 +42,7 @@ socket.on('loadPlayers', (data) => {
 })
 
 socket.on('startTimer', () => {
-    setTimer(timerlenght)
+    setTimer()
 })
 
 socket.on('stopTimer', () => {

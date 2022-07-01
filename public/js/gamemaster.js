@@ -71,7 +71,7 @@ socket.on('closeQuestion', () => {
 })
 
 socket.on('startTimer', (data) => {
-    setTimer(timerlenght)
+    setTimer()
 })
 
 socket.on('stopTimer', () => {

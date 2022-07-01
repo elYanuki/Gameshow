@@ -60,7 +60,7 @@ socket.on('loadQuestions', (data) => { //loads the question overview
 })
 
 socket.on('startTimer', () => {
-    setTimer(timerlenght)
+    setTimer()
 })
 
 socket.on('stopTimer', () => {
