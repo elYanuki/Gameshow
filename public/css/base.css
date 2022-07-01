@@ -1,11 +1,11 @@
 /*---------timer---------*/
 
 #timer{
-    grid-area: 1 / 1 / 2 / 3;
     background-color: var(--gray-1);
     display: flex;
     box-shadow: var(--shadow-1);
     z-index: 5;
+    height: 8vh;
 }
 
 #timer-number{
@@ -17,11 +17,12 @@
     color: var(--gray-6);
 /*     text-shadow:.1rem .1rem 0em var(--color-accent-2),
                 -.1rem -.1rem 0em var(--color-accent-2); */
+    cursor: pointer;
 }
 
 #timer-number div{
-    height: 100%;
-    width: 100%;
+    height: 5vh;
+    width: 5vh;
     background-color: var(--gray-3);
     border: .3em solid var(--color-accent-1);
     display: grid;
@@ -35,7 +36,7 @@
     font-size: 5vw;
     color: var(--gray-6);
     font-family: standart;
-    text-shadow: var(--outline-2);
+    text-shadow: var(--outline-1);
     user-select: none;
     display: flex;
 }
@@ -60,7 +61,6 @@
     width: 0%;
     background-color: var(--color-accent-1);
 }
-
 
 /*---------player---------*/
 

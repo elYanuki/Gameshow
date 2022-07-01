@@ -34,16 +34,17 @@
 
         <div id="awnsers"></div>
 
-        <div id="add" class="add"><p onclick="editmode()">add cattegory</p><input type="text" id="name-input"/> 
-        <p onclick="postPlayer(document.getElementById('name-input').value); document.getElementById('name-input').value = '' ">add player</p>
-        <p onclick="resetPlayers()">reset</p></div>
-
+        <div id="add" class="add">
+            <p onclick="postPlayer(document.getElementById('name-input').value); document.getElementById('name-input').value = '' ">add player</p>
+            <!-- <p onclick="addQuestion()">add cattegory</p> -->
+            <input type="text" id="name-input"/>
         <section id="questions">
         </section>
         
         <section class="add">
     
-            <p onclick="ffaPop()">add ffa </p><p onclick="triggerFFA()">trigger FFA</p>
+            <!-- <p onclick="ffaPop()">add ffa </p> --><p onclick="triggerFFA()">trigger FFA</p>
+            <p onclick="if(confirm('do u want to rest all scores') == true)socket.emit('reset')">reset</p>
         </section>
 
         <section class="add">
@@ -78,7 +79,7 @@
         <p onclick="deletePlayer()" class="delete">delete Player</p>
     </div>
 
-    <div id="editmode">
+    <div id="addQuestion">
         <input type="text" placeholder="kategoriename" id="set-name">
         <div id="question-inputs">
             <input type="text" placeholder="question 1:">
@@ -92,8 +93,8 @@
             <input type="text" placeholder="question 5:">
             <input type="text" placeholder="solution 5:">
         </div>
-        <p onclick="createQuestion()">Confirm</p>
-        <p onclick="editmodePopup.style.transform = 'translate(-50%, -50%) scale(0)'">cancel</p>
+        <p onclick="postQuestion()">Confirm</p>
+        <p onclick="addQuestionPopup.style.transform = 'translate(-50%, -50%) scale(0)'">cancel</p>
     </div>
 
     <div id="create-ffa">

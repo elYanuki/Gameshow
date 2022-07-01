@@ -1,3 +1,13 @@
+ 
+/**************************************************************************************************************
+
+USE: contains all functions and socket calls exclusivly needed (in this form) to run the gameshow send these changes to other files and open various popups needet to edit
+LINKED FROM: gamemaster.html
+AUTHOR: Yanik Kendler
+DEPENDS ON: socket, script.js
+
+***************************************************************************************************************/
+
 const socket = io();
 
 socket.on("connect", () => {
@@ -5,7 +15,7 @@ socket.on("connect", () => {
     console.log(socket.id);
 })
 
-socket.on('loadPlayers', (data) => {
+socket.on('loadPlayers', (data) => { //displays all players
     console.log("loading players");
 
     let playerHtml = ""
@@ -49,6 +59,8 @@ socket.on('loadQuestions', (data) => {
             questionData = data
 })
 
+//the following are needed in case there is multiple gamemasters syncing amongst each other
+
 socket.on('selectQuestion', (data) => {
     selectQuestion(questionData[data[0]].Text[data[1]], questionData[data[0]].Solution[data[1]])
 })
@@ -62,12 +74,16 @@ socket.on('startTimer', (data) => {
     setTimer(timerlenght)
 })
 
+socket.on('stopTimer', () => {
+    killTimer()
+})
+
 socket.on('loadFFA', (data) => {
     console.log(data);
     selectQuestion(data.Question, data.Solution)
 })
 
-socket.on('awnsers', (data) => {
+socket.on('awnsers', (data) => { //displays the awnsers that users gave for the gamemaster
     console.log("awnsers recieved", data);
 
     document.getElementById('awnsers').style.display = "block"
@@ -87,13 +103,15 @@ function closeAwnsers(){
     document.getElementById('awnsers').style.display = "none"
 }
 
+// used to check if a image url is provided as a question
+
 let isUrl = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
 
 function selectQuestion(txt, sol){
     console.log("selecting question");
     console.log(questionData);
 
-    if(isUrl.test(txt)){
+    if(isUrl.test(txt)){ //experimental feature not supported rn
         console.log("is url");
         selected.querySelector("#hidden").src = txt
         selected.querySelector("#shown").src = sol
@@ -109,6 +127,7 @@ function selectQuestion(txt, sol){
         selected.querySelector("#shown").style.opacity = 0
     }
 
+    selected.style.bottom = "-40%"
     selected.style.display = "flex"
     selected.style.border = "3rem solid var(--color-accent-1)"
 
@@ -116,35 +135,35 @@ function selectQuestion(txt, sol){
     textP.style.marginBottom = "0"
 }
 
-function sendSelectQuestion(set, id){
+function sendSelectQuestion(set, id){ //set: x coords (categorie) id: y coords (question)
     socket.emit("sendSelectQuestion", set, id)
     selectQuestion(questionData[set].Text[id], questionData[set].Solution[id])
 }
 
 function sendCloseQuestion(){
     socket.emit("sendCloseQuestion")
+    selected.style.display = "none" //closes popup window
     closeQuestion()
     killTimer()
 }
 
 function startTimer(){
     socket.emit("sendTimer")
-    setTimer(timerlenght)
 }
 
 function sendFFA(){
     socket.emit("sendFFA")
 }
 
-function sendSpecialUsed(player, pos){
+function sendSpecialUsed(player, pos){ //toggles specials below names | player: index of player | pos: index of special to toggle
     socket.emit("sendSpecialUsed", player, pos)
 }
 
-function getPlayers(){
+function getPlayers(){ //rarely used - dictates server to resend players
     socket.emit("getPlayers")
 }
 
-function getQuestions(){
+function getQuestions(){ //rarely used - dictates server to resend questions
     socket.emit("getQuestions")
 }
 
@@ -154,30 +173,16 @@ function sendChangeScore(plusMinus){
     scoreInput.value = ""
 }
 
-function postPlayer(name){
+function postPlayer(name){//adds new player
     socket.emit("postPlayer", name)
-}
-
-function createQuestion(){
-    let nameInput = document.getElementById('set-name').value
-    let questionInput = document.querySelectorAll("#question-inputs input")
-
-    if(nameInput != "")
-    socket.emit("postQuestion", nameInput, questionInput[0].value, questionInput[1].value, questionInput[2].value, questionInput[3].value, questionInput[4].value, questionInput[5].value, questionInput[6].value, questionInput[7].value, questionInput[8].value, questionInput[9].value)
-
-    editmodePopup.style.transform = "translate(-50%, -50%) scale(0)"
 }
 
 //popups
 
-function playSound(){}
+function playSound(){} //empty so that there is no sounds played by the clients
 
-function numberSel(elem){
+function numberSel(elem){ //called when u choose how many points you want to sub/add to a player - sets input field value to pressed button
     scoreInput.value = elem.innerText
-}
-
-function editmode(){
-    editmodePopup.style.transform = "translate(-50%, -50%) scale(1)"
 }
 
 function ffaPop(){
@@ -193,6 +198,24 @@ function triggerFFA(){
 
 function deletePlayer(){
     if(confirm("sure u want to delete selected Player") == true){
+        scoreSel.style.transform = "scale(0)"
+        scoreSelHidden = true
         socket.emit("deletePlayerID", selectedPlayer)
     }
+}
+
+//UNUSED
+
+function addQuestion(){ //opens the popup to add a new question
+    addQuestionPopup.style.transform = "translate(-50%, -50%) scale(1)"
+}
+
+function postQuestion(){ //adds new question
+    let nameInput = document.getElementById('set-name').value
+    let questionInput = document.querySelectorAll("#question-inputs input")
+
+    if(nameInput != "")
+    socket.emit("postQuestion", nameInput, questionInput[0].value, questionInput[1].value, questionInput[2].value, questionInput[3].value, questionInput[4].value, questionInput[5].value, questionInput[6].value, questionInput[7].value, questionInput[8].value, questionInput[9].value)
+
+    addQuestionPopup.style.transform = "translate(-50%, -50%) scale(0)" //closes the input popup
 }

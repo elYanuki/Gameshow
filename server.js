@@ -1,3 +1,13 @@
+ 
+/**************************************************************************************************************
+
+USE: manages gameshow, saves data, syncs clients
+AUTHOR: Yanik Kendler
+DEPENDS ON: socket, express, filsystem, npm
+
+***************************************************************************************************************/
+
+
 const express = require("express")
 const http = require("http")
 const fs = require('fs');
@@ -11,16 +21,21 @@ const server = http.createServer(app)
 const io = require("socket.io")(server)
 const port = 4000
 
-let ffACount = 0
-let ffaRunning = false
-
-let awnsers = []
-
 app.use(express.static("public"))
 
-io.on("connection", (socket) => {
-    console.log("user hod sie verbunden")
+let ffACount = 0 //used to automatically display a new ffa
+let ffaRunning = false //used to only collect and send awnsers if question is ffa
 
+let timerRunning = false //used to alternate between starting / restting the timer
+
+let awnsers = [] //used to collect awnsers and send to the gamemaster
+
+
+//all calls are named from client perspective: "send" - client sends to server | "get" - clients request data
+io.on("connection", (socket) => {
+    console.log("client connected")
+
+    //sends player and question data to all clients
     io.emit("loadPlayers", manager.players)
     io.emit("loadQuestions", manager.questions)
 
@@ -42,18 +57,31 @@ io.on("connection", (socket) => {
     })
 
     socket.on("sendTimer", () => {
-        socket.broadcast.emit("startTimer")
-        if(ffaRunning == true){
-            setTimeout(function(){
-                console.log("awnsers sent");
-                io.emit("awnsers", awnsers)
-                awnsers = []
-            },32000)
+        console.log("sendTimer recieved:", timerRunning);
+
+        if (timerRunning == false) {
+            console.log("starting timer");
+            timerRunning = true
+            io.emit("startTimer")
+            setTimeout(function () { //after the timer is over
+                if (ffaRunning == true) { //if current question is a ffa collect awnsers
+                    console.log("awnsers sent");
+                    io.emit("awnsers", awnsers)
+                    awnsers = []
+                }
+                timerRunning = false
+                console.log("timer reset");
+            }, 32000)
+        }
+        else if(timerRunning == true){
+            console.log("stoping timer");
+            io.emit("stopTimer")
+            timerRunning = false
         }
     })
 
     socket.on("sendSelectQuestion", (set, id) => {
-        console.log(set, id);
+        console.log("selecting question", set, id);
         socket.broadcast.emit("selectQuestion", set, id)
 
         manager.questions[set].Used[id] = true
@@ -85,7 +113,6 @@ io.on("connection", (socket) => {
 
         fs.writeFile(playerpath, JSON.stringify(manager.players, 0, 2), 'utf8', (error => {
             if (error) throw error;
-
         }))
     })
 

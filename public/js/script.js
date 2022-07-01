@@ -86,7 +86,7 @@ function killTimer(){
 
 function closeQuestion(){
 /*     selected.style.top = "100%" */
-    selected.style.display = "none"
+    selected.style.bottom = "-100%" 
     selected.style.border = "0rem solid var(--color-accent-1)"
     textP.style.opacity = "0"
     textP.style.marginBottom = "5rem"
@@ -123,7 +123,6 @@ function changeScorePopup(id, event) {
 function closeScorePopup(ev) {
     // If user clicks inside the element, do nothing
     if (ev.target.closest('#score-selector')) return
-    
     scoreSel.style.transform = "scale(0)"
     scoreSelHidden = true
   

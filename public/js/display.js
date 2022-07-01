@@ -1,3 +1,13 @@
+
+/**************************************************************************************************************
+
+    USE: contains all functions and socket calls exclusivly needed (in this form) to display/sync all changes to the gameshow
+    LINKED FROM: display.html
+    AUTHOR: Yanik Kendler
+    DEPENDS ON: socket, script.js
+
+***************************************************************************************************************/
+
 const socket = io();
 
 socket.on("connect", () => {
@@ -5,7 +15,7 @@ socket.on("connect", () => {
     console.log(socket.id);
 })
 
-socket.on('loadPlayers', (data) => {
+socket.on('loadPlayers', (data) => { //loads the player overview
     console.log("loading players");
 
     let playerHtml = ""
@@ -28,7 +38,7 @@ socket.on('loadPlayers', (data) => {
 })
 
 
-socket.on('loadQuestions', (data) => {
+socket.on('loadQuestions', (data) => { //loads the question overview
     console.log("loading questions");
     console.log(data);
     let questionHtml = ""
@@ -53,8 +63,12 @@ socket.on('startTimer', () => {
     setTimer(timerlenght)
 })
 
-socket.on('selectQuestion', (set, id) => {
-    console.log(set, id);
+socket.on('stopTimer', () => {
+    killTimer()
+})
+
+socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by the loadQuestion fetch
+    console.log("selection question:", set, id);
     selectQuestion(questionData[set].Text[id])
 })
 
@@ -64,7 +78,7 @@ socket.on('closeQuestion', () => {
     killTimer()
 })
 
-socket.on('loadFFA', (data) => {
+socket.on('loadFFA', (data) => { //loads Free For All question
     console.log(data);
     selectQuestion(data.Question)
 })
@@ -77,15 +91,16 @@ socket.on('openCategories', () => {
     cat.style.display = "block"
 })
 
-socket.on('closeInfo', () => {
+socket.on('closeInfo', () => { //closes the rules and categorie overviews above
     rules.style.display = "none"
     cat.style.display = "none"
 })
 
+//will be used to check if a image url is provided as a question
 let isUrl = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
 
 function selectQuestion(txt){
-    console.log("selecting question");
+    console.log("loading selected question");
     console.log(txt);
 
     selected.querySelector(".text").innerText = txt
@@ -99,7 +114,7 @@ function selectQuestion(txt){
     textP.style.marginBottom = "0"
 }
 
-function playSound(name){
+function playSound(name){ //used to play sounds that acompany the gameplay
     switch (name) {
         case `timeUp`:
             sound.src = "./sound/bell.wav"

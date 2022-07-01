@@ -45,7 +45,11 @@ socket.on('startTimer', () => {
     setTimer(timerlenght)
 })
 
-socket.on('loadQuestions', (data) => {
+socket.on('stopTimer', () => {
+    killTimer()
+})
+
+socket.on('loadQuestions', (data) => { //saves the data for later use (only the chosen name needs to be displayed)
     console.log("loading questions");
     console.log(data);
     questionData = data
@@ -58,14 +62,14 @@ function submitName(){
 
     console.log(name);
 
-    if(name != null && name != ""){
+    if(name != null && name != ""){ //if name has been entered
         myName = name
 
         main.style.display = "flex"
         login.style.display = "none"
         
         for (let i = 0; i < players.length; i++) {
-           if(players[i].Name == myName){
+           if(players[i].Name == myName){ //only displays the player with your name
                 socket.emit("getPlayers")
                 popup("loged in as: " + myName)
                 return
@@ -110,7 +114,7 @@ function selectQuestion(txt){
     textP.style.marginBottom = "0"
 }
 
-function deleteMe(){
+function deleteMe(){ //deletes selected player
     if(confirm("sure u want to delete player: " + myName) == true){
         socket.emit("deletePlayer", myName)
         main.style.display = "none"
@@ -124,20 +128,20 @@ socket.on('loadFFA', (data) => {
     ffaRunning = true
     waiting.style.opacity = 0
     selectQuestion(data.Question)
-    awnserInput.style.display = "block"
+    awnserInput.style.display = "block" //displayes input field to enter guess
 })
 
 function sendAwnser(){
     socket.emit("sendAwnser", myName, awnserInput.value)
 }
 
-function popup(content){
+function popup(content){ //creates info popup used to display the selected player
     playerPopup.innerHTML = content
     playerPopup.style = "top: 40vh; opacity: 1;"
 
-    setTimeout(function(){
+    setTimeout(function(){ //hides the popup after 2.5 sec
         playerPopup.style = "top: 35vh; opacity: 0;"
     },2500)
 }
 
-function playSound(){}
+function playSound(){} //empty so that there is no sounds played by the clients
