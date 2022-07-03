@@ -16,5 +16,23 @@
       true,
       true
     ]
+  },
+  {
+    "Name": "leon",
+    "Score": 0,
+    "Specials": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "Name": "niki",
+    "Score": 0,
+    "Specials": [
+      true,
+      true,
+      true
+    ]
   }
 ]

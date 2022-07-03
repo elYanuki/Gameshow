@@ -30,6 +30,9 @@ let timerRunning = false //used to alternate between starting / restting the tim
 
 let awnsers = [] //used to collect awnsers and send to the gamemaster
 
+//used to safe selected question
+let safedSet 
+let safedId
 
 //all calls are named from client perspective: "send" - client sends to server | "get" - clients request data
 io.on("connection", (socket) => {
@@ -38,6 +41,7 @@ io.on("connection", (socket) => {
     //sends player and question data to all clients
     io.emit("loadPlayers", manager.players)
     io.emit("loadQuestions", manager.questions)
+    io.emit("selectQuestion", safedSet, safedId)
 
     socket.on("sendFFA", () => {
         console.log("ffa triggerd");
@@ -82,6 +86,9 @@ io.on("connection", (socket) => {
 
     socket.on("sendSelectQuestion", (set, id) => {
         console.log("selecting question", set, id);
+        safedId = id
+        safedSet = set
+
         socket.broadcast.emit("selectQuestion", set, id)
 
         manager.questions[set].Used[id] = true
@@ -93,6 +100,9 @@ io.on("connection", (socket) => {
         ffaRunning = false
         socket.broadcast.emit("closeQuestion")
         io.emit("loadQuestions", manager.questions)
+
+        safedId = null
+        safedSet = null
     })
 
     socket.on("sendOpenRules", () => {

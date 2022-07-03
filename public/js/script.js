@@ -1,3 +1,14 @@
+ 
+/**************************************************************************************************************
+
+USE: Functiones that are used in every client
+LINKED FROM: player/gamemaster/display .html
+AUTHOR: Yanik Kendler
+DEPENDS ON: -
+
+***************************************************************************************************************/
+
+
 let timerBar = document.getElementById('timer-bar')
 let timerNumber = document.querySelector("#timer-number div p")
 let playerParent = document.getElementById('players')
@@ -31,16 +42,13 @@ function setTimer(){
         timerNumber.innerText = timerlenght
 
         setTimeout(function(){
-            timerBar.style.transition = `all ${timerlenght}s linear` 
-            setTimeout(function(){
-                timerBar.style.width = "0%"
-            },100)
-            
+            timerBar.style.transition = `all 1s linear`
         },400)
 
         for (let i = 0; i < timerlenght; i++) {
             countDown[i] = setTimeout(function(){
                 timerNumber.innerText = timerlenght - i //decrease the timer
+                timerBar.style.width = (100/timerlenght)*(timerlenght-i-1) + "%"
             },1000*i)
         }
 
@@ -53,7 +61,6 @@ function setTimer(){
             playSound("timeUp")
 
             killTimer()
-            
         },1000*timerlenght)
 }
 

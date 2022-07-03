@@ -61,8 +61,11 @@ socket.on('loadQuestions', (data) => {
 
 //the following are needed in case there is multiple gamemasters syncing amongst each other
 
-socket.on('selectQuestion', (data) => {
-    selectQuestion(questionData[data[0]].Text[data[1]], questionData[data[0]].Solution[data[1]])
+socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by the loadQuestion fetch
+    if(set != null && id != null){
+        console.log("selection question:", set, id);
+        selectQuestion(questionData[set].Text[id])
+    }
 })
 
 socket.on('closeQuestion', () => {
