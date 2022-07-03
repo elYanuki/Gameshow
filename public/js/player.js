@@ -82,9 +82,12 @@ function submitName(){
 }
 
 socket.on('selectQuestion', (set, id) => {
-    console.log(set, id);
-    selectQuestion(questionData[set].Text[id])
-    waiting.style.opacity = 0
+    if(set != null && id != null){
+        console.log("selection question:", set, id);
+        selectQuestion(questionData[set].Text[id])
+        waiting.style.opacity = 0
+    }
+    
 })
 
 socket.on('closeQuestion', () => {

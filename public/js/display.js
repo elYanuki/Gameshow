@@ -68,8 +68,10 @@ socket.on('stopTimer', () => {
 })
 
 socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by the loadQuestion fetch
-    console.log("selection question:", set, id);
-    selectQuestion(questionData[set].Text[id])
+    if(set != null && id != null){
+        console.log("selection question:", set, id);
+        selectQuestion(questionData[set].Text[id])
+    }
 })
 
 socket.on('closeQuestion', () => {
