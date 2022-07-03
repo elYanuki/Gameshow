@@ -35,6 +35,8 @@ let timerlenght = 30
 let ffaRunning = false
 
 function setTimer(){
+        console.log("starting timer");
+
         timerBar.style.transition = `all 200ms linear` //to load up the bar in 200ms
         timerBar.style.width = "100%"
         timerNumber.innerText = timerlenght
