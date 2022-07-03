@@ -71,7 +71,7 @@ io.on("connection", (socket) => {
                 }
                 timerRunning = false
                 console.log("timer reset");
-            }, 32000)
+            }, 31000)
         }
         else if(timerRunning == true){
             console.log("stoping timer");

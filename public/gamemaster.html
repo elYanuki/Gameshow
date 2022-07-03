@@ -38,6 +38,7 @@
             <p onclick="postPlayer(document.getElementById('name-input').value); document.getElementById('name-input').value = '' ">add player</p>
             <!-- <p onclick="addQuestion()">add cattegory</p> -->
             <input type="text" id="name-input"/>
+        </div>
         <section id="questions">
         </section>
         
@@ -77,32 +78,6 @@
             <i onclick="sendChangeScore('minus')" class="fa-solid fa-circle-minus"></i>
         </div>
         <p onclick="deletePlayer()" class="delete">delete Player</p>
-    </div>
-
-    <div id="addQuestion">
-        <input type="text" placeholder="kategoriename" id="set-name">
-        <div id="question-inputs">
-            <input type="text" placeholder="question 1:">
-            <input type="text" placeholder="solution 1:">
-            <input type="text" placeholder="question 2:">
-            <input type="text" placeholder="solution 2:">
-            <input type="text" placeholder="question 3:">
-            <input type="text" placeholder="solution 3:">
-            <input type="text" placeholder="question 4:">
-            <input type="text" placeholder="solution 4:">
-            <input type="text" placeholder="question 5:">
-            <input type="text" placeholder="solution 5:">
-        </div>
-        <p onclick="postQuestion()">Confirm</p>
-        <p onclick="addQuestionPopup.style.transform = 'translate(-50%, -50%) scale(0)'">cancel</p>
-    </div>
-
-    <div id="create-ffa">
-        <input type="text" id="ffa-question" placeholder="question">
-        <input type="text" id="ffa-solution" placeholder="solution">
-
-        <p onclick="postFFA(document.getElementById('ffa-question').value, document.getElementById('ffa-solution').value)">Confirm</p>
-        <p onclick="ffaPopup.style.transform = 'translate(-50%, -50%) scale(0)'">cancel</p>
     </div>
 </body>
 </html>
