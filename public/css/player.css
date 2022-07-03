@@ -254,6 +254,50 @@ main{
     transform: translateX(-50%);
 }
 
+/*---------fragen---------*/
+
+#players{
+    display: block;
+}
+
+.player{
+    font-size: 2em;
+    padding: .5em;
+    background-color: var(--gray-2);
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    border-radius: 1rem;
+    position: relative;
+    box-shadow: none;
+    width: auto;
+    height: 10vh;
+    margin: 0;
+    box-sizing: content-box;
+    max-width: 800px;
+    margin-inline: auto;
+}
+
+/**********media**********/
+
+@media screen and (min-width: 800px) {
+    #timer-number div{
+        height: 7vh;
+        width: 7vh;
+    }
+
+    #timer{
+        height: 10vh;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #timer-number div{
+        height: 10vh;
+        width: 10vh;
+    }
+}
+
 /**********Keyframes**********/
 
 /**********Variables**********/

@@ -196,6 +196,15 @@ io.on("connection", (socket) => {
         io.emit("loadQuestions", manager.questions)
         io.emit("loadPlayers", manager.players)
     })
+
+    socket.on("deleteAll", () => {
+        manager.players = []
+
+        updatePlayerFile()
+
+        io.emit("loadQuestions", manager.questions)
+        io.emit("loadPlayers", manager.players)
+    })
 })
 
 //SAVE DATA TO JSON FILES
