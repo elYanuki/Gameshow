@@ -29,8 +29,10 @@ function setTimer(){
         timerNumber.innerText = timerlenght
 
         setTimeout(function(){
-            timerBar.style.transition = `all ${timerlenght}s linear` 
-            timerBar.style.width = "0%"
+            timerBar.style.transition = `all ${timerlenght}s linear`
+            setTimeout(function(){
+             timerBar.style.width = "0%"
+            },100)
         },400)
 
         for (let i = 0; i < timerlenght; i++) {
@@ -47,15 +49,7 @@ function setTimer(){
             timerNumber.innerHTML = '0'
             playSound("timeUp")
 
-            setTimeout(function(){
-                timerNumber.style = "transition: none; opacity: 0;" //hides the number
-            },900)
-
-            setTimeout(function(){ //shows the icon again
-                timerNumber.style.transition = "all .5s"
-                timerNumber.innerHTML = '<span class="material-icons">timer</span>'
-                timerNumber.style.opacity = "1"
-            },1500)
+            killTimer()
         },1000*timerlenght)
 }
 
