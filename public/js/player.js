@@ -93,7 +93,6 @@ socket.on('selectQuestion', (set, id) => {
 socket.on('closeQuestion', () => {
     console.log("closing question");
     closeQuestion()
-    killTimer()
 
     ffaRunning = false
     awnserInput.style.display = "none"

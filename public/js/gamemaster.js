@@ -70,7 +70,6 @@ socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by 
 
 socket.on('closeQuestion', () => {
     closeQuestion()
-    killTimer()
 })
 
 socket.on('startTimer', (data) => {
@@ -147,7 +146,6 @@ function sendCloseQuestion(){
     socket.emit("sendCloseQuestion")
     selected.style.display = "none" //closes popup window
     closeQuestion()
-    killTimer()
 }
 
 function startTimer(){

@@ -77,7 +77,6 @@ socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by 
 socket.on('closeQuestion', () => {
     console.log("closing question");
     closeQuestion()
-    killTimer()
 })
 
 socket.on('loadFFA', (data) => { //loads Free For All question

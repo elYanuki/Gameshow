@@ -33,11 +33,13 @@ let clear
 let timerlenght = 30
 
 let ffaRunning = false
+let timerActive = false
 
 function setTimer(){
         timerBar.style.transition = `all 200ms linear` //to load up the bar in 200ms
         timerBar.style.width = "100%"
         timerNumber.innerText = timerlenght
+        timerActive = true
 
         setTimeout(function(){
             timerBar.style.transition = `all 1s linear`
@@ -65,6 +67,8 @@ function setTimer(){
 function killTimer(){
     console.log("killing timer");
 
+    timerBar.style.transition = `all 1s linear`
+
     timerBar.style.transition = `none`
     timerActive = false
 
@@ -76,6 +80,7 @@ function killTimer(){
     
     setTimeout(function(){
         timerNumber.style = "transition: none; opacity: 0;"
+        timerBar.style.width = 0
     },900)
 
     setTimeout(function(){
@@ -91,6 +96,10 @@ function closeQuestion(){
     selected.style.border = "0rem solid var(--color-accent-1)"
     textP.style.opacity = "0"
     textP.style.marginBottom = "5rem"
+
+    if(timerActive == true){
+        killTimer()
+    }
 }
 
 function changeScorePopup(id, event) {
