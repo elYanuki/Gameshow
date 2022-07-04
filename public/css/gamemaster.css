@@ -316,11 +316,12 @@ main{
     z-index: 50;
     background-color: var(--gray-3);
     padding: 2rem;
+    box-shadow: var(--outline-2), var(--shadow-3);
 }
 
 #awnsers p{
     color: white;
-    font-size: 120%;
+    font-size: 200%;
 }
 
 /**********Keyframes**********/
