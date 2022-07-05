@@ -84,7 +84,7 @@ function submitName(){
 socket.on('selectQuestion', (set, id) => {
     if(set != null && id != null){
         console.log("selection question:", set, id);
-        selectQuestion(questionData[set].Text[id])
+        selectQuestion(questionData[set].Question[id])
         waiting.style.opacity = 0
     }
     
@@ -105,7 +105,7 @@ function selectQuestion(txt){
     console.log("selecting question");
     console.log(txt);
 
-    selected.querySelector(".text").innerText = txt
+    selected.querySelector(".Question").innerText = txt
     selected.style.bottom = "0%"
 
     selected.style.border = "3rem solid var(--color-accent-1)"

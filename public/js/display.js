@@ -70,7 +70,7 @@ socket.on('stopTimer', () => {
 socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by the loadQuestion fetch
     if(set != null && id != null){
         console.log("selection question:", set, id);
-        selectQuestion(questionData[set].Text[id])
+        selectQuestion(questionData[set].Question[id])
     }
 })
 
@@ -104,7 +104,7 @@ function selectQuestion(txt){
     console.log("loading selected question");
     console.log(txt);
 
-    selected.querySelector(".text").innerText = txt
+    selected.querySelector(".Question").innerText = txt
     selected.style.bottom = "0%"
 
     selected.style.border = "3rem solid var(--color-accent-1)"

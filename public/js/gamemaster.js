@@ -64,7 +64,7 @@ socket.on('loadQuestions', (data) => {
 socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by the loadQuestion fetch
     if(set != null && id != null){
         console.log("selection question:", set, id);
-        selectQuestion(questionData[set].Text[id])
+        selectQuestion(questionData[set].Question[id])
     }
 })
 
@@ -122,7 +122,7 @@ function selectQuestion(txt, sol){
 
     }
     else{
-        selected.querySelector(".text").innerText = txt
+        selected.querySelector(".Question").innerText = txt
         selected.querySelector(".sol").innerText = sol
 
         selected.querySelector("#hidden").style.opacity = 0
@@ -139,7 +139,7 @@ function selectQuestion(txt, sol){
 
 function sendSelectQuestion(set, id){ //set: x coords (categorie) id: y coords (question)
     socket.emit("sendSelectQuestion", set, id)
-    selectQuestion(questionData[set].Text[id], questionData[set].Solution[id])
+    selectQuestion(questionData[set].Question[id], questionData[set].Solution[id])
 }
 
 function sendCloseQuestion(){
