@@ -9,24 +9,24 @@ DEPENDS ON: -
 ***************************************************************************************************************/
 
 
-let timerBar = document.getElementById('timer-bar')
-let timerNumber = document.querySelector("#timer-number div p")
-let playerParent = document.getElementById('players')
-let questionParent = document.getElementById('questions')
-let selected = document.getElementById('selected')
-let textP = selected.querySelector("p")
-let sound = document.getElementById('sound')
-let scoreSel = document.getElementById('score-selector')
-let scoreSelHidden = true;
-let scoreInput = document.getElementById('score-input')
-let selectedPlayer = 0
-let editmodePopup = document.getElementById('editmode')
-let ffaPopup = document.getElementById('create-ffa')
-let questionData = null
-let rules = document.getElementById('rules')
-let cat = document.getElementById('categories')
-let bottom = document.getElementById('bottom')
-let topScroll = document.getElementById('game')
+const timerBar = document.getElementById('timer-bar')
+const timerNumber = document.querySelector("#timer-number div p")
+const playerParent = document.getElementById('players')
+const questionParent = document.getElementById('questions')
+const selected = document.getElementById('selected')
+const textP = selected.querySelector("p")
+const sound = document.getElementById('sound')
+const scoreSel = document.getElementById('score-selector')
+const scoreSelHidden = true;
+const scoreInput = document.getElementById('score-input')
+const selectedPlayer = 0
+const editmodePopup = document.getElementById('editmode')
+const ffaPopup = document.getElementById('create-ffa')
+const questionData = null
+const rules = document.getElementById('rules')
+const cat = document.getElementById('categories')
+const bottom = document.getElementById('bottom')
+const topScroll = document.getElementById('game')
 
 let countDown = []
 let clear

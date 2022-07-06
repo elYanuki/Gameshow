@@ -210,13 +210,3 @@ function deletePlayer(){
 function addQuestion(){ //opens the popup to add a new question
     addQuestionPopup.style.transform = "translate(-50%, -50%) scale(1)"
 }
-
-function postQuestion(){ //adds new question
-    let nameInput = document.getElementById('set-name').value
-    let questionInput = document.querySelectorAll("#question-inputs input")
-
-    if(nameInput != "")
-    socket.emit("postQuestion", nameInput, questionInput[0].value, questionInput[1].value, questionInput[2].value, questionInput[3].value, questionInput[4].value, questionInput[5].value, questionInput[6].value, questionInput[7].value, questionInput[8].value, questionInput[9].value)
-
-    addQuestionPopup.style.transform = "translate(-50%, -50%) scale(0)" //closes the input popup
-}

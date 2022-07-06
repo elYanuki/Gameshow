@@ -1,7 +1,7 @@
 [
   {
     "Name": "Gaming ",
-    "Text": [
+    "Question": [
       "beliebtestes mario spiel",
       "welcher ist der seltenste fortnite skin",
       "in Minuten, was ist der minecraft RSG weltrekord",
@@ -25,7 +25,7 @@
   },
   {
     "Name": "trippelwort",
-    "Text": [
+    "Question": [
       "Wasser Hangar",
       "Puzzle Bruch",
       "Bei Schirm",
@@ -49,7 +49,7 @@
   },
   {
     "Name": "STEM",
-    "Text": [
+    "Question": [
       "Welches aus einer animationsserie bekannte wassertier besitzt kein gehirn",
       "welcher teil eines atoms hat keine elektrische ladung",
       "wo/welcher ist der größte Knochen im menschlichen Körper",
@@ -73,7 +73,7 @@
   },
   {
     "Name": "Lange vorbei",
-    "Text": [
+    "Question": [
       "Welche farbe hatten die Pyramiden ursprünglich",
       "Was war bevor man nach dem puls von toten fühlte ein echtes problem für tiefschläfer und gelähmte",
       "aufgrund des Ende welches Erergniss feierten die Russen so viel, dass die Nationalen Vodkareserven aufgebraucht wurden",

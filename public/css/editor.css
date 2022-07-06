@@ -57,6 +57,39 @@ body{
 .preview-item div{
     flex-grow: 1;
 }
+
+/*---------main---------*/
+
+main{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    box-sizing: border-box;
+    padding: 1rem;
+    width: 100vw;
+    height: 100vh;
+}
+
+/*---------game---------*/
+
+#game{
+    display: flex;
+    width: 70vw;
+    height: 100%;
+}
+
+.game-category{
+
+}
+
+/*---------questions---------*/
+
+#questions{
+    width: 100%;
+    height: 100%;
+}
+
+
 /**********Imports**********/
 
 @font-face {

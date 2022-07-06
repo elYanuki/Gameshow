@@ -16,6 +16,7 @@ const path = require("path");
 let playerpath = "./src/player.json"
 let questionpath = "./src/questions_1.json"
 let ffAPath = "./src/freeForAll_1.json"
+const allQuestionPath = "./src/questions.json"
 
 const app = express()
 const server = http.createServer(app)
@@ -37,6 +38,7 @@ let safedId
 
 //contains all games (categories awnsers etc)
 let gamedata = []
+let allQuestions = []
 
 server.listen(port, () => {
     console.log(`listenin on port ${port}`)
@@ -174,15 +176,6 @@ io.on("connection", (socket) => {
         io.emit("loadPlayers", currentGame.players)
     })
 
-    socket.on("postQuestion", (name, text1, sol1, text2, sol2, text3, sol3, text4, sol4, text5, sol5) => {
-
-        currentGame.addQuestionSet(name, text1, sol1, text2, sol2, text3, sol3, text4, sol4, text5, sol5)
-
-        io.emit("loadQuestions", currentGame.questions)
-
-        updateQuestionFile()
-    })
-
     socket.on("postPlayer", (name) => {
         name = name.toLowerCase()
         
@@ -221,13 +214,35 @@ io.on("connection", (socket) => {
     socket.on("getAllGames", () => {
         console.log("sending all games");
     
-        io.emit("loadAllGames", gamedata)
+        io.emit("loadAllGames", gamedata, allQuestions)
     })
 
     socket.on("selectGame", (id) => {
         questionpath = "./src/questions_" + id + ".json"
         ffAPath = "./src/freeForAll_" + id + ".json"
     })
+
+    socket.on("addGame", (id) => {
+        questionpath = "./src/questions_" + id + ".json"
+        ffAPath = "./src/freeForAll_" + id + ".json"
+    })
+
+    socket.on("postCategory", (name, text1, sol1, text2, sol2, text3, sol3, text4, sol4, text5, sol5) => {
+
+        currentGame.addQuestionSet(name, text1, sol1, text2, sol2, text3, sol3, text4, sol4, text5, sol5)
+
+        io.emit("loadQuestions", currentGame.questions)
+
+        updateQuestionFile()
+    })
+
+    socket.on("postQuestion", (question, solution) => {
+
+        io.emit("loadQuestions", currentGame.questions)
+
+        updateQuestionFile()
+    })
+
 })
 
 //SAVE DATA TO JSON FILES
@@ -245,7 +260,7 @@ if (fs.existsSync(playerpath)) {
     })
 }
 
-//initially saves/updates questions
+//initially gets questions
 if (fs.existsSync(questionpath)) {
     fs.readFile(questionpath, 'utf-8', (err, data_string) => {
         if (err) throw err;
@@ -258,7 +273,7 @@ if (fs.existsSync(questionpath)) {
     })
 }
 
-//initially saves/updates ffa
+//initially gets ffa
 if (fs.existsSync(ffAPath)) {
     fs.readFile(ffAPath, 'utf-8', (err, data_string) => {
         if (err) throw err;
@@ -268,6 +283,15 @@ if (fs.existsSync(ffAPath)) {
         for (let i = 0; i < data.length; i++) {
             currentGame.addFreeForAll(data[i].Question, data[i].Solution)
         }
+    })
+}
+
+//initially gets all questions
+if (fs.existsSync(allQuestionPath)) {
+    fs.readFile(allQuestionPath, 'utf-8', (err, data_string) => {
+        if (err) throw err;
+
+        allQuestions = JSON.parse(data_string);
     })
 }
 
@@ -314,8 +338,14 @@ function updatePlayerFile(){
 }
 
 function updateQuestionFile(){
-    fs.writeFile(questionpath, JSON.stringify(currentGame.questions), 'utf8', (error=>{
+    fs.writeFile(questionpath, JSON.stringify(currentGame.questions, 0, 2), 'utf8', (error=>{
         if(error) throw error;
+    }))
+}
+
+function updateAllQuestions(){
+    fs.writeFile(allQuestionPath, JSON.stringify(allQuestions, 0, 2), 'utf8', (error => {
+        if (error) throw error;
     }))
 }
 

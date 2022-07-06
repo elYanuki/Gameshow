@@ -1,7 +1,7 @@
 [
     {
         "Name": "name a lot",
-        "Text": [
+        "Question": [
             "Hunderassen",
             "Blumen",
             "Best selling games all time",
@@ -9,7 +9,7 @@
             "Steinarten"
         ],
         "Solution": [
-            "...",
+            "whatever i want help",
             "Rosen, Tulpen, Gänseblümchen, Sonnenblume, Veilchen, Nelke",
             "Minecraft, GTA, Tetris, WII Sports, Pupg, Super Mario Bros, Pokemon(red/green/blue/yellow) Mariokart 8",
             " Koloss von Rhodos - Leuchtturm von Alexandria - Pyramiden - Temple der Arthemis Zeus staue von Olympia - hängenden gärten",
@@ -25,7 +25,7 @@
     },
     {
         "Name": "leckerschmecker",
-        "Text": [
+        "Question": [
             "welches Fleisch ist in den bekannten Tiroler knödeln",
             "welche geschmacksrichtung hat das grüne Twinnie",
             "nenne die 4 Teile der Mozartkugel",
@@ -49,7 +49,7 @@
     },
     {
         "Name": "synonyme",
-        "Text": [
+        "Question": [
             "stehlen",
             "essen (tätigkeit)",
             "Zeichnung",
@@ -73,7 +73,7 @@
     },
     {
         "Name": "movies and media",
-        "Text": [
+        "Question": [
             "wie geniest Dagobert Duck am liebsten seinen Reichtum",
             "welche Kreaturen halfen den Rebellen bei der Schlacht um Endor der Schildreaktor des Todessterns zu deaktivieren",
             "wodurch überlebt Mitch eine Schussverletzung im Finale von Baywatch",
