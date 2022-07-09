@@ -1,0 +1,29 @@
+[
+  {
+    "Name": "yanik",
+    "Score": 200,
+    "Specials": [
+      true,
+      false,
+      false
+    ]
+  },
+  {
+    "Name": "jonas",
+    "Score": -200,
+    "Specials": [
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "Name": "patrick",
+    "Score": -200,
+    "Specials": [
+      true,
+      true,
+      true
+    ]
+  }
+]
