@@ -9,7 +9,7 @@ NodeJS based Gameshow
   - nicely styled clean view of the gameboard without scrolling
   - intendet to be streamed to a tv or simmilar
   - offers no controll over the game
--master:
+- master:
   - effective not good looking style
   - intendet to be used on the hosts phone
   - offers full controll over the game
