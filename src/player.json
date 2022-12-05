@@ -16,5 +16,14 @@
       true,
       true
     ]
+  },
+  {
+    "Name": "michi",
+    "Score": 0,
+    "Specials": [
+      true,
+      true,
+      true
+    ]
   }
 ]
