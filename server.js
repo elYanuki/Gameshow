@@ -131,17 +131,21 @@ io.on("connection", (socket) => {
         updatePlayerFile()
     })
 
+    socket.on("sendScrollPlayers", (direction) => {
+        io.emit("scrollPlayers", direction)
+    })
+
     socket.on("sendAwnser", (player, awnser) => { //collects awnsers for ffa
         let erg = player + ": " + awnser
         awnsers.push(erg)
     })
 
-    socket.on("sendSpecialUsed", (player, pos) => {
-        if (manager.players[player].Specials[pos] == true) {
-            manager.players[player].Specials[pos] = false
+    socket.on("sendSpecialUsed", (player) => {
+        if (manager.players[player].Special == true) {
+            manager.players[player].Special = false
         }
         else {
-            manager.players[player].Specials[pos] = true
+            manager.players[player].Special = true
         }
 
         updatePlayerFile()
@@ -186,9 +190,7 @@ io.on("connection", (socket) => {
     socket.on("reset", () => { //resets all scores and specials
         for (let i = 0; i < manager.players.length; i++) {
             manager.players[i].Score = 0
-            manager.players[i].Specials[0] = true
-            manager.players[i].Specials[1] = true
-            manager.players[i].Specials[2] = true
+            manager.players[i].Special = true
          }
 
          updatePlayerFile()
@@ -279,7 +281,7 @@ class Manager {
             let newPlayer = {
                 Name: name,
                 Score: 0,
-                Specials: [true, true, true],
+                Special: true,
             };
 
             this.players.push(newPlayer);

@@ -26,9 +26,7 @@ socket.on('loadPlayers', (data) => {
                 <p class="name">${data[i].Name}</p>
                 <div class="points-parent"><p class="points">${data[i].Score}</p></div>
                 <div>
-                    <div style="background-color:${data[i].Specials[0] ? 'var(--color-accent-1)' : 'var(--gray-5)'};"><i class="fa-solid fa-hand-point-right"></i></div>
-                    <div style="background-color:${data[i].Specials[1] ? 'var(--color-accent-1)' : 'var(--gray-5)'};"><i class="fa-solid fa-file-pen"></i></div>
-                    <div style="background-color:${data[i].Specials[2] ? 'var(--color-accent-1)' : 'var(--gray-5)'};"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div style="background-color:${data[i].Special ? 'var(--color-accent-1)' : 'var(--gray-5)'};">Multiplier</div>
                 </div>
             </div>`
         }
@@ -140,7 +138,7 @@ socket.on('loadFFA', (data) => {
 
     ffaRunning = true
     waiting.style.opacity = 0
-    selectQuestion(data.Question)
+    selectQuestion(data.Question, "free for all")
     awnserInput.style.display = "block" //displayes input field to enter guess
 })
 

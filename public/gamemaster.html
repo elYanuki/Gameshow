@@ -39,6 +39,12 @@
             <!-- <p onclick="addQuestion()">add cattegory</p> -->
             <input type="text" id="name-input"/>
         </div>
+        
+        <div id="add" class="add">
+            <p onclick="socket.emit('sendScrollPlayers', 0)">scrollup</p>
+            <p onclick="socket.emit('sendScrollPlayers', 1)">scrolldown</p>
+        </div>
+        
         <section id="questions">
         </section>
         

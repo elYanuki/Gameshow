@@ -25,9 +25,7 @@ socket.on('loadPlayers', (data) => { //displays all players
                     <p class="name">${data[i].Name}</p>
                     <div class="points-parent"><p class="points">${data[i].Score}</p></div>
                     <div>
-                        <div style="background-color:${data[i].Specials[0] ? 'var(--color-accent-1)' : 'var(--gray-5)'};" onclick="sendSpecialUsed(${i}, 0)"><i class="fa-solid fa-hand-point-right"></i></div>
-                        <div style="background-color:${data[i].Specials[1] ? 'var(--color-accent-1)' : 'var(--gray-5)'};" onclick="sendSpecialUsed(${i}, 1)"><i class="fa-solid fa-file-pen"></i></div>
-                        <div style="background-color:${data[i].Specials[2] ? 'var(--color-accent-1)' : 'var(--gray-5)'};" onclick="sendSpecialUsed(${i}, 2)"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div style="background-color:${data[i].Special ? 'var(--color-accent-1)' : 'var(--gray-5)'};" onclick="sendSpecialUsed(${i})">multiplier</div>
                     </div>
                     <i class="fa-solid fa-pen-to-square" onclick="changeScorePopup(${i}, event)"></i>
                 </div>`

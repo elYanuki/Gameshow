@@ -25,9 +25,7 @@ socket.on('loadPlayers', (data) => { //loads the player overview
             <p class="name">${data[i].Name}</p>
             <div class="points-parent"><p class="points">${data[i].Score}</p></div>
             <div>
-                <div style="background-color:${data[i].Specials[0] ? 'var(--color-accent-1)' : 'var(--gray-5)'};"><i class="fa-solid fa-hand-point-right"></i></div>
-                <div style="background-color:${data[i].Specials[1] ? 'var(--color-accent-1)' : 'var(--gray-5)'};"><i class="fa-solid fa-file-pen"></i></div>
-                <div style="background-color:${data[i].Specials[2] ? 'var(--color-accent-1)' : 'var(--gray-5)'};"><i class="fa-solid fa-shield-halved"></i></div>
+                <div style="background-color:${data[i].Special ? 'var(--color-accent-1)' : 'var(--gray-5)'};">multiplier</div>
             </div>
         </div>`
     }
@@ -81,7 +79,7 @@ socket.on('closeQuestion', () => {
 
 socket.on('loadFFA', (data) => { //loads Free For All question
     console.log(data);
-    selectQuestion(data.Question)
+    selectQuestion(data.Question, "free for all")
 })
 
 socket.on('openRules', () => {
@@ -95,6 +93,21 @@ socket.on('openCategories', () => {
 socket.on('closeInfo', () => { //closes the rules and categorie overviews above
     rules.style.display = "none"
     cat.style.display = "none"
+})
+
+socket.on('scrollPlayers', (direction) => {
+    if(direction == 0){ //up
+        players.scroll({
+            top: 0,
+            behavior: "smooth"
+          })
+    }
+    else{
+        players.scroll({
+            top: 3000,
+            behavior: "smooth"
+          })
+    }
 })
 
 //will be used to check if a image url is provided as a question

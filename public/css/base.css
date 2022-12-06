@@ -126,19 +126,16 @@
 
 .player div div{
     background-color: var(--color-accent-1);
-    aspect-ratio: 1/1;
-    padding: .2em;
-    border-radius: 50%;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    padding: .2rem .5rem;
     margin-right: .4em;
     box-shadow: var(--shadow-3);
-    
-}
-
-.player div div i{
-    font-size: .6em;
-    color: var(--gray-6);
-    /* text-shadow: var(--outline-1); */
-    pointer-events: none;
+    color: hsl(0, 0%, 90%);
+    font-family: sans-serif;
+    font-weight: lighter;
+    margin-top: .2rem;
+    letter-spacing: .05rem;
 }
 
 .add{
