@@ -64,7 +64,7 @@ socket.on('loadQuestions', (data) => {
 socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by the loadQuestion fetch
     if(set != null && id != null){
         console.log("selection question:", set, id);
-        selectQuestion(questionData[set].Text[id])
+        selectQuestion(questionData[set].Text[id], questionData[set].Solution[id])
     }
 })
 
@@ -111,30 +111,33 @@ let isUrl = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:w
 
 function selectQuestion(txt, sol){
     console.log("selecting question");
-    console.log(questionData);
+    console.log(txt, sol);
 
-    if(isUrl.test(txt)){ //experimental feature not supported rn
-        console.log("is url");
-        selected.querySelector("#hidden").src = txt
-        selected.querySelector("#shown").src = sol
-
-        selected.querySelector("#shown").style.opacity = 0
-
+    if(Array.isArray(txt)){
+        selected.innerHTML = `
+        <div style="background-image: url(${txt[1]});" class="image"></div>
+        <p class="text">${txt[0]}</p>
+        <p class="sol">${sol}</p>
+        <div class="buttons">
+            <p onclick="sendCloseQuestion()">schließen</p>
+            <p onclick="toggleSolution()">toggle</p>
+        </div>`
     }
     else{
-        selected.querySelector(".text").innerText = txt
-        selected.querySelector(".sol").innerText = sol
-
-        selected.querySelector("#hidden").style.opacity = 0
-        selected.querySelector("#shown").style.opacity = 0
+        selected.innerHTML= `
+        <p class="text">${txt}</p>
+        <p class="sol">${sol}</p>
+        <div class="buttons">
+            <p onclick="sendCloseQuestion()">schließen</p>
+            <p onclick="toggleSolution()">toggle</p>
+        </div>`
     }
-
-    selected.style.bottom = "-40%"
-    selected.style.display = "flex"
+    
+    //move in selected question panel
     selected.style.border = "3rem solid var(--color-accent-1)"
 
-    textP.style.opacity = "1"
-    textP.style.marginBottom = "0"
+    selected.style.display = "flex"
+    selected.style.border = "3rem solid var(--color-accent-1)"
 }
 
 function sendSelectQuestion(set, id){ //set: x coords (categorie) id: y coords (question)
@@ -144,9 +147,17 @@ function sendSelectQuestion(set, id){ //set: x coords (categorie) id: y coords (
 
 function sendCloseQuestion(){
     socket.emit("sendCloseQuestion")
-    selected.style.display = "none" //closes popup window
     closeQuestion()
 }
+
+function closeQuestion(){
+        selected.style.border = "0rem solid var(--color-accent-1)"
+        selected.style.display = "none"
+    
+        if(timerActive == true){
+            killTimer()
+        }
+    }
 
 function startTimer(){
     socket.emit("sendTimer")

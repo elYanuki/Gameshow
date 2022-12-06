@@ -25,5 +25,23 @@
       true,
       true
     ]
+  },
+  {
+    "Name": "leon",
+    "Score": 0,
+    "Specials": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "Name": "leischi",
+    "Score": 0,
+    "Specials": [
+      true,
+      true,
+      true
+    ]
   }
 ]

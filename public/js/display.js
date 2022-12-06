@@ -70,7 +70,7 @@ socket.on('stopTimer', () => {
 socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by the loadQuestion fetch
     if(set != null && id != null){
         console.log("selection question:", set, id);
-        selectQuestion(questionData[set].Text[id])
+        selectQuestion(questionData[set].Text[id], questionData[set].Name)
     }
 })
 
@@ -98,21 +98,23 @@ socket.on('closeInfo', () => { //closes the rules and categorie overviews above
 })
 
 //will be used to check if a image url is provided as a question
-let isUrl = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+let isUrl;
 
-function selectQuestion(txt){
+function selectQuestion(txt, catName){
     console.log("loading selected question");
     console.log(txt);
-
-    selected.querySelector(".text").innerText = txt
-    selected.style.bottom = "0%"
-
-    selected.style.border = "3rem solid var(--color-accent-1)"
     
-    textP = selected.querySelector("p")
-
-    textP.style.opacity = "1"
-    textP.style.marginBottom = "0"
+    if(Array.isArray(txt)){
+        console.log("url");
+        selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: url(${txt[1]});" class="image"></div><p class="text">${txt[0]}</p>`
+    }
+    else{
+        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${txt}</p>`    
+    }
+    
+    //move in selected question panel
+    selected.style.bottom = "0%"
+    selected.style.border = "3rem solid var(--color-accent-1)"
 }
 
 function playSound(name){ //used to play sounds that acompany the gameplay

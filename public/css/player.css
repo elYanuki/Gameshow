@@ -28,7 +28,7 @@ main{
     display: grid;
     place-items: center;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     /* display:none */
 }
 
@@ -160,7 +160,6 @@ main{
     text-align: center;
     justify-self: center;
     align-self: center;
-    opacity: 0;
     margin-bottom: 5rem;
     transition: all .3s;
     transition-delay: .6s;
@@ -229,12 +228,28 @@ main{
     width: 80%;
 }
 
+#selected .header{
+    justify-self:flex-start;
+    position: absolute;
+    top: 24vh;
+    font-size: 1.5rem;
+    font-family: thick;
+    color: rgb(100, 0, 100);
+    font-weight: 1000;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+}
+
 #delete{
     color: var(--gray-6);
     text-align: center;
     font-size: 110%;
     font-family: standart;
     margin-bottom: .5rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%)
 }
 
 #popup{
@@ -279,6 +294,13 @@ main{
 }
 
 /**********media**********/
+
+
+@font-face {
+    font-family: thick;
+    src: url(../import/Roboto-Black.ttf);
+}
+
 
 @media screen and (min-width: 800px) {
     #timer-number div{

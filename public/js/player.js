@@ -84,7 +84,7 @@ function submitName(){
 socket.on('selectQuestion', (set, id) => {
     if(set != null && id != null){
         console.log("selection question:", set, id);
-        selectQuestion(questionData[set].Text[id])
+        selectQuestion(questionData[set].Text[id], questionData[set].Name)
         waiting.style.opacity = 0
     }
     
@@ -101,19 +101,30 @@ socket.on('closeQuestion', () => {
     },500)
 })
 
-function selectQuestion(txt){
-    console.log("selecting question");
+function closeQuestion(){
+    selected.style.display = "none"
+    selected.style.border = "0rem solid var(--color-accent-1)"
+
+    if(timerActive == true){
+        killTimer()
+    }
+}
+
+function selectQuestion(txt, catName){
+    console.log("loading selected question");
     console.log(txt);
-
-    selected.querySelector(".text").innerText = txt
-    selected.style.bottom = "0%"
-
-    selected.style.border = "3rem solid var(--color-accent-1)"
     
-    textP = selected.querySelector("p")
-
-    textP.style.opacity = "1"
-    textP.style.marginBottom = "0"
+    if(Array.isArray(txt)){
+        console.log("url");
+        selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: url(${txt[1]});" class="image"></div><p class="text">${txt[0]}</p>`
+    }
+    else{
+        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${txt}</p>`    
+    }
+    
+    //move in selected question panel
+    selected.style.bottom = "0%"
+    selected.style.border = "3rem solid var(--color-accent-1)"
 }
 
 function deleteMe(){ //deletes selected player

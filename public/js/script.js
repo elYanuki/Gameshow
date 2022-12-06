@@ -14,7 +14,6 @@ let timerNumber = document.querySelector("#timer-number div p")
 let playerParent = document.getElementById('players')
 let questionParent = document.getElementById('questions')
 let selected = document.getElementById('selected')
-let textP = selected.querySelector("p")
 let sound = document.getElementById('sound')
 let scoreSel = document.getElementById('score-selector')
 let scoreSelHidden = true;
@@ -93,11 +92,8 @@ function killTimer(){
 }
 
 function closeQuestion(){
-/*     selected.style.top = "100%" */
-    selected.style.bottom = "-100%" 
+    selected.style.bottom = "-100%"
     selected.style.border = "0rem solid var(--color-accent-1)"
-    textP.style.opacity = "0"
-    textP.style.marginBottom = "5rem"
 
     if(timerActive == true){
         killTimer()
