@@ -8,8 +8,6 @@
 
 ***************************************************************************************************************/
 
-const socket = io();
-
 socket.on("connect", () => {
     console.log(socket);
     console.log(socket.id);
@@ -118,7 +116,6 @@ function selectQuestion(txt, catName){
     console.log(txt);
     
     if(Array.isArray(txt)){
-        console.log("url");
         selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: url(${txt[1]});" class="image"></div><p class="text">${txt[0]}</p>`
     }
     else{

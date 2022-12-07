@@ -8,8 +8,6 @@ DEPENDS ON: socket, script.js
 
 ***************************************************************************************************************/
 
-const socket = io();
-
 socket.on("connect", () => {
     console.log(socket);
     console.log(socket.id);
@@ -105,8 +103,6 @@ function closeAwnsers(){
 
 // used to check if a image url is provided as a question
 
-let isUrl = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
-
 function selectQuestion(txt, sol){
     console.log("selecting question");
     console.log(txt, sol);
@@ -115,10 +111,10 @@ function selectQuestion(txt, sol){
         selected.innerHTML = `
         <div style="background-image: url(${txt[1]});" class="image"></div>
         <p class="text">${txt[0]}</p>
-        <p class="sol">${sol}</p>
+        <p class="sol">${sol[0]}</p>
         <div class="buttons">
             <p onclick="sendCloseQuestion()">schließen</p>
-            <p onclick="toggleSolution()">toggle</p>
+            <p onclick="socket.emit('sendToggleImage', '${txt[1]}', '${sol[1]}')">toggle</p>
         </div>`
     }
     else{
@@ -127,7 +123,6 @@ function selectQuestion(txt, sol){
         <p class="sol">${sol}</p>
         <div class="buttons">
             <p onclick="sendCloseQuestion()">schließen</p>
-            <p onclick="toggleSolution()">toggle</p>
         </div>`
     }
     
@@ -149,13 +144,14 @@ function sendCloseQuestion(){
 }
 
 function closeQuestion(){
-        selected.style.border = "0rem solid var(--color-accent-1)"
-        selected.style.display = "none"
-    
-        if(timerActive == true){
-            killTimer()
-        }
+    selected.style.border = "0rem solid var(--color-accent-1)"
+    selected.style.display = "none"
+
+    if(timerActive == true){
+        killTimer()
     }
+}
+
 
 function startTimer(){
     socket.emit("sendTimer")

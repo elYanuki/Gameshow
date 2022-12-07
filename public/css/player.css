@@ -22,6 +22,11 @@ main{
     height: 100vh;
 }
 
+#content{
+    max-width: 800px;
+    margin-inline: auto;
+}
+
 /*---------login---------*/
 
 #login{
@@ -142,9 +147,8 @@ main{
     padding: 2.5rem;
     display: flex;
     box-shadow: inset 0 0 1rem 1rem rgba(26, 26, 26, 0.373);
-    width: 100vw;
+    width: 100%;
     box-sizing: border-box;
-    margin-bottom: 1rem;
     flex-direction: column;
     flex-grow: 1;
     align-items: center;
@@ -207,6 +211,14 @@ main{
     margin-inline: 2rem;
 }
 
+#selected .image{
+    width: 100%;
+    aspect-ratio: 4/3;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 #waiting{
     position: absolute;
     width: 100vw;
@@ -231,7 +243,7 @@ main{
 #selected .header{
     justify-self:flex-start;
     position: absolute;
-    top: 24vh;
+    top: 25vh;
     font-size: 1.5rem;
     font-family: thick;
     color: rgb(100, 0, 100);
@@ -273,6 +285,7 @@ main{
 
 #players{
     display: block;
+    height: fit-content;
 }
 
 .player{

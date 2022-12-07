@@ -34,6 +34,8 @@ let timerlenght = 30
 let ffaRunning = false
 let timerActive = false
 
+const socket = io();
+
 function setTimer(){
         console.log("starting timer");
 
@@ -99,6 +101,10 @@ function closeQuestion(){
         killTimer()
     }
 }
+
+socket.on('toggleImage', (path) => {
+    selected.querySelector(".image").style.backgroundImage = `url("${path}")`
+})
 
 function changeScorePopup(id, event) {
     if (scoreSelHidden == true) {

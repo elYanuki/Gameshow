@@ -1,5 +1,3 @@
-const socket = io();
-
 socket.on("connect", () => {
     console.log(socket);
     console.log(socket.id);
@@ -85,7 +83,6 @@ socket.on('selectQuestion', (set, id) => {
         selectQuestion(questionData[set].Text[id], questionData[set].Name)
         waiting.style.opacity = 0
     }
-    
 })
 
 socket.on('closeQuestion', () => {

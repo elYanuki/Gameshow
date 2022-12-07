@@ -84,8 +84,12 @@ io.on("connection", (socket) => {
         }
     })
 
+    let imageMode = 0
+
     socket.on("sendSelectQuestion", (set, id) => {
         console.log("selecting question", set, id);
+
+        imageMode = 0
         safedId = id
         safedSet = set
 
@@ -103,6 +107,18 @@ io.on("connection", (socket) => {
 
         safedId = null
         safedSet = null
+    })
+
+    socket.on("sendToggleImage", (txt, sol) => {
+        if(imageMode == 0){
+            imageMode = 1
+            io.emit("toggleImage", sol)
+        }
+        else{
+            io.emit("toggleImage", txt)
+            imageMode = 0
+        }
+        
     })
 
     socket.on("sendOpenRules", () => {
