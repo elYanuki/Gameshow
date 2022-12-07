@@ -109,7 +109,7 @@ function selectQuestion(txt, sol){
 
     if(Array.isArray(txt)){
         selected.innerHTML = `
-        <div style="background-image: url(${txt[1]});" class="image"></div>
+        <div style="background-image: ${txt[1]};" class="image"></div>
         <p class="text">${txt[0]}</p>
         <p class="sol">${sol[0]}</p>
         <div class="buttons">

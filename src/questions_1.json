@@ -26,14 +26,14 @@
 	{
 		"Name": "leckerschmecker",
 		"Text": [
-			["was ist das", "https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg"],
+			["was ist das", "url(https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg)"],
 			"welche Geschmacksrichtung hat das grüne Twinnie",
 			"nenne die 4 Teil der Mozartkugel",
 			"welches süße/neutrale Gebäck gibt es sowohl in laib als auch in hörnchen form",
 			"welches für Getränke bekannte obst weist über 600 Kerne pro frucht auf"
 		],
 		"Solution": [
-			["Speck (geräuchert)", "https://www.tagesschau.de/multimedia/bilder/reichelt-103~_v-original.jpg"],
+			["Speck (geräuchert)", "url(https://www.tagesschau.de/multimedia/bilder/reichelt-103~_v-original.jpg)"],
 			"Birne",
 			"Schokolade Nougat Marzipan Pistazie",
 			"Briosch",

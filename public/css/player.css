@@ -19,7 +19,7 @@ body{
 main{
     display: none;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 #content{
@@ -144,7 +144,7 @@ main{
     background-color: var(--gray-4);
     border: 0rem solid var(--color-accent-1);
     transition: all .6s;
-    padding: 2.5rem;
+    padding: 2.5vw;
     display: flex;
     box-shadow: inset 0 0 1rem 1rem rgba(26, 26, 26, 0.373);
     width: 100%;
@@ -153,6 +153,7 @@ main{
     flex-grow: 1;
     align-items: center;
     justify-content: center;
+    height: auto;
 }
 
 #selected .text{
@@ -164,9 +165,6 @@ main{
     text-align: center;
     justify-self: center;
     align-self: center;
-    margin-bottom: 5rem;
-    transition: all .3s;
-    transition-delay: .6s;
     line-height: 130%;
 }
 
@@ -286,6 +284,7 @@ main{
 #players{
     display: block;
     height: fit-content;
+    overflow: initial;
 }
 
 .player{
@@ -330,6 +329,11 @@ main{
     #timer-number div{
         height: 10vh;
         width: 10vh;
+    }
+
+    #timer-number{
+        display: flex;
+        justify-content: center;
     }
 }
 

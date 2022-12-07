@@ -103,7 +103,7 @@ function closeQuestion(){
 }
 
 socket.on('toggleImage', (path) => {
-    selected.querySelector(".image").style.backgroundImage = `url("${path}")`
+    selected.querySelector(".image").style.backgroundImage = path
 })
 
 function changeScorePopup(id, event) {
