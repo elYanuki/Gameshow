@@ -102,12 +102,6 @@
     text-shadow: var(--outline-1)
 }
 
-.player div{
-    display: flex;
-    justify-content:flex-start;
-    align-items: center;
-}
-
 .points-parent{
     display: flex;
     align-items: center;
@@ -124,10 +118,16 @@
     margin-top: -1rem;
 }
 
+.player div{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+}
+
 .player div div{
     background-color: var(--color-accent-1);
     border-radius: 2rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: .2rem .5rem;
     margin-right: .4em;
     box-shadow: var(--shadow-3);
@@ -136,6 +136,7 @@
     font-weight: lighter;
     margin-top: .2rem;
     letter-spacing: .05rem;
+    text-transform: uppercase;
 }
 
 .add{

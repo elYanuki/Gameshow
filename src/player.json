@@ -2,6 +2,16 @@
   {
     "Name": "leon",
     "Score": 0,
-    "Special": false
+    "Special": true
+  },
+  {
+    "Name": "dfg",
+    "Score": 0,
+    "Special": true
+  },
+  {
+    "Name": "peter",
+    "Score": 0,
+    "Special": true
   }
 ]

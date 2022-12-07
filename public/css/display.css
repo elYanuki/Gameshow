@@ -267,13 +267,7 @@ main{
     font-weight: lighter;
     margin-top: .2rem;
     letter-spacing: .05rem;
-}
-
-.player div div i{
-    font-size: .6em;
-    color: var(--gray-6);
-    /* text-shadow: var(--outline-1); */
-    pointer-events: none;
+    text-transform: uppercase;
 }
 
 #add{
