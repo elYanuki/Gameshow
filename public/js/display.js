@@ -8,6 +8,8 @@
 
 ***************************************************************************************************************/
 
+sound.volume = 0.2;
+
 socket.on("connect", () => {
     console.log(socket);
     console.log(socket.id);
@@ -70,11 +72,6 @@ socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by 
     }
 })
 
-socket.on('closeQuestion', () => {
-    console.log("closing question");
-    closeQuestion()
-})
-
 socket.on('loadFFA', (data) => { //loads Free For All question
     console.log(data);
     selectQuestion(data.Question, "free for all")
@@ -115,7 +112,7 @@ function selectQuestion(txt, catName){
     console.log("loading selected question");
     console.log(txt);
     
-    if(Array.isArray(txt)){
+    if(Array.isArray(txt)){//image question
         selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${txt[1]};" class="image"></div><p class="text">${txt[0]}</p>`
     }
     else{
@@ -128,6 +125,7 @@ function selectQuestion(txt, catName){
 }
 
 function playSound(name){ //used to play sounds that acompany the gameplay
+    console.log("sound", name);
     switch (name) {
         case `timeUp`:
             sound.src = "./sound/bell.wav"

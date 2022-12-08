@@ -310,7 +310,7 @@ main{
     padding: .5rem;
 }
 
-#awnsers{
+#answers{
     position: absolute;
     right: 10vw;
     left: 10vw;
@@ -322,11 +322,17 @@ main{
     background-color: var(--gray-3);
     padding: 2rem;
     box-shadow: var(--outline-2), var(--shadow-3);
+    overflow-y: auto;
+    flex-direction: column;
 }
 
-#awnsers p{
+#answers p{
     color: white;
     font-size: 200%;
+}
+
+#answers p:last-of-type{
+    justify-self: flex-end;
 }
 
 /**********Keyframes**********/

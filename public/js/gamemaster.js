@@ -64,10 +64,6 @@ socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by 
     }
 })
 
-socket.on('closeQuestion', () => {
-    closeQuestion()
-})
-
 socket.on('startTimer', (data) => {
     setTimer()
 })
@@ -81,10 +77,10 @@ socket.on('loadFFA', (data) => {
     selectQuestion(data.Question, data.Solution)
 })
 
-socket.on('awnsers', (data) => { //displays the awnsers that users gave for the gamemaster
-    console.log("awnsers recieved", data);
+socket.on('answers', (data) => { //displays the awnsers that users gave for the gamemaster
+    console.log("answers recieved", data);
 
-    document.getElementById('awnsers').style.display = "block"
+    document.getElementById('answers').style.display = "flex"
 
     let html = ""
 
@@ -94,11 +90,11 @@ socket.on('awnsers', (data) => { //displays the awnsers that users gave for the 
 
     html += `<p onclick="closeAwnsers()">close</p>`
 
-    document.getElementById('awnsers').innerHTML = html
+    document.getElementById('answers').innerHTML = html
 })
 
 function closeAwnsers(){
-    document.getElementById('awnsers').style.display = "none"
+    document.getElementById('answers').style.display = "none"
 }
 
 // used to check if a image url is provided as a question

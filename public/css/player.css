@@ -145,7 +145,7 @@ main{
     border: 0rem solid var(--color-accent-1);
     transition: all .6s;
     padding: 2.5vw;
-    display: flex;
+    display: none;
     box-shadow: inset 0 0 1rem 1rem rgba(26, 26, 26, 0.373);
     width: 100%;
     box-sizing: border-box;
@@ -166,27 +166,6 @@ main{
     justify-self: center;
     align-self: center;
     line-height: 130%;
-}
-
-#selected .sol{
-    text-align: center;
-    font-size: 2vw;
-    color: white;
-}
-
-#selected .hidden{
-    position: absolute;
-    opacity: 1;
-    width: 40vw;
-    left: 0;
-}
-
-#selected .shown{
-    position: absolute;
-    opacity: 1;
-    transition: opacity 1s;
-    width: 40vw;
-    right: 0;
 }
 
 #selected .buttons{
@@ -227,8 +206,7 @@ main{
     font-family: standart;
 }
 
-#awnserInput{
-    display: none;
+#answerInput{
     color: white;
     text-align: center;
     font-size: 150%;

@@ -28,7 +28,7 @@ let ffaRunning = false //used to only collect and send awnsers if question is ff
 
 let timerRunning = false //used to alternate between starting / restting the timer
 
-let awnsers = [] //used to collect awnsers and send to the gamemaster
+let answers = [] //used to collect awnsers and send to the gamemaster
 
 //used to safe selected question
 let safedSet 
@@ -39,12 +39,16 @@ io.on("connection", (socket) => {
     console.log("client connected")
 
     //sends player and question data to all clients
-    io.emit("loadPlayers", manager.players)
-    io.emit("loadQuestions", manager.questions)
-    io.emit("selectQuestion", safedSet, safedId)
+    socket.emit("loadPlayers", manager.players)
+    socket.emit("loadQuestions", manager.questions)
+    socket.emit("selectQuestion", safedSet, safedId)
+
+    if(ffaRunning == true)
+        socket.emit("loadFFA", manager.freeForAll[ffACount])
+
 
     socket.on("sendFFA", () => {
-        console.log("ffa triggerd");
+        console.log("ffa triggerd count:", ffACount);
 
         ffaRunning = true
         console.log(manager.freeForAll);
@@ -60,6 +64,7 @@ io.on("connection", (socket) => {
         io.emit("loadQuestions", manager.questions)
     })
 
+    let timerOver = null
     socket.on("sendTimer", () => {
         console.log("sendTimer recieved:", timerRunning);
 
@@ -67,22 +72,27 @@ io.on("connection", (socket) => {
             console.log("starting timer");
             timerRunning = true
             io.emit("startTimer")
-            setTimeout(function () { //after the timer is over
-                if (ffaRunning == true) { //if current question is a ffa collect awnsers
-                    console.log("awnsers sent");
-                    io.emit("awnsers", awnsers)
-                    awnsers = []
-                }
-                timerRunning = false
-                console.log("timer reset");
-            }, 31000)
+            timerOver = setTimeout(function () { //after the timer is over
+                stopTimer()
+                setTimeout(() => {
+                    if (ffaRunning == true) { //if current question is a ffa send collected answers to gamemaster
+                        console.log("answer sent");
+                        io.emit("answers", answers)
+                        answers = []
+                    }
+                }, 1000);
+            }, 30000)
         }
         else if(timerRunning == true){
-            console.log("stoping timer");
-            io.emit("stopTimer")
-            timerRunning = false
+            stopTimer()
         }
     })
+
+    function stopTimer(){
+        clearInterval(timerOver)
+        io.emit("stopTimer")
+        timerRunning = false
+    }
 
     let imageMode = 0
 
@@ -104,6 +114,7 @@ io.on("connection", (socket) => {
         ffaRunning = false
         socket.broadcast.emit("closeQuestion")
         io.emit("loadQuestions", manager.questions)
+        stopTimer()
 
         safedId = null
         safedSet = null
@@ -151,9 +162,10 @@ io.on("connection", (socket) => {
         io.emit("scrollPlayers", direction)
     })
 
-    socket.on("sendAwnser", (player, awnser) => { //collects awnsers for ffa
-        let erg = player + ": " + awnser
-        awnsers.push(erg)
+    socket.on("sendAnswer", (player, answer) => { //collects answers for ffa
+        let erg = player + ": " + answer
+        answers.push(erg)
+        console.log("answer recieved:", answer);
     })
 
     socket.on("sendSpecialUsed", (player) => {

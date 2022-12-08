@@ -54,17 +54,6 @@ function setTimer(){
                 timerBar.style.width = (100/timerlenght)*(timerlenght-i-1) + "%"
             },1000*i)
         }
-
-        clear = setTimeout(function(){
-            if(ffaRunning == true){ //timer is up - players should send their awnser
-                sendAwnser()
-            }
-
-            timerNumber.innerHTML = '0'
-            playSound("timeUp")
-
-            killTimer()
-        },1000*timerlenght)
 }
 
 function killTimer(){
@@ -74,6 +63,9 @@ function killTimer(){
 
     timerBar.style.transition = `none`
     timerActive = false
+    
+    timerNumber.innerHTML = '0'
+    playSound("timeUp")
 
     for (let i = 0; i < timerlenght; i++) {
        clearTimeout(countDown[i])
@@ -91,15 +83,17 @@ function killTimer(){
         timerNumber.innerHTML = '<span class="material-icons">timer</span>'
         timerNumber.style.opacity = "1"
     },1500)
+
 }
+
+socket.on('closeQuestion', () => {
+    console.log("closing question");
+    closeQuestion()
+})
 
 function closeQuestion(){
     selected.style.bottom = "-100%"
     selected.style.border = "0rem solid var(--color-accent-1)"
-
-    if(timerActive == true){
-        killTimer()
-    }
 }
 
 socket.on('toggleImage', (path) => {
