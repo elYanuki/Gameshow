@@ -62,6 +62,9 @@ socket.on('startTimer', () => {
 })
 
 socket.on('stopTimer', () => {
+    if(timerActive == true)
+        playSound("timeUp")
+
     killTimer()
 })
 

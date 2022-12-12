@@ -65,7 +65,6 @@ function killTimer(){
     timerActive = false
     
     timerNumber.innerHTML = '0'
-    playSound("timeUp")
 
     for (let i = 0; i < timerlenght; i++) {
        clearTimeout(countDown[i])

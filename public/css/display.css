@@ -448,7 +448,9 @@ main{
 }
 
 #rules{
-    display: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     position: absolute;
     background-color: var(--gray-3);
     top: 0;
@@ -457,35 +459,38 @@ main{
     right: 0;
     z-index: 11;
     color: var(--gray-6);
+    font-size: 1.3rem;
+    padding: 2vw;
 }
 
 #rules section{
-    width: 50%;
-    padding: 1rem;
+    padding: 1vw;
 }
 
 #rules ul{
-    margin-left: 1.5rem;
+    margin-left: 2rem;
 }
 
 #rules li{
     margin-bottom: .2rem;
-    line-height: 140%;
+    line-height: 160%;
 }
 
 #rules h1{
     text-shadow: var(--outline-2);
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-align: center;
+    grid-area: 1 / 1 / 1 / 3;
+    height: auto;
 }
 
 #rules h2{
     text-shadow: var(--outline-1);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
 }
 
 #rules h3{
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     text-shadow: var(--outline-1);
     margin-top: .3rem;
     margin-bottom: .2rem;

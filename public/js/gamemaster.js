@@ -181,8 +181,6 @@ function postPlayer(name){//adds new player
 
 //popups
 
-function playSound(){} //empty so that there is no sounds played by the clients
-
 function numberSel(elem){ //called when u choose how many points you want to sub/add to a player - sets input field value to pressed button
     scoreInput.value = elem.innerText
 }

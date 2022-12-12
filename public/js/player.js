@@ -148,5 +148,3 @@ function popup(content){ //creates info popup used to display the selected playe
         playerPopup.style = "top: 35vh; opacity: 0;"
     },2500)
 }
-
-function playSound(){} //empty so that there is no sounds played by the clients
