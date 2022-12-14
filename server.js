@@ -50,8 +50,12 @@ io.on("connection", (socket) => {
     socket.on("sendFFA", () => {
         console.log("ffa triggerd count:", ffACount);
 
+        if(ffACount >= manager.freeForAll.length){
+            io.emit("loadFFA", {"type": 11,"question": "Out of 'free for all' Questions","solution": ""})
+            return
+        }
+
         ffaRunning = true
-        console.log(manager.freeForAll);
         io.emit("loadFFA", manager.freeForAll[ffACount])
         ffACount++
     })
@@ -105,7 +109,7 @@ io.on("connection", (socket) => {
 
         socket.broadcast.emit("selectQuestion", set, id)
 
-        manager.questions[set].Used[id] = true
+        manager.questions[set].questions[id].used = true
     })
 
     socket.on("sendCloseQuestion", () => {
@@ -169,11 +173,11 @@ io.on("connection", (socket) => {
     })
 
     socket.on("sendSpecialUsed", (player) => {
-        if (manager.players[player].Special == true) {
-            manager.players[player].Special = false
+        if (manager.players[player].special == true) {
+            manager.players[player].special = false
         }
         else {
-            manager.players[player].Special = true
+            manager.players[player].special = true
         }
 
         updatePlayerFile()
@@ -184,11 +188,11 @@ io.on("connection", (socket) => {
     socket.on("changeScore", (plusMinus, value, player) => {
         if (value == "") {}
         else if (plusMinus == "plus") {
-            manager.players[player].Score = parseInt(manager.players[player].Score) + parseInt(value)
+            manager.players[player].score = parseInt(manager.players[player].score) + parseInt(value)
             console.log("plus");
         }
         else if (plusMinus == "minus") {
-            manager.players[player].Score = parseInt(manager.players[player].Score) - parseInt(value)
+            manager.players[player].score = parseInt(manager.players[player].score) - parseInt(value)
         }
 
         updatePlayerFile()
@@ -196,9 +200,9 @@ io.on("connection", (socket) => {
         io.emit("loadPlayers", manager.players)
     })
 
-    socket.on("postQuestion", (name, text1, sol1, text2, sol2, text3, sol3, text4, sol4, text5, sol5) => {
+    socket.on("postQuestion", (name, text1, sol1, type1, text2, sol2, type2, text3, sol3, type3, text4, sol4, type4, text5, sol5, type5) => {
 
-        manager.addQuestionSet(name, text1, sol1, text2, sol2, text3, sol3, text4, sol4, text5, sol5)
+        manager.addQuestionSet(name, text1, sol1, type1, text2, sol2, type2, text3, sol3, type3, text4, sol4, type4, text5, sol5, type5)
 
         io.emit("loadQuestions", manager.questions)
 
@@ -217,8 +221,8 @@ io.on("connection", (socket) => {
 
     socket.on("reset", () => { //resets all scores and specials
         for (let i = 0; i < manager.players.length; i++) {
-            manager.players[i].Score = 0
-            manager.players[i].Special = true
+            manager.players[i].score = 0
+            manager.players[i].special = true
          }
 
          updatePlayerFile()
@@ -246,9 +250,8 @@ if (fs.existsSync(playerpath)) {
 
         let data = JSON.parse(data_string);
 
-        for (let i = 0; i < data.length; i++) {
-            manager.addPlayer(data[i].Name)
-        }
+        console.log(data);
+        manager.setPlayers(data)
     })
 }
 
@@ -259,9 +262,8 @@ if (fs.existsSync(questionpath)) {
 
         let data = JSON.parse(data_string);
 
-        for (let i = 0; i < data.length; i++) {
-            manager.addQuestionSet(data[i].Name, data[i].Text[0], data[i].Solution[0], data[i].Text[1], data[i].Solution[1], data[i].Text[2], data[i].Solution[2], data[i].Text[3], data[i].Solution[3], data[i].Text[4], data[i].Solution[4])
-        }
+        console.log(data);
+        manager.setQuestions(data)
     })
 }
 
@@ -272,9 +274,8 @@ if (fs.existsSync(ffAPath)) {
 
         let data = JSON.parse(data_string);
 
-        for (let i = 0; i < data.length; i++) {
-            manager.addFreeForAll(data[i].Question, data[i].Solution)
-        }
+        console.log(data);
+        manager.setFFA(data)
     })
 }
 
@@ -294,8 +295,6 @@ server.listen(port, () => {
     console.log(`listenin on port ${port}`)
 })
 
-
-
 class Manager {
     constructor() {
         this.players = new Array();
@@ -304,12 +303,12 @@ class Manager {
     }
 
     addPlayer(name) {
-        if (name != "") {
+        if (name != "" && name != null) {
             name = name.toLowerCase()
             let newPlayer = {
-                Name: name,
-                Score: 0,
-                Special: true,
+                name: name,
+                score: 0,
+                special: true,
             };
 
             this.players.push(newPlayer);
@@ -322,15 +321,38 @@ class Manager {
             name = name.toLowerCase()
 
             let newSet = {
-                Name: name,
-                Text: [
-                    text1, text2, text3, text4, text5
-                ],
-                Solution: [
-                    sol1, sol2, sol3, sol4, sol5
-                ],
-                Used: [
-                    false, false, false, false, false
+                name: name,
+                questions: [
+                    {
+                        "type": type1,
+                        "text": text1,
+                        "solution": sol1,
+                        "used": false
+                    },
+                    {
+                        "type": type2,
+                        "text": text2,
+                        "solution": sol2,
+                        "used": false
+                    },
+                    {
+                        "type": type3,
+                        "text": text3,
+                        "solution": sol3,
+                        "used": false
+                    },
+                    {
+                        "type": type4,
+                        "text": text4,
+                        "solution": sol4,
+                        "used": false
+                    },
+                    {
+                        "type": type5,
+                        "text": text5,
+                        "solution": sol5,
+                        "used": false
+                    },
                 ]
             };
 
@@ -338,25 +360,19 @@ class Manager {
         }
     }
 
-    addFreeForAll(question, solution) {
-        let newSet = {
-            Question: question,
-            Solution: solution
+    addFreeForAll(type, question, solution) {
+        let newFFA = {
+            type: type,
+            question: question,
+            solution: solution
         };
 
-        this.freeForAll.push(newSet);
-        console.log(this.freeForAll);
-    }
-
-    printQuestions() {
-        let txt = ""
-
-        return txt;
+        this.freeForAll.push(newFFA);
     }
 
     deletePlayer(name){
         for (let i = 0; i < manager.players.length; i++) {
-           if(manager.players[i].Name == name){
+           if(manager.players[i].name == name){
                 manager.players.splice(i,1)
            }
         }
@@ -364,6 +380,18 @@ class Manager {
 
     deletePlayerID(id){
         manager.players.splice(id,1)
+    }
+
+    setQuestions(questions){
+        manager.questions = questions
+    }
+
+    setPlayers(players){
+        manager.players = players
+    }
+
+    setFFA(ffa){
+        manager.freeForAll = ffa
     }
 }
 

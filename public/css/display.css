@@ -448,7 +448,7 @@ main{
 }
 
 #rules{
-    display: grid;
+    display: none;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     position: absolute;

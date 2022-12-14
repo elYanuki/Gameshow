@@ -1,98 +1,142 @@
 [
 	{
-		"Name": "name a lot",
-		"Text": [
-			"Hunderassen",
-			"Blumen",
-			"Best selling games all time",
-			"Weltwunder",
-			"Steinarten"
-		],
-		"Solution": [
-			"...",
-			"Rosen, Tulpen, Gänseblümchen, Sonnenblume, Veilchen, Nelke",
-			"Minecraft, GTA, Tetris, WII Sports, Pupg, Super Mario Bros, Pokemon(red/green/blue/yellow) Mariokart 8",
-			" Koloss von Rhodos - Leuchtturm von Alexandria - Pyramiden - Temple der Arthemis Zeus staue von Olympia - hängenden gärten",
-			"Schiefer, Basalt, Kalkstein, Marmor, Granit, Andesit"
-		],
-		"Used": [
-			false,
-			false,
-			false,
-			false,
-			false
+		"name": "name a lot",
+		"questions": [
+			{
+				"type": 0,
+				"text": "Hunderassen",
+				"solution": "...",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Blumen",
+				"solution": "Rosen, Tulpen, Gänseblümchen, Sonnenblume, Veilchen, Nelke",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Best selling games all time",
+				"solution": "Minecraft, GTA, Tetris, WII Sports, Pupg, Super Mario Bros, Pokemon(red/green/blue/yellow) Mariokart 8",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Weltwunder",
+				"solution": " Koloss von Rhodos - Leuchtturm von Alexandria - Pyramiden - Temple der Arthemis Zeus staue von Olympia - hängenden gärten",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Steinarten",
+				"solution": "Schiefer, Basalt, Kalkstein, Marmor, Granit, Andesit",
+				"used": false
+			}
 		]
 	},
 	{
-		"Name": "leckerschmecker",
-		"Text": [
-			["was ist das", "url(https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg)"],
-			"welche Geschmacksrichtung hat das grüne Twinnie",
-			"nenne die 4 Teil der Mozartkugel",
-			"welches süße/neutrale Gebäck gibt es sowohl in laib als auch in hörnchen form",
-			"welches für Getränke bekannte obst weist über 600 Kerne pro frucht auf"
-		],
-		"Solution": [
-			["Speck (geräuchert)", "url(https://www.tagesschau.de/multimedia/bilder/reichelt-103~_v-original.jpg)"],
-			"Birne",
-			"Schokolade Nougat Marzipan Pistazie",
-			"Briosch",
-			"grantapfel"
-		],
-		"Used": [
-			false,
-			false,
-			false,
-			false,
-			false
+		"name": "name a lot",
+		"questions": [
+			{
+				"type": 0,
+				"text": "Hunderassen",
+				"solution": "...",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Blumen",
+				"solution": "Rosen, Tulpen, Gänseblümchen, Sonnenblume, Veilchen, Nelke",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Best selling games all time",
+				"solution": "Minecraft, GTA, Tetris, WII Sports, Pupg, Super Mario Bros, Pokemon(red/green/blue/yellow) Mariokart 8",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Weltwunder",
+				"solution": " Koloss von Rhodos - Leuchtturm von Alexandria - Pyramiden - Temple der Arthemis Zeus staue von Olympia - hängenden gärten",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Steinarten",
+				"solution": "Schiefer, Basalt, Kalkstein, Marmor, Granit, Andesit",
+				"used": false
+			}
 		]
 	},
 	{
-		"Name": "synonyme",
-		"Text": [
-			"stehlen",
-			"essen (tätigkeit)",
-			"Zeichnung",
-			"Galaxie",
-			"einen schlag abwehren"
-		],
-		"Solution": [
-			"klauen rauben",
-			"futtern snackn fooden",
-			"Gemälde, malerei",
-			"Sternensystem",
-			"einen schlag parrieren"
-		],
-		"Used": [
-			false,
-			false,
-			false,
-			false,
-			false
+		"name": "name a lot",
+		"questions": [
+			{
+				"type": 0,
+				"text": "Hunderassen",
+				"solution": "...",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Blumen",
+				"solution": "Rosen, Tulpen, Gänseblümchen, Sonnenblume, Veilchen, Nelke",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Best selling games all time",
+				"solution": "Minecraft, GTA, Tetris, WII Sports, Pupg, Super Mario Bros, Pokemon(red/green/blue/yellow) Mariokart 8",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Weltwunder",
+				"solution": " Koloss von Rhodos - Leuchtturm von Alexandria - Pyramiden - Temple der Arthemis Zeus staue von Olympia - hängenden gärten",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Steinarten",
+				"solution": "Schiefer, Basalt, Kalkstein, Marmor, Granit, Andesit",
+				"used": false
+			}
 		]
 	},
 	{
-		"Name": "movies and media",
-		"Text": [
-			"wie geniest Dagobert Duck am liebsten seinen Reichtum",
-			"welche Kreaturen halfen den Rebellen bei der Schlacht um Endor der Schildreaktor des Todessterns zu deaktivieren",
-			"wodurch überlebt Mitch eine Schussverletzung im Finale von Baywatch",
-			"wie nennt Stan Lee, Tony stark am Ende von Captain america - Civil War",
-			"Was hängt im Hotel Transilvanien an fast allen Türen"
-		],
-		"Solution": [
-			"baden",
-			"ewok",
-			"Seeigel Adrenalin",
-			"Tony Stank",
-			"Sprechende Schrumpfköpfe"
-		],
-		"Used": [
-			false,
-			false,
-			false,
-			false,
-			false
+		"name": "name a lot",
+		"questions": [
+			{
+				"type": 0,
+				"text": "Hunderassen",
+				"solution": "...",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Blumen",
+				"solution": "Rosen, Tulpen, Gänseblümchen, Sonnenblume, Veilchen, Nelke",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Best selling games all time",
+				"solution": "Minecraft, GTA, Tetris, WII Sports, Pupg, Super Mario Bros, Pokemon(red/green/blue/yellow) Mariokart 8",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Weltwunder",
+				"solution": " Koloss von Rhodos - Leuchtturm von Alexandria - Pyramiden - Temple der Arthemis Zeus staue von Olympia - hängenden gärten",
+				"used": false
+			},
+			{
+				"type": 0,
+				"text": "Steinarten",
+				"solution": "Schiefer, Basalt, Kalkstein, Marmor, Granit, Andesit",
+				"used": false
+			}
 		]
 	}
 ]

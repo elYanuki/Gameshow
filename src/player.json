@@ -1,12 +1,12 @@
 [
   {
-    "Name": "leon",
-    "Score": 0,
-    "Special": true
+    "name": "leon",
+    "score": 0,
+    "special": true
   },
   {
-    "Name": "yanik",
-    "Score": 0,
-    "Special": true
+    "name": "yanik",
+    "score": 0,
+    "special": true
   }
 ]

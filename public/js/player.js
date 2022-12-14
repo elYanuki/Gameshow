@@ -17,13 +17,13 @@ socket.on('loadPlayers', (data) => {
 
     let playerHtml = ""
     for (let i = 0; i < data.length; i++) {
-        if(data[i].Name == myName){
+        if(data[i].name == myName){
             playerHtml += `
             <div class="player" player-id="${i}">
-                <p class="name">${data[i].Name}</p>
-                <div class="points-parent"><p class="points">${data[i].Score}</p></div>
+                <p class="name">${data[i].name}</p>
+                <div class="points-parent"><p class="points">${data[i].score}</p></div>
                 <div>
-                    <div style="background-color:${data[i].Special ? 'var(--color-accent-1)' : 'var(--gray-5)'};">Multiplier</div>
+                    <div style="background-color:${data[i].special ? 'var(--color-accent-1)' : 'var(--gray-5)'};">Multiplier</div>
                 </div>
             </div>`
         }
@@ -67,7 +67,7 @@ function submitName(){
         login.style.display = "none"
         
         for (let i = 0; i < players.length; i++) {
-           if(players[i].Name == myName){ //only displays the player with your name
+           if(players[i].name == myName){ //only displays the player with your name
                 socket.emit("getPlayers")
                 popup("loged in as: " + myName)
                 return
@@ -81,9 +81,7 @@ function submitName(){
 
 socket.on('selectQuestion', (set, id) => {
     if(set != null && id != null){
-        console.log("selection question:", set, id);
-        console.log(questionData[set].Text[id], questionData[set].Name);
-        selectQuestion(questionData[set].Text[id], questionData[set].Name)
+        selectQuestion(questionData[set].questions[id], questionData[set].name)
         waiting.style.opacity = 0
     }
 })
@@ -98,20 +96,23 @@ function closeQuestion(){
     },500)
 }
 
-function selectQuestion(txt, catName){
-    console.log("loading selected question");
-    console.log(txt, catName);
+function selectQuestion(data, catName){
+    console.log("loading selected question", data);
+
+    if(data == null){console.error("question-data is null"); return}
+
     
-    if(Array.isArray(txt)){//image
-        console.log("url");
-        selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${txt[1]};" class="image"></div><p class="text">${txt[0]}</p>`
+    if(data.type == 0){//normal
+        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.text}</p>`    
     }
-    else if(catName == "free for all"){
-        console.log("ffa");
-        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${txt}</p><input type="text" id="answerInput" autocomplete="off">`
+    else if(data.type == 1){//image
+        selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${data.img[0]};" class="image"></div><p class="text">${data.text}</p>`
     }
-    else{//normal
-        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${txt}</p>`    
+    else if(data.type == 10){ //FFA with input
+        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.question}</p><input type="text" id="answerInput" autocomplete="off">`
+    }
+    else if(data.type == 11){ //FFA without input
+        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.question}</p>`
     }
     
     //move in selected question panel
@@ -132,7 +133,7 @@ socket.on('loadFFA', (data) => {
 
     ffaRunning = true
     waiting.style.opacity = 0
-    selectQuestion(data.Question, "free for all")
+    selectQuestion(data, "free for all")
 })
 
 function sendAnswer(){

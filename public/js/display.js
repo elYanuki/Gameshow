@@ -22,10 +22,10 @@ socket.on('loadPlayers', (data) => { //loads the player overview
     for (let i = 0; i < data.length; i++) {
         playerHtml += `
         <div class="player" player-id="${i}">
-            <p class="name">${data[i].Name}</p>
-            <div class="points-parent"><p class="points">${data[i].Score}</p></div>
+            <p class="name">${data[i].name}</p>
+            <div class="points-parent"><p class="points">${data[i].score}</p></div>
             <div>
-                <div style="background-color:${data[i].Special ? 'var(--color-accent-1)' : 'var(--gray-5)'};">multiplier</div>
+                <div style="background-color:${data[i].special ? 'var(--color-accent-1)' : 'var(--gray-5)'};">multiplier</div>
             </div>
         </div>`
     }
@@ -43,12 +43,12 @@ socket.on('loadQuestions', (data) => { //loads the question overview
     for (let i = 0; i < data.length; i++) {
         questionHtml += `
                 <div class="catergory" cat-id="${i}">
-                    <h1>${data[i].Name}</h1>
-                    <div style="opacity: ${(data[i].Used[0] == false) ? 1 : 0}"><p>100</p></div>
-                    <div style="opacity: ${(data[i].Used[1] == false) ? 1 : 0}"><p>200</p></div>
-                    <div style="opacity: ${(data[i].Used[2] == false) ? 1 : 0}"><p>300</p></div>
-                    <div style="opacity: ${(data[i].Used[3] == false) ? 1 : 0}"><p>400</p></div>
-                    <div style="opacity: ${(data[i].Used[4] == false) ? 1 : 0}"><p>500</p></div>
+                    <h1>${data[i].name}</h1>
+                    <div style="opacity: ${(data[i].questions[0].used == false) ? 1 : 0}"><p>100</p></div>
+                    <div style="opacity: ${(data[i].questions[1].used == false) ? 1 : 0}"><p>200</p></div>
+                    <div style="opacity: ${(data[i].questions[2].used == false) ? 1 : 0}"><p>300</p></div>
+                    <div style="opacity: ${(data[i].questions[3].used == false) ? 1 : 0}"><p>400</p></div>
+                    <div style="opacity: ${(data[i].questions[4].used == false) ? 1 : 0}"><p>500</p></div>
                 </div>`
     }
 
@@ -71,17 +71,17 @@ socket.on('stopTimer', () => {
 socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by the loadQuestion fetch
     if(set != null && id != null){
         console.log("selection question:", set, id);
-        selectQuestion(questionData[set].Text[id], questionData[set].Name)
+        selectQuestion(questionData[set].questions[id], questionData[set].name)
     }
 })
 
 socket.on('loadFFA', (data) => { //loads Free For All question
     console.log(data);
-    selectQuestion(data.Question, "free for all")
+    selectQuestion(data, "free for all")
 })
 
 socket.on('openRules', () => {
-    rules.style.display = "flex"
+    rules.style.display = "grid"
 })
 
 socket.on('openCategories', () => {
@@ -111,15 +111,20 @@ socket.on('scrollPlayers', (direction) => {
 //will be used to check if a image url is provided as a question
 let isUrl;
 
-function selectQuestion(txt, catName){
+function selectQuestion(data, catName){
     console.log("loading selected question");
-    console.log(txt);
+
+    if(data == null){console.error("question-data is null"); return}
     
-    if(Array.isArray(txt)){//image question
-        selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${txt[1]};" class="image"></div><p class="text">${txt[0]}</p>`
+    if(data.type == 0){//default question
+        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.text}</p>`    
     }
-    else{
-        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${txt}</p>`    
+    else if(data.type == 10 || data.type == 11){//FFA
+        console.log("ffa");
+        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.question}</p>`
+    }
+    else if(data.type == 1){//image question
+        selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${data.img[0]};" class="image"></div><p class="text">${data.text}</p>`
     }
     
     //move in selected question panel

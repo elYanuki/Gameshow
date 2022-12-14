@@ -1,18 +1,22 @@
 [
   {
-    "Question": "In welchem alter hört dein gehirn auf zu wachsen",
-    "Solution": "18"
+    "type": 10,
+    "question": "In welchem alter hört dein gehirn auf zu wachsen",
+    "solution": "18"  
   },
   {
-    "Question": "Wie viele Megapixel hat das Menschliche auge",
-    "Solution": "576"
+    "type": 10,
+    "question": "Wie viele Megapixel hat das Menschliche auge",
+    "solution": "576"
   },
   {
-    "Question": "welches Tier benutzt google als rasenmäher ersatzt",
-    "Solution": "Ziegen"
+    "type": 10,
+    "question": "welches Tier benutzt google als rasenmäher ersatzt",
+    "solution": "Ziegen"
   },
   {
-    "Question": "wie viele einwohner hat österreich",
-    "Solution": "9.000.000"
+    "type": 10,
+    "question": "wie viele einwohner hat österreich",
+    "solution": "9.000.000"
   }
 ]

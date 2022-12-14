@@ -20,10 +20,10 @@ socket.on('loadPlayers', (data) => { //displays all players
     for (let i = 0; i < data.length; i++) {
         playerHtml += `
                 <div class="player" player-id="${i}">
-                    <p class="name">${data[i].Name}</p>
-                    <div class="points-parent"><p class="points">${data[i].Score}</p></div>
+                    <p class="name">${data[i].name}</p>
+                    <div class="points-parent"><p class="points">${data[i].score}</p></div>
                     <div>
-                        <div style="background-color:${data[i].Special ? 'var(--color-accent-1)' : 'var(--gray-5)'};" onclick="sendSpecialUsed(${i})">multiplier</div>
+                        <div style="background-color:${data[i].special ? 'var(--color-accent-1)' : 'var(--gray-5)'};" onclick="sendSpecialUsed(${i})">multiplier</div>
                     </div>
                     <i class="fa-solid fa-pen-to-square" onclick="changeScorePopup(${i}, event)"></i>
                 </div>`
@@ -41,12 +41,12 @@ socket.on('loadQuestions', (data) => {
             for (let i = 0; i < data.length; i++) {
                 questionHtml += `
                 <div class="catergory" cat-id="${i}">
-                    <h1>${data[i].Name}</h1>
-                    <div onclick="sendSelectQuestion(${i},0)" style="opacity: ${(data[i].Used[0] == false) ? 1 : 0.3}"><p>100</p></div>
-                    <div onclick="sendSelectQuestion(${i},1)" style="opacity: ${(data[i].Used[1] == false) ? 1 : 0.3}"><p>200</p></div>
-                    <div onclick="sendSelectQuestion(${i},2)" style="opacity: ${(data[i].Used[2] == false) ? 1 : 0.3}"><p>300</p></div>
-                    <div onclick="sendSelectQuestion(${i},3)" style="opacity: ${(data[i].Used[3] == false) ? 1 : 0.3}"><p>400</p></div>
-                    <div onclick="sendSelectQuestion(${i},4)" style="opacity: ${(data[i].Used[4] == false) ? 1 : 0.3}"><p>500</p></div>
+                    <h1>${data[i].name}</h1>
+                    <div onclick="sendSelectQuestion(${i},0)" style="opacity: ${(data[i].questions[0].used == false) ? 1 : 0.3}"><p>100</p></div>
+                    <div onclick="sendSelectQuestion(${i},1)" style="opacity: ${(data[i].questions[1].used == false) ? 1 : 0.3}"><p>200</p></div>
+                    <div onclick="sendSelectQuestion(${i},2)" style="opacity: ${(data[i].questions[2].used == false) ? 1 : 0.3}"><p>300</p></div>
+                    <div onclick="sendSelectQuestion(${i},3)" style="opacity: ${(data[i].questions[3].used == false) ? 1 : 0.3}"><p>400</p></div>
+                    <div onclick="sendSelectQuestion(${i},4)" style="opacity: ${(data[i].questions[4].used == false) ? 1 : 0.3}"><p>500</p></div>
                 </div>`
             }
     
@@ -60,11 +60,11 @@ socket.on('loadQuestions', (data) => {
 socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by the loadQuestion fetch
     if(set != null && id != null){
         console.log("selection question:", set, id);
-        selectQuestion(questionData[set].Text[id], questionData[set].Solution[id])
+        selectQuestion(questionData[set].questions[id], questionData[set].name)
     }
 })
 
-socket.on('startTimer', (data) => {
+socket.on('startTimer', () => {
     setTimer()
 })
 
@@ -73,8 +73,7 @@ socket.on('stopTimer', () => {
 })
 
 socket.on('loadFFA', (data) => {
-    console.log(data);
-    selectQuestion(data.Question, data.Solution)
+    selectQuestion(data)
 })
 
 socket.on('answers', (data) => { //displays the awnsers that users gave for the gamemaster
@@ -99,24 +98,33 @@ function closeAwnsers(){
 
 // used to check if a image url is provided as a question
 
-function selectQuestion(txt, sol){
-    console.log("selecting question");
-    console.log(txt, sol);
+function selectQuestion(data){
+    console.log("selecting question", data);
 
-    if(Array.isArray(txt)){
-        selected.innerHTML = `
-        <div style="background-image: ${txt[1]};" class="image"></div>
-        <p class="text">${txt[0]}</p>
-        <p class="sol">${sol[0]}</p>
+    if(data == null){console.error("question-data is null"); return}
+
+    if(data.type == 0){//default
+        selected.innerHTML= `
+        <p class="text">${data.text}</p>
+        <p class="sol">${data.solution}</p>
         <div class="buttons">
             <p onclick="sendCloseQuestion()">schließen</p>
-            <p onclick="socket.emit('sendToggleImage', '${txt[1]}', '${sol[1]}')">toggle</p>
         </div>`
     }
-    else{
+    else if(data.type == 1){//image
+        selected.innerHTML = `
+        <div style="background-image: ${data.img[0]};" class="image"></div>
+        <p class="text">${data.text}</p>
+        <p class="sol">${data.solution}</p>
+        <div class="buttons">
+        <p onclick="sendCloseQuestion()">schließen</p>
+        <p onclick="socket.emit('sendToggleImage', '${data.img[0]}', '${data.img[1]}')">toggle</p>
+        </div>`
+    }
+    else if(data.type == 10 || data.type == 11){//ffa
         selected.innerHTML= `
-        <p class="text">${txt}</p>
-        <p class="sol">${sol}</p>
+        <p class="text">${data.question}</p>
+        <p class="sol">${data.solution}</p>
         <div class="buttons">
             <p onclick="sendCloseQuestion()">schließen</p>
         </div>`
@@ -131,7 +139,7 @@ function selectQuestion(txt, sol){
 
 function sendSelectQuestion(set, id){ //set: x coords (categorie) id: y coords (question)
     socket.emit("sendSelectQuestion", set, id)
-    selectQuestion(questionData[set].Text[id], questionData[set].Solution[id])
+    selectQuestion(questionData[set].questions[id])
 }
 
 function sendCloseQuestion(){

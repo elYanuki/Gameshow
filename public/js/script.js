@@ -44,6 +44,8 @@ function setTimer(){
         timerNumber.innerText = timerlenght
         timerActive = true
 
+        debugger
+
         setTimeout(function(){
             timerBar.style.transition = `all 1s linear`
         },400)
