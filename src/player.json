@@ -2,11 +2,16 @@
   {
     "name": "leon",
     "score": 0,
-    "special": true
+    "special": false
   },
   {
     "name": "yanik",
-    "score": 0,
+    "score": -300,
+    "special": true
+  },
+  {
+    "name": "michi",
+    "score": 200,
     "special": true
   }
 ]

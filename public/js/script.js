@@ -37,27 +37,27 @@ let timerActive = false
 const socket = io();
 
 function setTimer(){
-        console.log("starting timer");
+    console.log("starting timer");
 
-        timerBar.style.transition = `all 200ms linear` //to load up the bar in 200ms
-        timerBar.style.width = "100%"
-        timerNumber.innerText = timerlenght
-        timerActive = true
+    timerBar.style.transition = `all 200ms linear` //to load up the bar in 200ms
+    timerBar.style.width = "100%"
+    timerNumber.innerText = timerlenght
+    timerActive = true
 
-        debugger
+    setTimeout(function(){
+        timerBar.style.transition = `all 1s linear`
+    },200)
 
-        setTimeout(function(){
-            timerBar.style.transition = `all 1s linear`
-        },400)
-
+    setTimeout(function(){
         for (let i = 0; i < timerlenght; i++) {
             countDown[i] = setTimeout(function(){
                 timerNumber.innerText = timerlenght - i //decrease the timer
                 timerBar.style.width = (100/timerlenght)*(timerlenght-i-1) + "%"
             },1000*i)
         }
+    },200)
 }
-
+    
 function killTimer(){
     console.log("killing timer");
 

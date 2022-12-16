@@ -112,19 +112,19 @@ socket.on('scrollPlayers', (direction) => {
 let isUrl;
 
 function selectQuestion(data, catName){
-    console.log("loading selected question");
+    console.log("loading selected question", data);
 
     if(data == null){console.error("question-data is null"); return}
     
     if(data.type == 0){//default question
         selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.text}</p>`    
     }
+    else if(data.type == 1){//image question
+        selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${data.img[0]};" class="image"></div><p class="text">${data.text}</p>`
+    }
     else if(data.type == 10 || data.type == 11){//FFA
         console.log("ffa");
         selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.question}</p>`
-    }
-    else if(data.type == 1){//image question
-        selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${data.img[0]};" class="image"></div><p class="text">${data.text}</p>`
     }
     
     //move in selected question panel

@@ -124,13 +124,13 @@ io.on("connection", (socket) => {
         safedSet = null
     })
 
-    socket.on("sendToggleImage", (txt, sol) => {
+    socket.on("sendToggleImage", (hint, solution) => {
         if(imageMode == 0){
             imageMode = 1
-            io.emit("toggleImage", sol)
+            io.emit("toggleImage", solution)
         }
         else{
-            io.emit("toggleImage", txt)
+            io.emit("toggleImage", hint)
             imageMode = 0
         }
         
