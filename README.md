@@ -14,7 +14,7 @@ NodeJS based Gameshow
   - intendet to be used on the hosts phone
   - offers full controll over the game
 - player:
-  - nicely styled limeted view of the game
+  - nicely styled limited view of the game
   - intendet to be used on the players phones to submitt awnsers to certain question types
   - lets you create or delete players and submitt awnsers
 
