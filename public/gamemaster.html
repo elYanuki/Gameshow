@@ -32,7 +32,7 @@
         <section id="players">
         </section>
 
-        <div id="answers"></div>
+        <div id="answers"><table><tbody><tr><th>player</th><th>answer</th></tr><tr><td>yanik</td><td>sdafdsaf</td></tr><tr><td>leon</td><td>asdfsafd</td></tr></tbody></table><p onclick="closeAwnsers()">close</p></div>
 
         <div id="add" class="add">
             <p onclick="postPlayer(document.getElementById('name-input').value); document.getElementById('name-input').value = '' ">add player</p>
@@ -51,7 +51,7 @@
         <section class="add">
     
             <!-- <p onclick="ffaPop()">add ffa </p> --><p onclick="triggerFFA()">trigger FFA</p>
-            <p onclick="if(confirm('do u want to rest all scores') == true)socket.emit('reset')">reset</p>
+            <p onclick="if(confirm('do u want to rest all scores and questions') == true)socket.emit('reset')">reset</p>
             <p onclick="if(confirm('do u want to delte all players') == true)socket.emit('deleteAll')">delteAll</p>
         </section>
 

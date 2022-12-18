@@ -77,7 +77,7 @@ socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by 
 
 socket.on('loadFFA', (data) => { //loads Free For All question
     console.log(data);
-    selectQuestion(data, "free for all")
+    selectQuestion(data)
 })
 
 socket.on('openRules', () => {
@@ -85,7 +85,7 @@ socket.on('openRules', () => {
 })
 
 socket.on('openCategories', () => {
-    cat.style.display = "block"
+    cat.style.display = "grid"
 })
 
 socket.on('closeInfo', () => { //closes the rules and categorie overviews above
@@ -108,9 +108,6 @@ socket.on('scrollPlayers', (direction) => {
     }
 })
 
-//will be used to check if a image url is provided as a question
-let isUrl;
-
 function selectQuestion(data, catName){
     console.log("loading selected question", data);
 
@@ -122,9 +119,12 @@ function selectQuestion(data, catName){
     else if(data.type == 1){//image question
         selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${data.img[0]};" class="image"></div><p class="text">${data.text}</p>`
     }
+    else if(data.type == 2){//multiple choice question
+        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.text}</p><div class="options"><p>${data.options[0]}</p><p>${data.options[1]}</p><p>${data.options[2]}</p><p>${data.options[3]}</p></div>`
+    }
     else if(data.type == 10 || data.type == 11){//FFA
         console.log("ffa");
-        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.question}</p>`
+        selected.innerHTML= `<span class="header">${data.type == 10 ? "Schätzfrage" : "Ratefrage"}</span><p class="text">${data.question}</p>`
     }
     
     //move in selected question panel

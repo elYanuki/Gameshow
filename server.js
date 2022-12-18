@@ -34,6 +34,10 @@ let answers = [] //used to collect awnsers and send to the gamemaster
 let safedSet 
 let safedId
 
+//used to store wheter rules or categories are open rn
+let categories = false
+let rules = false
+
 //all calls are named from client perspective: "send" - client sends to server | "get" - clients request data
 io.on("connection", (socket) => {
     console.log("client connected")
@@ -44,9 +48,14 @@ io.on("connection", (socket) => {
     socket.emit("selectQuestion", safedSet, safedId)
 
     if(ffaRunning == true)
-        socket.emit("loadFFA", manager.freeForAll[ffACount])
+        socket.emit("loadFFA", manager.freeForAll[ffACount-1])
 
+    if(rules == true)
+        socket.emit("openRules")
+    if(categories == true)
+        socket.emit("openCategories")
 
+    
     socket.on("sendFFA", () => {
         console.log("ffa triggerd count:", ffACount);
 
@@ -125,6 +134,7 @@ io.on("connection", (socket) => {
     })
 
     socket.on("sendToggleImage", (hint, solution) => {
+        console.log("toggle image");
         if(imageMode == 0){
             imageMode = 1
             io.emit("toggleImage", solution)
@@ -138,14 +148,20 @@ io.on("connection", (socket) => {
 
     socket.on("sendOpenRules", () => {
         socket.broadcast.emit("openRules")
+        rules = true
     })
 
     socket.on("sendOpenCategories", () => {
+        categories = true
         socket.broadcast.emit("openCategories")
     })
 
     socket.on("sendCloseInfo", () => {
         socket.broadcast.emit("closeInfo")
+        categories = false
+        rules = false
+
+        console.log("closeinfo");
     })
 
     socket.on("deletePlayer", (name) => {
@@ -167,7 +183,7 @@ io.on("connection", (socket) => {
     })
 
     socket.on("sendAnswer", (player, answer) => { //collects answers for ffa
-        let erg = player + ": " + answer
+        let erg = {player: player, answer: answer}
         answers.push(erg)
         console.log("answer recieved:", answer);
     })
@@ -219,16 +235,19 @@ io.on("connection", (socket) => {
         io.emit("loadPlayers", manager.players)
     })
 
-    socket.on("reset", () => { //resets all scores and specials
+    socket.on("reset", () => { //resets all scores specials and questions
         for (let i = 0; i < manager.players.length; i++) {
             manager.players[i].score = 0
             manager.players[i].special = true
-         }
+        }
 
-         updatePlayerFile()
+        readQuestions().then(()=>{
+            updatePlayerFile()
+    
+            io.emit("loadQuestions", manager.questions)
+            io.emit("loadPlayers", manager.players)
+        })
 
-        io.emit("loadQuestions", manager.questions)
-        io.emit("loadPlayers", manager.players)
     })
 
     socket.on("deleteAll", () => {
@@ -243,7 +262,7 @@ io.on("connection", (socket) => {
 
 //SAVE DATA TO JSON FILES
 
-//initially saves/updates players
+//initially reads players
 if (fs.existsSync(playerpath)) {
     fs.readFile(playerpath, 'utf-8', (err, data_string) => {
         if (err) throw err;
@@ -255,19 +274,26 @@ if (fs.existsSync(playerpath)) {
     })
 }
 
-//initially saves/updates questions
-if (fs.existsSync(questionpath)) {
-    fs.readFile(questionpath, 'utf-8', (err, data_string) => {
-        if (err) throw err;
+//initially reads questions
+readQuestions()
+function readQuestions(){
+    return new Promise((resolve, reject) => {
+        if (fs.existsSync(questionpath)) {
+            fs.readFile(questionpath, 'utf-8', (err, data_string) => {
+                if (err) {reject("error when reading"); throw err};
+    
+                let data = JSON.parse(data_string);
+    
+                console.log(data);
+                manager.setQuestions(data)
 
-        let data = JSON.parse(data_string);
-
-        console.log(data);
-        manager.setQuestions(data)
+                resolve("file read")
+            })
+        }
     })
 }
 
-//initially saves/updates ffa
+//initially reads ffa
 if (fs.existsSync(ffAPath)) {
     fs.readFile(ffAPath, 'utf-8', (err, data_string) => {
         if (err) throw err;

@@ -81,13 +81,17 @@ socket.on('answers', (data) => { //displays the awnsers that users gave for the 
 
     document.getElementById('answers').style.display = "flex"
 
-    let html = ""
+    let html = "<table><tr><th>player</th><th>answer</th></tr>"
 
     for (let i = 0; i < data.length; i++) {
-       html += `<p>${data[i]}</p>`
+       html += `
+        <tr>
+            <td>${data[i].player}</td>
+            <td>${data[i].answer}</td>
+        </tr>`
     }
 
-    html += `<p onclick="closeAwnsers()">close</p>`
+    html += `</table><p onclick="closeAwnsers()">close</p>`
 
     document.getElementById('answers').innerHTML = html
 })
@@ -117,8 +121,24 @@ function selectQuestion(data){
         <p class="text">${data.text}</p>
         <p class="sol">${data.solution}</p>
         <div class="buttons">
-        <p onclick="sendCloseQuestion()">schließen</p>
-        <p onclick="socket.emit('sendToggleImage', '${data.img[0]}', '${data.img[1]}')">toggle</p>
+            <p onclick="sendCloseQuestion()">schließen</p>
+            <p onclick="socket.emit('sendToggleImage', '${data.img[0]}', '${data.img[1]}')">toggle</p>
+        </div>`
+    }
+    else if(data.type == 2){//multiple choice question
+        selected.innerHTML= `
+        <p class="text">${data.text}</p>
+        <div class="options">
+            <p>${data.options[0]}</p>
+            <p>${data.options[1]}</p>
+            <p>${data.options[2]}</p>
+            <p>${data.options[3]}</p>
+        </div>
+        <p class="sol">${data.solution}</p>
+
+
+        <div class="buttons">
+            <p onclick="sendCloseQuestion()">schließen</p>
         </div>`
     }
     else if(data.type == 10 || data.type == 11){//ffa

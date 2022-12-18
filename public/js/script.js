@@ -24,7 +24,6 @@ let ffaPopup = document.getElementById('create-ffa')
 let questionData = null
 let rules = document.getElementById('rules')
 let cat = document.getElementById('categories')
-let bottom = document.getElementById('bottom')
 let topScroll = document.getElementById('game')
 
 let countDown = []
@@ -98,6 +97,7 @@ function closeQuestion(){
 }
 
 socket.on('toggleImage', (path) => {
+    console.log("changing image", path);
     selected.querySelector(".image").style.backgroundImage = path
 })
 

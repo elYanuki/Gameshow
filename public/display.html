@@ -18,7 +18,7 @@
 <body>
     <article id="rules">
         <h1>Spielablauf</h1>
-        <section>
+        <section class="big">
             <h2>Runden</h2>
             <ul>
                 <li>Fragen sind nach Kategorien und Punkten geordnet</li>
@@ -26,99 +26,133 @@
                 <li>Frage wird vorgelesen – sobald der Timer gestartet ist darf Spieler 1 antworten</li>
             </ul>
 
-            <div id="two-way">
+            <div class="two-way">
                 <div class="line"></div>
                 <div class="split"></div>
                 <div class="option">
                     <p>1 antwortet falsch oder nicht</p>
                     <ul>
                         <li>1 bekommt die Punkte abgezogen</li>
-                        <li>Frage geht an Spieler 2 – wenn er richtig Antwortet bekommt er die punkte – wenn falsch bekommt er Abzug</li>
-                        <li>Wenn 2 nicht antwortet bekommt er keinen Abzug – Frage geht an 3 usw</li>
+                        <li>Frage geht an Spieler 2</li>
+                        <!-- <li>Wenn 2 nicht antwortet bekommt er keinen Abzug – Frage geht an 3 usw</li> -->
                     </ul>
+
+                    <div class="two-way">
+                        <div class="line"></div>
+                        <div class="split"></div>
+                        <div class="option">
+                            <p>2 antwortet</p>
+                            <ul>
+                                <li>Wenn richtig bekommt er Punkte</li>
+                                <li>Wenn falsch bekommt er Abzug</li>
+                            </ul>
+                        </div>
+                        <div class="option">
+                            <p>2 antwortet nicht</p>
+                            <ul>
+                                <li>Frage geht an Spieler 3</li>
+                                <li>usw.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="option">
                     <p>1 antwortet richtig</p>
                     <ul>
-                        <li>1 bekommt die punkte der Frage</li>
+                        <li>1 bekommt die Punkte der Frage</li>
                         <li>1 hat das Board (max. 3-mal)</li>
                     </ul>
                 </div>
             </div>
-
+        </section>
+        <section>
             <h2>Multiplier</h2>
             <ul>
                 <li>Wird eingesetzt, bevor die Frage vorgelesen wird</li>
-                <li>Spieler kann eine „beliebige“ punktezahl auf die Frage setzten</li>
-                <li>Punktezahl muss kleiner als 1500 und kleiner als der Betrag des Score der aktuellen Punkte sein (minus zählt as plus)</li>
+                <li>Spieler kann eine „beliebige“ Punktezahl auf die Frage setzten</li>
+                <li>Punktezahl muss kleiner als 1500 und kleiner als der Betrag der aktuellen Punkte sein</li>
                 <li>Gilt nur für den Spieler, der den Multiplier verwendet hat</li>
             </ul>
-        </section>
-        <section>
+
             <h2>free for all</h2>
             <ul>
-                <li>nachdem jeder spieler einmal das board hatte wird eine ffa Frage gestellt</li>
-                <li><mark class="underline">Generic</mark>
+                <li>nachdem jeder Spieler einmal das Board hatte wird eine ffa Frage gestellt</li>
+                <li><mark class="underline">Ratefrage</mark>
                     <ul>
-                        <li>keine abzüge, unendlich guesses wer als erster errät bekommt 150 punkte</li>
+                        <li>keine Abzüge, unendlich Guesses wer als erster errät bekommt 200 Punkte</li>
                     </ul>
                 </li>
                 <li><mark class="underline">Schätztfrage</mark>
                     <ul>
-                        <li>30 sek zeit</li>
-                        <li>der reihe nach sagt jeder eine Zahl, der näheste bekommt 150 Punkte</li>
+                        <li>30 sek Zeit</li>
+                        <li>der reihe nach sagt jeder eine Zahl, der näheste bekommt 200 Punkte</li>
                     </ul>
                 </li>
             </ul>
-
-            <h2>finale</h2>
-            <ul>
-                <li>2 finalisten stehen fest</li>
-                <li>die beiden finalisten werden aus dem raum geschickt und den anderen beiden werden simple fragen</li>
-                <li>sie beantworten die Fragen im Stillen und schreiben die Antworten nieder</li>
-                <li>einer der Finalisten beginnt und ihm werden die selben Fragen gestellt, für jede übereinstimmung bekommt er 50 punkte</li>
-                <li>der zweite finalist wird hereingebeten und er muss ebenfalls die Fragen beantworten</li>
-            </ul>
         </section>
     </article>
+
     <article id="categories">
-        <h1>Kategorien</h1>
-        <p>Im zweifelsfall wird abgestimmt</p>
-            <h3>Synonyme</h3>
+        <div>
+            <h1>Kategorien</h1>
+            <p>Im zweifelsfall wird abgestimmt</p>
+        </div>
+
+        <div>
+            <h2>Synonyme</h2>
             <ul>
                 <li>Nenne ein Synonym des genannten Wortes</li>
                 <li>Busch >> Strauch</li>
             </ul>
-            <h3>List a Lot</h3>
+        </div>
+        <div>
+            <h2>connect 3</h2>
+            <ul>
+                <li>verbinde die drei genannten Dinge mit einem Begriff</li>
+                <li>Bauen - Waffen - Paragleiter >> FORTNITE</li>
+            </ul>
+        </div>
+        <div>
+            <h2>List a Lot</h2>
             <ul>
                 <li>Nenne viele Dinge des vorgegebenen Themas</li>
-                <li>Jedes genannte ding zählt 1/5 der Punkte</li>
-                <li>100 Punkte: 100/5 = 20 pro ding</li>
-                <li>300 Punkte: 300/5 = 60 pro ding</li>
-                <li>maximal 6 dinge können genannt werden</li>
+                <li>Jedes genannte Ding zählt 1/5 der Punkte</li>
+                <li>100 Punkte: 100/5 = 20 pro Ding</li>
+                <li>300 Punkte: 300/5 = 60 pro Ding</li>
+                <li>maximal 6 Dinge können genannt werden</li>
                 <li>nenne rote Dinge</li>
             </ul>
-            <h3>connect 3</h3>
+        </div>
+        <div>
+            <h2>Trippelwort</h2>
             <ul>
-                <li>verbinde die drei genannten dinge mit einem Begriff</li>
-                <li>bauen - Waffen - Paragleiter >> FORTNITE</li>
+                <li>Verbinde zwei genannte Worte mit einem Wort zB. Butter & Laib</li>
+                <li>die Lösung muss Ende eines Doppelwortes mit dem ersten Wort sein <br>Butter >> Butter-BROT</li>
+                <li>..und der Anfang eines Doppelwortes mit dem zweiten Wort sein<br>Laib >> BROT-laib</li>
+                <li>Lösung: BROT</li>
             </ul>
-            <h3>Trippelwort</h3>
-            <ul>
-                <li>bilde aus dem ersten gennannten Wort und einem neuen Wort ein Doppelwort <br>Butter >> ButterBROT</li>
-                <li>das neue Wort muss der erste Teil eines Doppelwortes mit dem zweiten gennannten Wort sein <br>Laib >> BROTlaib</li>
-                <li>Butter, Laib >> ButterBROTlaib</li>
-            </ul>
-            <h3>Famous Funfacts</h3>
+        </div>
+        <div>
+            <h2>Famous Funfacts</h2>
             <ul>
                 <li>Ordne dem Funfact eine bekannte Person zu</li>
                 <li>Wissenschaftler dessen Gehirn nach seinem Tod gestohlen wurde >> Einstein</li>
             </ul>
-            <h3 id="bottom">Generic</h3>
+        </div>
+        <div>
+            <h2>Bilder</h2>
+            <ul>
+                <li>beantworte eine Frage zu einem Bild</li>
+                <li>Welches Tier ist hier zu sehen?</li>
+            </ul>
+        </div>
+        <div>
+            <h2>Generic</h2>
             <ul>
                 <li>Beantworte die gestellte Frage .-.</li>
                 <li>welche Farbe haben Yaniks Augen</li>
             </ul>
+        </div>
     </article>
 
     <main>
