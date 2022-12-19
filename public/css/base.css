@@ -117,19 +117,6 @@
     border-bottom: .1rem solid var(--color-accent-1);
 }
 
-/* .bar i{
-    margin-left: .5rem;
-    cursor: pointer;
-    color: var(--gray-2);
-    transition: all .5s;
-    min-width: 1rem;
-    min-height: 1rem;
-}
-
-.bar i:hover{
-    color: var(--color-accent-1);
-} */
-
 .bar i:active{
     color: var(--color-accent-2);
 }
@@ -143,7 +130,6 @@
     font-size: 1.4rem;
     border-radius: 50%;
     background-color: var(--gray-4);
-    /* border: .2rem solid var(--gray-2); */
     padding: .4rem;
     margin: .2rem;
     box-shadow: var(--shadow-2);
@@ -214,5 +200,4 @@
     --shadow-1: 0rem 0rem 1rem .5rem rgba(24, 24, 24, 0.537);
     --shadow-2: 0rem .3rem 0rem 0rem rgba(35, 35, 35, 0.222);
     --shadow-3: .5rem .5rem .3rem 0rem rgba(35, 35, 35, 0.165);
-
 }

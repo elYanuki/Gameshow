@@ -15,7 +15,8 @@ img{
 }
 
 body{
-    overflow: auto;
+    overflow: hidden;
+    height: 100vh;
 }
 
 /**********Main Style**********/
@@ -31,14 +32,15 @@ main{
 /* #region*/
 article{
     position: absolute;
+    top: 0;
 }
 
 article[data-position="right"]{
-    transform: translateX(100%);
+    left: 50%;
 }
 
 article[data-position="left"]{
-    transform: translateX(-100%);
+    right: 50%;
 }
 
 /* #endregion */
@@ -234,9 +236,6 @@ article[data-position="left"]{
     padding: 1rem;
     width: auto;
     border-radius: 1rem;
-    /*left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%); */
 }
 
 #score-selector .delete{
@@ -268,7 +267,6 @@ article[data-position="left"]{
 #score-input{
     background-color: rgb(57, 57, 57);
     border: none;
-    /* border-bottom: .1rem solid var(--color-accent-1); */
     color: var(--gray-6);
     border-radius: .3rem;
     box-sizing: border-box;
