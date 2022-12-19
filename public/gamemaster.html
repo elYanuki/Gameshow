@@ -20,47 +20,45 @@
     <main>
         <section id="timer">
             <div id="timer-number" onclick="startTimer()">
-                <div>
-                    <p><span class="material-icons">timer</span></p>
-                </div>
+                <p><span class="material-icons">timer</span></p>
             </div>
             <div id="timer-bar-parent">
                 <div id="timer-bar"></div>
             </div>
         </section>
 
-        <section id="players">
-        </section>
-
-        <div id="answers"><table><tbody><tr><th>player</th><th>answer</th></tr><tr><td>yanik</td><td>sdafdsaf</td></tr><tr><td>leon</td><td>asdfsafd</td></tr></tbody></table><p onclick="closeAwnsers()">close</p></div>
-
-        <div id="add" class="add">
-            <p onclick="postPlayer(document.getElementById('name-input').value); document.getElementById('name-input').value = '' ">add player</p>
-            <!-- <p onclick="addQuestion()">add cattegory</p> -->
-            <input type="text" id="name-input"/>
-        </div>
+        <article data-position="mid">
+            <section id="players">
+            </section>
+            
+            <div class="bar">
+                <p onclick="postPlayer(document.getElementById('name-input').value); document.getElementById('name-input').value = '' ">add player</p>
+                <!-- <p onclick="addQuestion()">add cattegory</p> -->
+                <input type="text" id="name-input"/>
+            </div>
+            
+            <div class="bar">
+                <p onclick="socket.emit('sendScrollPlayers', 0)">scrollup</p>
+                <p onclick="socket.emit('sendScrollPlayers', 1)">scrolldown</p>
+            </div>
+        </article>
         
-        <div id="add" class="add">
-            <p onclick="socket.emit('sendScrollPlayers', 0)">scrollup</p>
-            <p onclick="socket.emit('sendScrollPlayers', 1)">scrolldown</p>
-        </div>
+        <article data-position="right">
+            <section id="questions"></section>
+            <div id="selected"></div>
+        </article>
         
-        <section id="questions">
-        </section>
-        
-        <section class="add">
-    
-            <!-- <p onclick="ffaPop()">add ffa </p> --><p onclick="triggerFFA()">trigger FFA</p>
-            <p onclick="if(confirm('do u want to rest all scores and questions') == true)socket.emit('reset')">reset</p>
-            <p onclick="if(confirm('do u want to delte all players') == true)socket.emit('deleteAll')">delteAll</p>
-        </section>
+        <footer>
+            <section class="bar">
+                <!-- <p onclick="ffaPop()">add ffa </p> --><p onclick="triggerFFA()">trigger FFA</p>
+                <p onclick="if(confirm('do u want to rest all scores and questions') == true)socket.emit('reset')">reset</p>
+                <p onclick="if(confirm('do u want to delte all players') == true)socket.emit('deleteAll')">delteAll</p>
+            </section>
+            <section class="bar">
+                <p onclick="socket.emit('sendOpenRules')">rules</p><p onclick="socket.emit('sendOpenCategories')">categories</p><p onclick="socket.emit('sendCloseInfo')">close</p>
+            </section>
+        </footer>
 
-        <section class="add">
-            <p onclick="socket.emit('sendOpenRules')">rules</p><p onclick="socket.emit('sendOpenCategories')">categories</p><p onclick="socket.emit('sendCloseInfo')">close</p>
-        </section>
-
-        <div id="selected">
-        </div>
     </main>
 
     <div id="score-selector">
@@ -78,5 +76,7 @@
         </div>
         <p onclick="deletePlayer()" class="delete">delete Player</p>
     </div>
+
+    <div id="answers"><table><tbody><tr><th>player</th><th>answer</th></tr><tr><td>yanik</td><td>sdafdsaf</td></tr><tr><td>leon</td><td>asdfsafd</td></tr></tbody></table><p onclick="closeAwnsers()">close</p></div>
 </body>
 </html>

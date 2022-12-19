@@ -27,6 +27,70 @@ main{
     margin-inline: auto;
 }
 
+/*---------timer---------*/
+
+#timer{
+    background-color: var(--gray-1);
+    display: flex;
+    box-shadow: var(--shadow-1);
+    z-index: 5;
+    height: 8vh;
+}
+
+#timer-number{
+    height: 10vw;
+    width: 10vw;
+    box-sizing: border-box;
+    padding: .8em;
+    flex-shrink: 0;
+    color: var(--gray-6);
+/*     text-shadow:.1rem .1rem 0em var(--color-accent-2),
+                -.1rem -.1rem 0em var(--color-accent-2); */
+    cursor: pointer;
+}
+
+#timer-number div{
+    height: 5vh;
+    width: 5vh;
+    background-color: var(--gray-3);
+    border: .3em solid var(--color-accent-1);
+    display: grid;
+    place-items: center;
+    border-radius: 100%;
+    box-sizing: border-box;
+}
+
+#timer-number div p{
+    text-align: center;
+    font-size: 5vw;
+    color: var(--gray-6);
+    font-family: standart;
+    text-shadow: var(--outline-1);
+    user-select: none;
+    display: flex;
+}
+
+#timer-number div p span{
+    font-size: .8em;
+    align-self: center;
+}
+
+#timer-bar-parent{
+    height: 2.8vw;
+    width: 100%;
+    margin-block: auto;
+    background-color: var(--gray-2);
+    margin-inline: 1em;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+#timer-bar{
+    height: 100%;
+    width: 0%;
+    background-color: var(--color-accent-1);
+}
+
 /*---------login---------*/
 
 #login{

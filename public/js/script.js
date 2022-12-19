@@ -10,7 +10,7 @@ DEPENDS ON: -
 
 
 let timerBar = document.getElementById('timer-bar')
-let timerNumber = document.querySelector("#timer-number div p")
+let timerNumber = document.querySelector("#timer-number p")
 let playerParent = document.getElementById('players')
 let questionParent = document.getElementById('questions')
 let selected = document.getElementById('selected')

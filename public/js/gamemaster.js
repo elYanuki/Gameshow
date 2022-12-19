@@ -13,6 +13,23 @@ socket.on("connect", () => {
     console.log(socket.id);
 })
 
+let touchstartX = 0
+let touchendX = 0
+    
+function checkDirection() {
+  if (touchendX < touchstartX) alert('swiped left!')
+  if (touchendX > touchstartX) alert('swiped right!')
+}
+
+document.addEventListener('touchstart', e => {
+  touchstartX = e.changedTouches[0].screenX
+})
+
+document.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX
+  checkDirection()
+})
+
 socket.on('loadPlayers', (data) => { //displays all players
     console.log("loading players");
 
@@ -150,11 +167,11 @@ function selectQuestion(data){
         </div>`
     }
     
-    //move in selected question panel
-    selected.style.border = "3rem solid var(--color-accent-1)"
-
+    
     selected.style.display = "flex"
     selected.style.border = "3rem solid var(--color-accent-1)"
+    
+    selected.scrollIntoView(false)
 }
 
 function sendSelectQuestion(set, id){ //set: x coords (categorie) id: y coords (question)

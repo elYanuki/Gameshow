@@ -41,15 +41,18 @@ socket.on('loadQuestions', (data) => { //loads the question overview
     console.log(data);
     let questionHtml = ""
     for (let i = 0; i < data.length; i++) {
-        questionHtml += `
-                <div class="catergory" cat-id="${i}">
-                    <h1>${data[i].name}</h1>
-                    <div style="opacity: ${(data[i].questions[0].used == false) ? 1 : 0}"><p>100</p></div>
-                    <div style="opacity: ${(data[i].questions[1].used == false) ? 1 : 0}"><p>200</p></div>
-                    <div style="opacity: ${(data[i].questions[2].used == false) ? 1 : 0}"><p>300</p></div>
-                    <div style="opacity: ${(data[i].questions[3].used == false) ? 1 : 0}"><p>400</p></div>
-                    <div style="opacity: ${(data[i].questions[4].used == false) ? 1 : 0}"><p>500</p></div>
-                </div>`
+        questionHtml += `<div class="catergory" cat-id="${i}"><h1>${data[i].name}</h1>`
+
+        for (let j = 0; j < 5; j++) {
+            if(data[i].questions[j].used == false){ //qustion unused
+                questionHtml += `<div style="opacity: 1;" ><p>${(j+1)*100}</p></div>` 
+            }
+            else{ //question used
+                questionHtml += `<div style="opacity: 0.2; box-shadow: none;"><p style="opacity: 0.3; text-shadow: none;">${(j+1)*100}</p></div>` 
+            }
+        }
+
+        questionHtml += `</div>`
     }
 
     questionParent.innerHTML = questionHtml
