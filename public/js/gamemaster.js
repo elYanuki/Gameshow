@@ -17,12 +17,16 @@ let touchstartX = 0
 let touchendX = 0
     
 function checkDirection() {
-  if (touchendX - touchstartX < -100) alert('swiped left!')
-  if (touchendX - touchstartX > 100) alert('swiped right!')
+  if (touchendX - touchstartX < -100) swipe(0)//left
+  if (touchendX - touchstartX > 100) swipe(1)//left
 }
 
 document.addEventListener('touchstart', e => {
   touchstartX = e.changedTouches[0].screenX
+})
+
+document.addEventListener('touch', e => {
+  console.log("touchy")
 })
 
 document.addEventListener('touchend', e => {
@@ -30,10 +34,30 @@ document.addEventListener('touchend', e => {
   checkDirection()
 })
 
+let mode = 1
+const articles = document.querySelectorAll('article')
+function swipe(to){
+    if(mode == to)
+        return
+
+    if(mode == 0){
+        mode = 1
+        articles[0].dataset.position = "mid"
+        articles[1].dataset.position = "right"
+    }
+    else{
+        mode = 0
+        articles[0].dataset.position = "left"
+        articles[1].dataset.position = "mid"
+    }
+}
+
 socket.on('loadPlayers', (data) => { //displays all players
     console.log("loading players");
 
     let playerHtml = ""
+    if(data.length == 0)
+        playerHtml = "<p class='no-players'>no players yet</p>"
     for (let i = 0; i < data.length; i++) {
         playerHtml += `
                 <div class="player" player-id="${i}">
@@ -45,8 +69,6 @@ socket.on('loadPlayers', (data) => { //displays all players
                     <i class="fa-solid fa-pen-to-square" onclick="changeScorePopup(${i}, event)"></i>
                 </div>`
     }
-
-    playerHtml += ``
 
     playerParent.innerHTML = playerHtml
 })

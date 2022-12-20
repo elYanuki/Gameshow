@@ -1,6 +1,14 @@
 
 /*---------player---------*/
 
+.no-players{
+    color: white;
+    width: 100%;
+    text-align: center;
+    grid-column: span 2;
+    align-self: center;
+}
+
 #players{
     background-color: var(--gray-2);
     z-index: 3;
@@ -11,8 +19,8 @@
     height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     width: 100%;
+    align-content: space-between;
 }
 
 .player{
@@ -25,10 +33,11 @@
     border-radius: 1rem;
     box-shadow: var(--shadow-1);
     position: relative;
-    width: 45vw;
+    width: 90%;
     height: 90%;
     margin: auto;
     box-sizing: border-box;
+    height: fit-content;
 }
 
 .name{
@@ -81,7 +90,7 @@
 /*     position: fixed;
     bottom: 0;
     left: 0; */
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     font-size: 1.5rem;

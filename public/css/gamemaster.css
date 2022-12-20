@@ -17,6 +17,7 @@ img{
 body{
     overflow: hidden;
     height: 100vh;
+    background-color: var(--gray-3);
 }
 
 /**********Main Style**********/
@@ -24,23 +25,42 @@ main{
     width: 100%;
     height: 100vh;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin-inline: auto;
 }
 
 
 /*---------- position content ----------*/
 
 /* #region*/
+
+#swipe-container{
+    position: relative;
+    flex-grow: 1;
+}
+
 article{
     position: absolute;
     top: 0;
+    transition: all .5s;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 article[data-position="right"]{
-    left: 50%;
+    left: 100%;
+}
+
+article[data-position="mid"]{
+    left: 0%;
 }
 
 article[data-position="left"]{
-    right: 50%;
+    left: -100%;
 }
 
 /* #endregion */
@@ -54,7 +74,7 @@ article[data-position="left"]{
     background-color: var(--gray-1);
     display: flex;
     z-index: 5;
-    height: 5vh;
+    height: 7vh;
 }
 
 #timer-number{
@@ -71,38 +91,35 @@ article[data-position="left"]{
     color: var(--gray-6);
     font-family: standart;
     user-select: none;
-    display: flex;
-    font-size: 4vh;
+    font-size: 6vh;
+    width: 100%;
 }
 
 #timer-number p span{
-    margin: auto;
-    align-self: center;
-    font-size: 4vh;
+    font-size: 6vh;
 }
 
 #timer-bar-parent{
     height: inherit;
     width: 100%;
-    margin-block: auto;
-    background-color: var(--gray-2);
     overflow: hidden;
 }
 
 #timer-bar{
-    height: 100%;
+    height: 60%;
+    margin-block: calc(7vh/5);
     width: 0%;
     background-color: var(--color-accent-1);
 }
 
 /* #endregion */
 
-/*---------fragen---------*/
+/*---------questions---------*/
 
 /* #region */
 
 #questions{
-    background-color: var(--gray-3);
+    background-color: var(--gray-2);
     display: flex;
     position: relative;
     height: auto;
@@ -118,7 +135,6 @@ article[data-position="left"]{
 }
 
 .catergory{
-    background-color: var(--gray-3);
     width: 25%;
     height: auto;
     box-sizing: border-box;
@@ -128,33 +144,33 @@ article[data-position="left"]{
 
 .catergory div{
     box-sizing: border-box;
-    background-color:var(--gray-4);
     display: grid;
     place-items: center;
     cursor: pointer;
+    margin-block: .2rem;
 }
 
 .catergory div p{
     font-size: 2em;
     text-align: center;
-    text-shadow: var(--outline-1);
     color: var(--gray-6);
     user-select: none;
 }
 
 #selected{
-    background-color: var(--gray-4);
+    background-color: hsl(0, 0%, 15%);
     border: 0rem solid var(--color-accent-1);
     padding: 2.5rem;
-    width: 100vw;
+    width: 100%;
     height: auto;
     box-sizing: border-box;
     flex-direction: column;
+    flex-grow: 1;
+    position: relative;
 }
 
 #selected .text{
     color: var(--gray-6);
-    text-shadow: var(--outline-1);
     font-family: standart;
     font-size: 6vw;
     width: 100%;
@@ -198,18 +214,17 @@ article[data-position="left"]{
 #selected .buttons{
     display: flex;
     position: absolute;
-    top: 100%;
     justify-content: center;
     width: 100%;
     align-items: center;
     left: 0;
-    right: 0hhh;
+    right: 0;
+    top: 100%;
 }
 
 #selected .buttons p{
     color: rgb(122, 18, 128);
     text-align: center;
-    width: 10%;
     font-size: 1.2rem;
     cursor: pointer;
     margin-inline: 2rem;
@@ -222,6 +237,17 @@ article[data-position="left"]{
 
 /* #endregion */
 
+/*---------- players ----------*/
+
+/* #region*/
+
+#players{
+    flex-grow: 1;
+    box-shadow: none;
+}
+
+/* #endregion */
+
 /*---------popups---------*/
 
 /* #region */
@@ -230,7 +256,6 @@ article[data-position="left"]{
     transition: all .5s;
     position: absolute;
     background-color: var(--gray-3);
-    box-shadow: var(--shadow-1);
     transform: scale(0);
     z-index: 10;
     padding: 1rem;
@@ -272,7 +297,6 @@ article[data-position="left"]{
     box-sizing: border-box;
     padding-inline: .5rem;
     transition: border .4s;
-    box-shadow: inset 0 0 .2rem .2rem rgba(0, 0, 0, 0.271);
     font-size: 1.5rem;
     width: 100%;
     padding-top: .1rem;
@@ -294,7 +318,6 @@ article[data-position="left"]{
 }
 
 #score-selector div:last-of-type i{
-    box-shadow: var(--shadow-3);
     transition: all .3s;
     cursor: pointer;
     min-height: 1rem;
@@ -302,14 +325,8 @@ article[data-position="left"]{
     aspect-ratio: 1;
 }
 
-#score-selector div:last-of-type i:hover{
-    box-shadow: var(--shadow-3);
-    color: var(--color-accent-1);
-}
-
 #editmode{
     background-color: var(--gray-3);
-    box-shadow: var(--shadow-1);
     border-radius: 1rem;
     position: absolute;
     top: 0;
@@ -346,7 +363,6 @@ article[data-position="left"]{
 
 #create-ffa{
     background-color: var(--gray-3);
-    box-shadow: var(--shadow-1);
     border-radius: 1rem;
     position: absolute;
     top: 0;
@@ -385,7 +401,6 @@ article[data-position="left"]{
     z-index: 50;
     background-color: var(--gray-3);
     padding: 2rem;
-    box-shadow: var(--outline-2), var(--shadow-3);
     overflow-y: auto;
     flex-direction: column;
 }
@@ -399,7 +414,6 @@ article[data-position="left"]{
 
 #answers table th{
     font-weight: bold;
-    text-shadow: var(--outline-1);
 }
 
 #answers table td, #answers table th{
@@ -421,8 +435,9 @@ article[data-position="left"]{
 
 /* #region*/
 
-footer{
-    margin-top: auto;
+article .bar{
+    background-color: hsl(0, 0%, 15%);
+    box-shadow: none;
 }
 
 /* #endregion */

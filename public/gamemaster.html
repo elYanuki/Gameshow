@@ -27,35 +27,42 @@
             </div>
         </section>
 
-        <article data-position="mid">
-            <section id="players">
-            </section>
+        <div >
+
+        </div>
+
+        <div id="swipe-container">
+            <article data-position="mid">
+                <section id="players">
+                </section>
             
-            <div class="bar">
-                <p onclick="postPlayer(document.getElementById('name-input').value); document.getElementById('name-input').value = '' ">add player</p>
-                <input type="text" id="name-input"/>
-            </div>
+                <div class="bar">
+                    <p onclick="postPlayer(document.getElementById('name-input').value); document.getElementById('name-input').value = '' ">add player</p>
+                    <input type="text" id="name-input"/>
+                </div>
             
-            <div class="bar">
-                <p onclick="socket.emit('sendScrollPlayers', 0)">scrollup</p>
-                <p onclick="socket.emit('sendScrollPlayers', 1)">scrolldown</p>
-            </div>
-        </article>
-        
-        <article data-position="right">
-            <section id="questions"></section>
-            <div id="selected"></div>
-        </article>
+                <div class="bar">
+                    <p onclick="socket.emit('sendScrollPlayers', 0)">scrollup</p>
+                    <p onclick="socket.emit('sendScrollPlayers', 1)">scrolldown</p>
+                </div>
+            </article>
+            
+            <article data-position="right">
+                <section id="questions">
+                </section>
+                <div id="selected"></div>
+            </article>
+        </div>
         
         <footer>
-            <section class="bar">
+            <div class="bar">
                 <p onclick="triggerFFA()">trigger FFA</p>
                 <p onclick="if(confirm('do u want to rest all scores and questions') == true)socket.emit('reset')">reset</p>
-                <p onclick="if(confirm('do u want to delte all players') == true)socket.emit('deleteAll')">delteAll</p>
-            </section>
-            <section class="bar">
+                <p onclick="if(confirm('do u want to delte all players') == true)socket.emit('deleteAll')">deleteAll</p>
+            </div>
+            <div class="bar">
                 <p onclick="socket.emit('sendOpenRules')">rules</p><p onclick="socket.emit('sendOpenCategories')">categories</p><p onclick="socket.emit('sendCloseInfo')">close</p>
-            </section>
+            </div>
         </footer>
 
     </main>

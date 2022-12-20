@@ -16,6 +16,8 @@ socket.on('loadPlayers', (data) => {
     console.log("loading players");
 
     let playerHtml = ""
+    if(data.length == 0)
+        playerHtml = "<p class='no-players'>no players yet</p>"
     for (let i = 0; i < data.length; i++) {
         if(data[i].name == myName){
             playerHtml += `
@@ -28,8 +30,6 @@ socket.on('loadPlayers', (data) => {
             </div>`
         }
     }
-
-    playerHtml += ``
 
     playerParent.innerHTML = playerHtml
 

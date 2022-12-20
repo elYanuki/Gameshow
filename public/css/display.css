@@ -30,6 +30,8 @@ main{
 
 /*---------timer---------*/
 
+/* #region */
+
 #timer{
     grid-area: 1 / 1 / 2 / 3;
     background-color: var(--gray-1);
@@ -90,7 +92,12 @@ main{
     width: 0%;
     background-color: var(--color-accent-1);
 }
-/*---------fragen---------*/
+
+/* #endregion */
+
+/*---------question---------*/
+
+/* #region */
 
 #questions{
     grid-area: 2 / 2 / auto / auto;
@@ -223,7 +230,19 @@ main{
     text-transform: uppercase;
 }
 
+/* #endregion */
+
 /*---------player---------*/
+
+/* #region */
+
+.no-players{
+    color: white;
+    width: 100%;
+    text-align: center;
+    grid-column: span 2;
+    align-self: center;
+}
 
 #players{
     grid-area: 2 / 1 / auto / auto;
@@ -366,6 +385,8 @@ main{
 .player .fa-pen-to-square:hover{
     background-color: var(--color-accent-1);
 }
+
+/* #endregion */
 
 /*---------popups---------*/
 
