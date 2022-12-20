@@ -2,11 +2,12 @@
 /*---------player---------*/
 
 .no-players{
-    color: white;
+    color: hsl(0, 0%, 80%);
     width: 100%;
     text-align: center;
     grid-column: span 2;
     align-self: center;
+    margin-top: 10vh;
 }
 
 #players{

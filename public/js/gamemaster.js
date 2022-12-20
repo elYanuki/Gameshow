@@ -50,6 +50,9 @@ function swipe(to){
         articles[0].dataset.position = "left"
         articles[1].dataset.position = "mid"
     }
+
+    document.querySelector('#swipe-marker-container .swipe-marker').classList.toggle("left")
+    document.querySelector('#swipe-marker-container .swipe-marker').classList.toggle("right")
 }
 
 socket.on('loadPlayers', (data) => { //displays all players
@@ -99,6 +102,8 @@ socket.on('loadQuestions', (data) => {
 socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by the loadQuestion fetch
     if(set != null && id != null){
         console.log("selection question:", set, id);
+        
+        swipe(0)
         selectQuestion(questionData[set].questions[id], questionData[set].name)
     }
 })
@@ -208,7 +213,7 @@ function sendCloseQuestion(){
 
 function closeQuestion(){
     selected.style.border = "0rem solid var(--color-accent-1)"
-    selected.style.display = "none"
+    selected.innerHTML = ""
 
     if(timerActive == true){
         killTimer()

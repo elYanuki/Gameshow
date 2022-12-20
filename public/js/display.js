@@ -123,7 +123,14 @@ function selectQuestion(data, catName){
         selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${data.img[0]};" class="image"></div><p class="text">${data.text}</p>`
     }
     else if(data.type == 2){//multiple choice question
-        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.text}</p><div class="options"><p>${data.options[0]}</p><p>${data.options[1]}</p><p>${data.options[2]}</p><p>${data.options[3]}</p></div>`
+        selected.innerHTML= `<span class="header">${catName}</span>
+        <p class="text">${data.text}</p>
+        <div class="options">
+            <div data-option="A">${data.options[0]}</div>
+            <div data-option="B">${data.options[1]}</div>
+            <div data-option="C">${data.options[2]}</div>
+            <div data-option="D">${data.options[3]}</div>
+        </div>`
     }
     else if(data.type == 10 || data.type == 11){//FFA
         console.log("ffa");

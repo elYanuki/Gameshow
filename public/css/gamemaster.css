@@ -35,6 +35,37 @@ main{
 /*---------- position content ----------*/
 
 /* #region*/
+#swipe-marker-container{
+    height: 1.8vh;
+    background-color: hsl(0, 0%, 15%);
+    padding-block: 1vh;
+}
+
+#swipe-marker-container .swipe-marker, #swipe-marker-container .swipe-marker-option{
+    border-radius: 50%;
+    aspect-ratio: 1;
+    height: inherit;
+    position: absolute;
+    transform: translateX(-50%);
+    transition: all .5s;
+}
+
+#swipe-marker-container .swipe-marker{
+    background-color: white;
+    z-index: 3;
+}
+
+#swipe-marker-container .swipe-marker-option{
+    background-color: hsl(0, 0%, 40%);
+    height: 1.5vh;
+    margin-block: 0.15vh;
+}
+#swipe-marker-container .left{
+    left: 45%;
+}
+#swipe-marker-container .right{
+    left: 55%;
+}
 
 #swipe-container{
     position: relative;
@@ -160,9 +191,9 @@ article[data-position="left"]{
 #selected{
     background-color: hsl(0, 0%, 15%);
     border: 0rem solid var(--color-accent-1);
-    padding: 2.5rem;
+    padding: 1.5rem;
     width: 100%;
-    height: auto;
+    height: 5vh;
     box-sizing: border-box;
     flex-direction: column;
     flex-grow: 1;
@@ -172,7 +203,7 @@ article[data-position="left"]{
 #selected .text{
     color: var(--gray-6);
     font-family: standart;
-    font-size: 6vw;
+    font-size: 1.5rem;
     width: 100%;
     text-align: center;
     justify-self: center;
@@ -183,7 +214,8 @@ article[data-position="left"]{
 }
 
 #selected .image{
-    width: auto;
+    height: auto;
+    flex-shrink: 2;
     aspect-ratio: 4/3;
     background-size: contain;
     background-position: center;
@@ -192,8 +224,9 @@ article[data-position="left"]{
 
 #selected .sol{
     text-align: center;
-    font-size: 4vw;
+    font-size: 1.5rem;
     color: white;
+    word-wrap: break-word;
 }
 
 #selected .hidden{
