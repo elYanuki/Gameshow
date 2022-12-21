@@ -21,6 +21,7 @@ body{
 }
 
 /**********Main Style**********/
+
 main{
     overflow-x: hidden;
     display: flex;
@@ -30,10 +31,12 @@ main{
 /*---------- position content ----------*/
 
 /* #region*/
+
 #swipe-marker-container{
     height: 1.8vh;
     background-color: hsl(0, 0%, 15%);
     padding-block: 1vh;
+    cursor: pointer;
 }
 
 #swipe-marker-container .swipe-marker, #swipe-marker-container .swipe-marker-option{
@@ -272,6 +275,25 @@ article[data-position="left"]{
 #players{
     flex-grow: 1;
     box-shadow: none;
+}
+
+.player .fa-pen-to-square{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transition: all .3s;
+    color: var(--gray-6);
+    font-size: 1.4rem;
+    border-radius: 50%;
+    background-color: var(--gray-4);
+    padding: .4rem;
+    margin: .2rem;
+    box-shadow: var(--shadow-2);
+    cursor: pointer;
+}
+
+.player .fa-pen-to-square:hover{
+    background-color: var(--color-accent-1);
 }
 
 /* #endregion */

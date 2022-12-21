@@ -63,7 +63,7 @@ socket.on('loadPlayers', (data) => { //displays all players
                     <p class="name">${data[i].name}</p>
                     <div class="points-parent"><p class="points">${data[i].score}</p></div>
                     <div>
-                        <div style="background-color:${data[i].special ? 'var(--color-accent-1)' : 'var(--gray-5)'};" onclick="sendSpecialUsed(${i})">multiplier</div>
+                        <div class="special" style="background-color:${data[i].special ? 'var(--color-accent-1)' : 'var(--gray-5)'};" onclick="sendSpecialUsed(${i})">multiplier</div>
                     </div>
                     <i class="fa-solid fa-pen-to-square" onclick="changeScorePopup(${i}, event)"></i>
                 </div>`
@@ -99,7 +99,6 @@ socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by 
     if(set != null && id != null){
         console.log("selection question:", set, id);
         
-        swipe(0)
         selectQuestion(questionData[set].questions[id], questionData[set].name)
     }
 })
@@ -146,6 +145,8 @@ function selectQuestion(data){
     console.log("selecting question", data);
 
     if(data == null){console.error("question-data is null"); return}
+
+    swipe(0)
 
     if(data.type == 0){//default
         selected.innerHTML= `

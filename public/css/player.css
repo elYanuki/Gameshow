@@ -30,6 +30,8 @@ main{
 
 /*---------timer---------*/
 
+/* #region */
+
 #timer{
     background-color: var(--gray-1);
     display: flex;
@@ -92,7 +94,11 @@ main{
     background-color: var(--color-accent-1);
 }
 
+/* #endregion */
+
 /*---------login---------*/
+
+/* #region */
 
 #login{
     display: grid;
@@ -150,7 +156,11 @@ main{
     text-transform: uppercase;
 }
 
+/* #endregion */
+
 /*---------fragen---------*/
+
+/* #region */
 
 #questions{
     background-color: var(--gray-3);
@@ -293,16 +303,29 @@ main{
     text-transform: uppercase;
 }
 
-#delete{
+/* #endregion */
+
+
+/*---------- controlls ----------*/
+
+/* #region*/
+
+.bottom-bar{
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    justify-content: space-evenly;
+    width: 100%;
+    background-color: var(--gray-2);
+    padding-block: .5rem;
+}
+
+.bottom-bar p{
     color: var(--gray-6);
     text-align: center;
     font-size: 110%;
     font-family: standart;
     margin-bottom: .5rem;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%)
 }
 
 #popup{
@@ -311,7 +334,7 @@ main{
     opacity: 0;
     transition: all .5s;
     color: var(--gray-6);
-    background-color: var(--gray-3);
+    background-color: var(--gray-2);
     border-radius: .5rem;
     text-align: center;
     font-size: 150%;
@@ -322,7 +345,11 @@ main{
     transform: translateX(-50%);
 }
 
+/* #endregion */
+
 /*---------fragen---------*/
+
+/* #region */
 
 #players{
     display: block;
@@ -347,6 +374,8 @@ main{
     max-width: 800px;
     margin-inline: auto;
 }
+
+/* #endregion */
 
 /**********media**********/
 

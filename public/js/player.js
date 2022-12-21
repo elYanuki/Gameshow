@@ -26,7 +26,7 @@ socket.on('loadPlayers', (data) => {
                 <p class="name">${data[i].name}</p>
                 <div class="points-parent"><p class="points">${data[i].score}</p></div>
                 <div>
-                    <div style="background-color:${data[i].special ? 'var(--color-accent-1)' : 'var(--gray-5)'};">Multiplier</div>
+                    <div class="special" style="background-color:${data[i].special ? 'var(--color-accent-1)' : 'var(--gray-5)'};">Multiplier</div>
                 </div>
             </div>`
         }
@@ -77,7 +77,7 @@ function submitName(name){
         for (let i = 0; i < players.length; i++) {
            if(players[i].name == myName){ //only displays the player with your name
                 socket.emit("getPlayers")
-                popup("loged in as: " + myName)
+                popup("logged in as: " + myName)
                 return
            }
         }

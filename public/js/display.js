@@ -27,7 +27,7 @@ socket.on('loadPlayers', (data) => { //loads the player overview
             <p class="name">${data[i].name}</p>
             <div class="points-parent"><p class="points">${data[i].score}</p></div>
             <div>
-                <div style="background-color:${data[i].special ? 'var(--color-accent-1)' : 'var(--gray-5)'};">multiplier</div>
+                <div class="special" style="background-color:${data[i].special ? 'var(--color-accent-1)' : 'var(--gray-5)'};">multiplier</div>
             </div>
         </div>`
     }

@@ -38,6 +38,9 @@ let safedId
 let categories = false
 let rules = false
 
+//defines var that will be used to check if timer has reached zero
+let timerOver = setTimeout(()=>{})
+
 //all calls are named from client perspective: "send" - client sends to server | "get" - clients request data
 io.on("connection", (socket) => {
     console.log("client connected")
@@ -77,7 +80,6 @@ io.on("connection", (socket) => {
         io.emit("loadQuestions", manager.questions)
     })
 
-    let timerOver = null
     socket.on("sendTimer", () => {
         console.log("sendTimer recieved:", timerRunning);
 
@@ -100,12 +102,6 @@ io.on("connection", (socket) => {
             stopTimer()
         }
     })
-
-    function stopTimer(){
-        clearInterval(timerOver)
-        io.emit("stopTimer")
-        timerRunning = false
-    }
 
     let imageMode = 0
 
@@ -259,6 +255,13 @@ io.on("connection", (socket) => {
         io.emit("loadPlayers", manager.players)
     })
 })
+
+
+function stopTimer(){
+    clearInterval(timerOver)
+    io.emit("stopTimer")
+    timerRunning = false
+}
 
 //SAVE DATA TO JSON FILES
 

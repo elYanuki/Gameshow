@@ -78,7 +78,7 @@ main{
     align-items: center;
 }
 
-.player div div{
+.player div .special{
     background-color: var(--color-accent-1);
     border-radius: 2rem;
     font-size: 1rem;
@@ -95,9 +95,6 @@ main{
 
 .bar{
     background-color: var(--gray-1);
-/*     position: fixed;
-    bottom: 0;
-    left: 0; */
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -118,7 +115,6 @@ main{
     background-color: var(--gray-3);
     border: none;
     margin-right: .5rem;
-    /* border-bottom: .1rem solid var(--color-accent-1); */
     color: var(--gray-6);
     border-radius: .3rem;
     box-sizing: border-box;
@@ -137,25 +133,6 @@ main{
 .bar i:active{
     color: var(--color-accent-2);
 }
-
-.player .fa-pen-to-square{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    transition: all .3s;
-    color: var(--gray-6);
-    font-size: 1.4rem;
-    border-radius: 50%;
-    background-color: var(--gray-4);
-    padding: .4rem;
-    margin: .2rem;
-    box-shadow: var(--shadow-2);
-}
-
-.player .fa-pen-to-square:hover{
-    background-color: var(--color-accent-1);
-}
-
 
 /*---------- selected question ----------*/
 
