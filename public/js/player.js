@@ -12,6 +12,7 @@ let main = document.getElementById('main')
 let waiting = document.getElementById('waiting')
 let playerPopup = document.getElementById('popup')
 
+new Promise((resolve, reject) => {
 socket.on('loadPlayers', (data) => {
     console.log("loading players");
 
@@ -34,6 +35,11 @@ socket.on('loadPlayers', (data) => {
     playerParent.innerHTML = playerHtml
 
     players = data
+
+	resolve()
+})
+}).then(() => {
+	submitName(localStorage["gameshow-playername"])
 })
 
 socket.on('startTimer', () => {
@@ -53,15 +59,17 @@ socket.on('loadQuestions', (data) => { //saves the data for later use (only the 
     questionData = data
 })
 
-function submitName(){
+function submitName(name){
     console.log("sub name");
 
-    let name = document.getElementById('nameInput').value.toLowerCase()
-
     console.log(name);
+    
+    if(name != null && name != "" && name != undefined){ //if name has been entered
+        name = name.toLowerCase()
 
-    if(name != null && name != ""){ //if name has been entered
         myName = name
+
+        localStorage["gameshow-playername"] = myName
 
         main.style.display = "flex"
         login.style.display = "none"
@@ -129,6 +137,10 @@ function deleteMe(){ //deletes selected player
         main.style.display = "none"
         login.style.display = "grid"
     }
+}
+
+function logout(){
+    
 }
 
 socket.on('loadFFA', (data) => {

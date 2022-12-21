@@ -25,10 +25,6 @@ document.addEventListener('touchstart', e => {
   touchstartX = e.changedTouches[0].screenX
 })
 
-document.addEventListener('touch', e => {
-  console.log("touchy")
-})
-
 document.addEventListener('touchend', e => {
   touchendX = e.changedTouches[0].screenX
   checkDirection()

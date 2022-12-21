@@ -12,14 +12,15 @@ img{
 /**********Main Style**********/
 
 body{
-    background-color: var(--gray-3);
+    background-color: hsl(0, 0%, 28%);
     overflow: auto;
 }
 
 main{
     display: none;
-    flex-direction: column;
-    min-height: 100vh;
+    position: relative;
+    background-color: var(--gray-3);
+    box-shadow: var(--shadow-1);
 }
 
 #content{

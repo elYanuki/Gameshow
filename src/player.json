@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "name": "dfg",
+    "score": 0,
+    "special": false
+  },
+  {
+    "name": "jaklitsch",
+    "score": 0,
+    "special": true
+  },
+  {
+    "name": "leon",
+    "score": 0,
+    "special": false
+  },
+  {
+    "name": "22",
+    "score": 0,
+    "special": true
+  },
+  {
+    "name": "455555",
+    "score": 0,
+    "special": true
+  },
+  {
+    "name": "4545",
+    "score": 0,
+    "special": true
+  },
+  {
+    "name": "peter",
+    "score": 0,
+    "special": true
+  },
+  {
+    "name": "yanik",
+    "score": 500,
+    "special": true
+  },
+  {
+    "name": "sebstian",
+    "score": 0,
+    "special": true
+  }
+]
