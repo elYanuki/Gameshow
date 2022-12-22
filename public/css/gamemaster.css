@@ -27,7 +27,6 @@ main{
     display: flex;
 }
 
-
 /*---------- position content ----------*/
 
 /* #region*/
@@ -37,6 +36,7 @@ main{
     background-color: hsl(0, 0%, 15%);
     padding-block: 1vh;
     cursor: pointer;
+    position: relative;
 }
 
 #swipe-marker-container .swipe-marker, #swipe-marker-container .swipe-marker-option{
@@ -94,22 +94,15 @@ article[data-position="left"]{
 
 /* #endregion */
 
-
 /*---------timer---------*/
 
 /* #region */
 
 #timer{
-    background-color: var(--gray-1);
-    display: flex;
-    z-index: 5;
-    height: 7vh;
+    height: 6.5vh;
 }
 
 #timer-number{
-    box-sizing: border-box;
-    flex-shrink: 0;
-    color: var(--gray-6);
     height: inherit;
 }
 
@@ -129,16 +122,13 @@ article[data-position="left"]{
 }
 
 #timer-bar-parent{
-    height: inherit;
-    width: 100%;
-    overflow: hidden;
+    height: 2.8vh;
+    margin-block: auto;
+    margin-inline: 1em;
 }
 
 #timer-bar{
-    height: 60%;
-    margin-block: calc(7vh/5);
-    width: 0%;
-    background-color: var(--color-accent-1);
+    height: 100%;
 }
 
 /* #endregion */
@@ -186,60 +176,24 @@ article[data-position="left"]{
     user-select: none;
 }
 
+/* #endregion */
+
+/*---------- selected question ----------*/
+
+/* #region*/
+
 #selected{
     background-color: hsl(0, 0%, 15%);
-    border: 0rem solid var(--color-accent-1);
     padding: 1.5rem;
-    width: 100%;
     height: 5vh;
-    box-sizing: border-box;
-    flex-direction: column;
-    flex-grow: 1;
-    position: relative;
 }
 
 #selected .text{
-    color: var(--gray-6);
-    font-family: standart;
-    font-size: 1.5rem;
-    width: 100%;
+    font-size: clamp(1rem, 4vw, 1.5rem);
     text-align: center;
     justify-self: center;
-    align-self: center;
     transition: all .3s;
     transition-delay: .6s;
-    line-height: 130%;
-}
-
-#selected .image{
-    height: auto;
-    flex-shrink: 2;
-    aspect-ratio: 4/3;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-#selected .sol{
-    text-align: center;
-    font-size: 1.5rem;
-    color: white;
-    word-wrap: break-word;
-}
-
-#selected .hidden{
-    position: absolute;
-    opacity: 1;
-    width: 40vw;
-    left: 0;
-}
-
-#selected .shown{
-    position: absolute;
-    opacity: 1;
-    transition: opacity 1s;
-    width: 40vw;
-    right: 0;
 }
 
 #selected .buttons{
@@ -262,8 +216,40 @@ article[data-position="left"]{
     padding: 1rem;
 }
 
+#selected .image{
+    flex-shrink: 2;
+}
+
+#selected .sol{
+    text-align: center;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    color: white;
+    word-wrap: break-word;
+}
+
+#selected .hidden{
+    position: absolute;
+    opacity: 1;
+    width: 40vw;
+    left: 0;
+}
+
+#selected .shown{
+    position: absolute;
+    opacity: 1;
+    transition: opacity 1s;
+    width: 40vw;
+    right: 0;
+}
+
+#selected .options{
+    margin-block: .1rem;
+}
+
 #selected .options p{
-    font-size: 1.1rem;
+    font-size: 1rem;
+    padding: .1rem;
+    font-size: clamp(1rem, 4vw, 1.5rem);
 }
 
 /* #endregion */
@@ -373,42 +359,6 @@ article[data-position="left"]{
     min-height: 1rem;
     background-color: hsl(0, 0%, 23%);
     aspect-ratio: 1;
-}
-
-#editmode{
-    background-color: var(--gray-3);
-    border-radius: 1rem;
-    position: absolute;
-    top: 0;
-    z-index: 10;
-    padding: 1rem;
-    top: 50%;
-    left: 50%;
-    width: 90vw;
-    transform: translate(-50%, -50%) scale(0);
-    transition: all .3s;
-}
-
-#editmode #question-inputs{
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: .5rem;
-    margin-block: 1rem;
-}
-
-#editmode input{
-    font-size: 100%;
-    background-color: var(--gray-2);
-    color: var(--gray-6);
-    width: 100%;
-}
-
-#editmode p{
-    cursor: pointer;
-    background-color: var(--gray-2);
-    width: fit-content;
-    color: var(--gray-6);
-    padding: .5rem;
 }
 
 #create-ffa{

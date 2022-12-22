@@ -7,7 +7,41 @@ main{
     flex-direction: column;
 }
 
+/*---------timer---------*/
+
+/* #region */
+
+#timer{
+    background-color: var(--gray-1);
+    display: flex;
+    z-index: 5;
+    height: 8vh;
+}
+
+#timer-number{
+    box-sizing: border-box;
+    flex-shrink: 0;
+    color: var(--gray-6);
+}
+
+#timer-bar-parent{
+    width: 90%;
+    overflow: hidden;
+    background-color: var(--gray-2);
+    border-radius: 1rem;
+}
+
+#timer-bar{
+    width: 0%;
+    background-color: var(--color-accent-1);
+    transition: all 1s linear;
+}
+
+/* #endregion */
+
 /*---------player---------*/
+
+/* #region */
 
 .no-players{
     color: hsl(0, 0%, 80%);
@@ -69,7 +103,7 @@ main{
     text-shadow:var(--outline-1);
     color: var(--gray-6);
     align-self: flex-start;
-    margin-top: -1rem;
+    margin-top: -.5rem;
 }
 
 .player div{
@@ -92,6 +126,14 @@ main{
     letter-spacing: .05rem;
     text-transform: uppercase;
 }
+
+
+/* #endregion */
+
+
+/*---------- bars ----------*/
+
+/* #region*/
 
 .bar{
     background-color: var(--gray-1);
@@ -134,6 +176,8 @@ main{
     color: var(--color-accent-2);
 }
 
+/* #endregion */
+
 /*---------- selected question ----------*/
 
 /* #region*/
@@ -147,7 +191,6 @@ main{
     background-size: 80% 100%;
     background-repeat: no-repeat;
     background-position: center;
-    margin-top: 1vw;
     margin-block: .5rem;
 }
 
@@ -157,15 +200,63 @@ main{
     font-size: 1.5rem;
     width: 100%;
     text-align: center;
-    padding: .3rem;
+    padding: .5rem;
     box-sizing: border-box;
     height: 100%;
     background-color: hsl(0, 0%, 32%);
     border: 1px solid hsl(0, 0%, 50%);
 }
 
-/* #endregion */
+#selected{
+    border: 0rem solid var(--color-accent-1);
+    width: 100%;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    box-sizing: border-box;
+    position: relative;
+}
 
+#selected .text{
+    color: var(--gray-6);
+    font-family: standart;
+    width: 100%;
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+    line-height: 130%;
+}
+
+#selected .buttons{
+    display: flex;
+    position: absolute;
+    top: 100%;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    left: 0;
+    right: 0hhh;
+}
+
+#selected .buttons p{
+    color: rgb(122, 18, 128);
+    text-align: center;
+    width: 10%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-inline: 2rem;
+}
+
+#selected .image{
+    aspect-ratio: 4/3;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* #endregion */
 
 /**********Imports**********/
 

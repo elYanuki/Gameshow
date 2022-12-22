@@ -103,8 +103,8 @@ socket.on('selectQuestion', (set, id) => { //uses the questiondata array set by 
     }
 })
 
-socket.on('startTimer', () => {
-    setTimer()
+socket.on('setTimer', (value) => {
+    setTimer(value)
 })
 
 socket.on('stopTimer', () => {
@@ -148,49 +148,51 @@ function selectQuestion(data){
 
     swipe(0)
 
-    if(data.type == 0){//default
-        selected.innerHTML= `
-        <p class="text">${data.text}</p>
-        <p class="sol">${data.solution}</p>
-        <div class="buttons">
-            <p onclick="sendCloseQuestion()">schließen</p>
-        </div>`
+    switch (data.type) {
+        case 0: //default
+            selected.innerHTML= `
+                <p class="text">${data.text}</p>
+                <p class="sol">${data.solution}</p>
+                <div class="buttons">
+                    <p onclick="sendCloseQuestion()">schließen</p>
+                </div>`
+            break;
+        case 1: //image
+            selected.innerHTML = `
+                <div style="background-image: ${data.img[0]};" class="image"></div>
+                <p class="text">${data.text}</p>
+                <p class="sol">${data.solution}</p>
+                <div class="buttons">
+                    <p onclick="sendCloseQuestion()">schließen</p>
+                    <p onclick="socket.emit('sendToggleImage', '${data.img[0]}', '${data.img[1]}')">toggle</p>
+                </div>`
+            break;
+        case 2: //multiple choice
+            selected.innerHTML= `
+                <p class="text">${data.text}</p>
+                <div class="options">
+                    <p>${data.options[0]}</p>
+                    <p>${data.options[1]}</p>
+                    <p>${data.options[2]}</p>
+                    <p>${data.options[3]}</p>
+                </div>
+                <p class="sol">${data.solution}</p>
+        
+        
+                <div class="buttons">
+                    <p onclick="sendCloseQuestion()">schließen</p>
+                </div>`
+            break;
+        case 10: //FFA
+        case 11:
+            selected.innerHTML= `
+                <p class="text">${data.question}</p>
+                <p class="sol">${data.solution}</p>
+                <div class="buttons">
+                    <p onclick="sendCloseQuestion()">schließen</p>
+                </div>`
+            break;
     }
-    else if(data.type == 1){//image
-        selected.innerHTML = `
-        <div style="background-image: ${data.img[0]};" class="image"></div>
-        <p class="text">${data.text}</p>
-        <p class="sol">${data.solution}</p>
-        <div class="buttons">
-            <p onclick="sendCloseQuestion()">schließen</p>
-            <p onclick="socket.emit('sendToggleImage', '${data.img[0]}', '${data.img[1]}')">toggle</p>
-        </div>`
-    }
-    else if(data.type == 2){//multiple choice question
-        selected.innerHTML= `
-        <p class="text">${data.text}</p>
-        <div class="options">
-            <p>${data.options[0]}</p>
-            <p>${data.options[1]}</p>
-            <p>${data.options[2]}</p>
-            <p>${data.options[3]}</p>
-        </div>
-        <p class="sol">${data.solution}</p>
-
-
-        <div class="buttons">
-            <p onclick="sendCloseQuestion()">schließen</p>
-        </div>`
-    }
-    else if(data.type == 10 || data.type == 11){//ffa
-        selected.innerHTML= `
-        <p class="text">${data.question}</p>
-        <p class="sol">${data.solution}</p>
-        <div class="buttons">
-            <p onclick="sendCloseQuestion()">schließen</p>
-        </div>`
-    }
-    
     
     selected.style.display = "flex"
     selected.style.border = "3rem solid var(--color-accent-1)"
@@ -211,10 +213,6 @@ function sendCloseQuestion(){
 function closeQuestion(){
     selected.style.border = "0rem solid var(--color-accent-1)"
     selected.innerHTML = ""
-
-    if(timerActive == true){
-        killTimer()
-    }
 }
 
 

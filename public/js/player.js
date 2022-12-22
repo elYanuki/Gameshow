@@ -42,8 +42,8 @@ socket.on('loadPlayers', (data) => {
 	submitName(localStorage["gameshow-playername"])
 })
 
-socket.on('startTimer', () => {
-    setTimer()
+socket.on('setTimer', (value) => {
+    setTimer(value)
 })
 
 socket.on('stopTimer', () => {
@@ -109,21 +109,36 @@ function selectQuestion(data, catName){
 
     if(data == null){console.error("question-data is null"); return}
 
-    
-    if(data.type == 0){//normal
-        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.text}</p>`    
-    }
-    else if(data.type == 1){//image
-        selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${data.img[0]};" class="image"></div><p class="text">${data.text}</p>`
-    }
-    else if(data.type == 2){//multiple choice question
-        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.text}</p><div class="options"><p>${data.options[0]}</p><p>${data.options[1]}</p><p>${data.options[2]}</p><p>${data.options[3]}</p></div>`
-    }
-    else if(data.type == 10){ //FFA with input
-        selected.innerHTML= `<span class="header">Schätzfrage</span><p class="text">${data.question}</p><input type="text" id="answerInput" autocomplete="off">`
-    }
-    else if(data.type == 11){ //FFA without input
-        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.question}</p>`
+    switch (data.type) {
+        case 0: //default
+            selected.innerHTML= `<span class="header">${catName}</span> <p class="text">${data.text}</p>`    
+            break;
+        case 1: //image
+            selected.innerHTML= `
+                <span class="header">${catName}</span>
+                <div style="background-image: ${data.img[0]};" class="image"></div>
+                <p class="text">${data.text}</p>`
+            break
+        case 2: //multiple choice
+            selected.innerHTML= `
+                <span class="header">${catName}</span>
+                <p class="text">${data.text}</p>
+                <div class="options">
+                    <p>${data.options[0]}</p>
+                    <p>${data.options[1]}</p>
+                    <p>${data.options[2]}</p>
+                    <p>${data.options[3]}</p>
+                </div>`
+            break
+        case 10: //FFA with input
+            selected.innerHTML= `
+                <span class="header">Schätzfrage</span>
+                <p class="text">${data.question}</p>
+                <input type="text" id="answerInput" autocomplete="off">`
+            break;
+        case 11: //FFA without input
+            selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.question}</p>`
+            break
     }
     
     //move in selected question panel

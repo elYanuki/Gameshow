@@ -9,12 +9,12 @@ img{
     width:100%
 }
 
-/**********Main Style**********/
-
 body{
     background-color: hsl(0, 0%, 28%);
     overflow: auto;
 }
+
+/**********Main Style**********/
 
 main{
     display: none;
@@ -23,38 +23,21 @@ main{
     box-shadow: var(--shadow-1);
 }
 
-#content{
-    max-width: 800px;
-    margin-inline: auto;
-}
-
 /*---------timer---------*/
 
 /* #region */
 
 #timer{
-    background-color: var(--gray-1);
-    display: flex;
     box-shadow: var(--shadow-1);
-    z-index: 5;
-    height: 8vh;
 }
 
 #timer-number{
-    height: 10vw;
-    width: 10vw;
-    box-sizing: border-box;
-    padding: .8em;
-    flex-shrink: 0;
-    color: var(--gray-6);
-/*     text-shadow:.1rem .1rem 0em var(--color-accent-2),
-                -.1rem -.1rem 0em var(--color-accent-2); */
     cursor: pointer;
 }
 
 #timer-number div{
-    height: 5vh;
-    width: 5vh;
+    aspect-ratio: 1;
+    height: 3rem;
     background-color: var(--gray-3);
     border: .3em solid var(--color-accent-1);
     display: grid;
@@ -65,7 +48,7 @@ main{
 
 #timer-number div p{
     text-align: center;
-    font-size: 5vw;
+    font-size: 1.5rem;
     color: var(--gray-6);
     font-family: standart;
     text-shadow: var(--outline-1);
@@ -74,24 +57,18 @@ main{
 }
 
 #timer-number div p span{
-    font-size: .8em;
+    font-size: 1.6rem;
     align-self: center;
 }
 
 #timer-bar-parent{
-    height: 2.8vw;
-    width: 100%;
+    height: 2.8vh;
     margin-block: auto;
-    background-color: var(--gray-2);
     margin-inline: 1em;
-    border-radius: 1rem;
-    overflow: hidden;
 }
 
 #timer-bar{
     height: 100%;
-    width: 0%;
-    background-color: var(--color-accent-1);
 }
 
 /* #endregion */
@@ -158,89 +135,25 @@ main{
 
 /* #endregion */
 
-/*---------fragen---------*/
+/*---------selected question---------*/
 
 /* #region */
 
-#questions{
-    background-color: var(--gray-3);
-    display: flex;
-    /* padding-inline: .6em; */
-    position: relative;
-    height: auto;
-    padding-bottom: 2rem;
-}
-
-#questions h1{
-    text-align: center;
-    font-size: 1em;
-    padding: .4em;
-    background-color: var(--color-accent-1);
-    color: var(--gray-1);
-    /* box-shadow: inset 0 0 1rem 1rem rgba(0, 0, 0, 0.296); */
-    box-shadow: var(--shadow-2);
-    color: var(--gray-6);
-    user-select: none;
-}
-
-.catergory{
-    background-color: var(--gray-3);
-    width: 25%;
-    /* padding-inline: .6em; */
-    height: auto;
-    box-sizing: border-box;
-    display: grid;
-    grid-template-rows: auto 1fr 1fr 1fr 1fr 1fr;
-}
-
-.catergory div{
-    width: auto;
-    height: auto;
-    box-sizing: border-box;
-    background-color:var(--gray-4);
-    margin: 1em;
-    margin-inline: 1.6em;
-    display: grid;
-    place-items: center;
-    border-radius: 1em;
-    box-shadow: var(--outline-1), var(--shadow-3);
-    cursor: pointer;
-}
-
-.catergory div p{
-    font-size: 2em;
-    text-align: center;
-    text-shadow: var(--outline-1);
-    color: var(--gray-6);
-    user-select: none;
-}
-
 #selected{
     background-color: var(--gray-4);
-    border: 0rem solid var(--color-accent-1);
     transition: all .6s;
     padding: 2.5vw;
     display: none;
     box-shadow: inset 0 0 1rem 1rem rgba(26, 26, 26, 0.373);
-    width: 100%;
-    box-sizing: border-box;
-    flex-direction: column;
-    flex-grow: 1;
     align-items: center;
     justify-content: center;
-    height: auto;
 }
 
 #selected .text{
-    color: var(--gray-6);
     text-shadow: var(--outline-1);
-    font-family: standart;
-    font-size: 8vw;
-    width: 100%;
+    font-size: 2rem;
     text-align: center;
     justify-self: center;
-    align-self: center;
-    line-height: 130%;
 }
 
 #selected .buttons{
@@ -265,10 +178,6 @@ main{
 
 #selected .image{
     width: 100%;
-    aspect-ratio: 4/3;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 #waiting{
@@ -294,30 +203,30 @@ main{
 #selected .header{
     justify-self:flex-start;
     position: absolute;
-    top: 25vh;
+    top: -1.5rem;
     font-size: 1.5rem;
     font-family: thick;
     color: rgb(100, 0, 100);
     font-weight: 1000;
     letter-spacing: .1rem;
     text-transform: uppercase;
+    transform: translateY(-50%);
 }
 
 /* #endregion */
-
 
 /*---------- controlls ----------*/
 
 /* #region*/
 
 .bottom-bar{
-    position: absolute;
     display: flex;
     bottom: 0;
     justify-content: space-evenly;
     width: 100%;
     background-color: var(--gray-2);
     padding-block: .5rem;
+    margin-top: auto;
 }
 
 .bottom-bar p{
@@ -347,7 +256,7 @@ main{
 
 /* #endregion */
 
-/*---------fragen---------*/
+/*---------players---------*/
 
 /* #region */
 
@@ -367,8 +276,6 @@ main{
     border-radius: 1rem;
     position: relative;
     box-shadow: none;
-    width: auto;
-    height: 10vh;
     margin: 0;
     box-sizing: content-box;
     max-width: 800px;
@@ -388,8 +295,7 @@ main{
 
 @media screen and (min-width: 800px) {
     #timer-number div{
-        height: 7vh;
-        width: 7vh;
+        height: 3rem;
     }
 
     #timer{
@@ -398,10 +304,6 @@ main{
 }
 
 @media screen and (min-width: 1200px) {
-    #timer-number div{
-        height: 10vh;
-        width: 10vh;
-    }
 
     #timer-number{
         display: flex;

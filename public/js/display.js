@@ -11,8 +11,6 @@
 sound.volume = 0.2;
 
 socket.on("connect", () => {
-    console.log(socket);
-    console.log(socket.id);
 })
 
 socket.on('loadPlayers', (data) => { //loads the player overview
@@ -60,8 +58,8 @@ socket.on('loadQuestions', (data) => { //loads the question overview
     questionData = data
 })
 
-socket.on('startTimer', () => {
-    setTimer()
+socket.on('setTimer', (value) => {
+    setTimer(value)
 })
 
 socket.on('stopTimer', () => {
@@ -116,27 +114,29 @@ function selectQuestion(data, catName){
 
     if(data == null){console.error("question-data is null"); return}
     
-    if(data.type == 0){//default question
-        selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.text}</p>`    
+    switch (data.type) {
+        case 0:
+            selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.text}</p>`    
+            break;
+        case 1:
+            selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${data.img[0]};" class="image"></div><p class="text">${data.text}</p>`
+            break
+        case 2:
+            selected.innerHTML= `<span class="header">${catName}</span>
+                <p class="text">${data.text}</p>
+                <div class="options">
+                    <div data-option="A">${data.options[0]}</div>
+                    <div data-option="B">${data.options[1]}</div>
+                    <div data-option="C">${data.options[2]}</div>
+                    <div data-option="D">${data.options[3]}</div>
+                </div>`
+                break
+        case 10:
+        case 11:
+            selected.innerHTML= `<span class="header">${data.type == 10 ? "Schätzfrage" : "Ratefrage"}</span><p class="text">${data.question}</p>`
+            break
     }
-    else if(data.type == 1){//image question
-        selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${data.img[0]};" class="image"></div><p class="text">${data.text}</p>`
-    }
-    else if(data.type == 2){//multiple choice question
-        selected.innerHTML= `<span class="header">${catName}</span>
-        <p class="text">${data.text}</p>
-        <div class="options">
-            <div data-option="A">${data.options[0]}</div>
-            <div data-option="B">${data.options[1]}</div>
-            <div data-option="C">${data.options[2]}</div>
-            <div data-option="D">${data.options[3]}</div>
-        </div>`
-    }
-    else if(data.type == 10 || data.type == 11){//FFA
-        console.log("ffa");
-        selected.innerHTML= `<span class="header">${data.type == 10 ? "Schätzfrage" : "Ratefrage"}</span><p class="text">${data.question}</p>`
-    }
-    
+
     //move in selected question panel
     selected.style.bottom = "0%"
     selected.style.border = "3rem solid var(--color-accent-1)"

@@ -19,7 +19,6 @@ let scoreSel = document.getElementById('score-selector')
 let scoreSelHidden = true;
 let scoreInput = document.getElementById('score-input')
 let selectedPlayer = 0
-let editmodePopup = document.getElementById('editmode')
 let ffaPopup = document.getElementById('create-ffa')
 let questionData = null
 let rules = document.getElementById('rules')
@@ -28,50 +27,38 @@ let topScroll = document.getElementById('game')
 
 let countDown = []
 let clear
-let timerlenght = 30
 
 let ffaRunning = false
 let timerActive = false
+let firstTimerNum = true
 
 const socket = io();
 
-function setTimer(){
-    console.log("starting timer");
-
-    timerBar.style.transition = `all 200ms linear` //to load up the bar in 200ms
-    timerBar.style.width = "100%"
-    timerNumber.innerText = timerlenght
+function setTimer(value){
     timerActive = true
-
-    setTimeout(function(){
-        timerBar.style.transition = `all 1s linear`
-    },200)
-
-    setTimeout(function(){
-        for (let i = 0; i < timerlenght; i++) {
-            countDown[i] = setTimeout(function(){
-                timerNumber.innerText = timerlenght - i //decrease the timer
-                timerBar.style.width = (100/timerlenght)*(timerlenght-i-1) + "%"
-            },1000*i)
-        }
-    },200)
-}
     
+    if(firstTimerNum == true){ 
+        timerBar.style.transition = `all 200ms linear` //to load up the bar in 200ms
+        
+        setTimeout(function(){
+            timerBar.style.transition = `all 1s linear`
+        },400)
+
+        firstTimerNum = false
+    }
+    
+    timerNumber.innerText = value
+    timerBar.style.width = 100/30*value + "%"
+}
+
 function killTimer(){
     console.log("killing timer");
 
-    timerBar.style.transition = `all 1s linear`
-
     timerBar.style.transition = `none`
     timerActive = false
+    firstTimerNum = false
     
     timerNumber.innerHTML = '0'
-
-    for (let i = 0; i < timerlenght; i++) {
-       clearTimeout(countDown[i])
-    }
-
-    clearTimeout(clear)
     
     setTimeout(function(){
         timerNumber.style = "transition: none; opacity: 0;"

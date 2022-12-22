@@ -86,22 +86,36 @@ io.on("connection", (socket) => {
         if (timerRunning == false) {
             console.log("starting timer");
             timerRunning = true
-            io.emit("startTimer")
-            timerOver = setTimeout(function () { //after the timer is over
-                stopTimer()
-                setTimeout(() => {
-                    if (ffaRunning == true) { //if current question is a ffa send collected answers to gamemaster
-                        console.log("answer sent");
-                        io.emit("answers", answers)
-                        answers = []
-                    }
-                }, 1000);
-            }, 30000)
+
+            setTimer(30)
         }
         else if(timerRunning == true){
             stopTimer()
         }
     })
+
+    let timeRec = setTimeout(function(){},0)
+
+    function setTimer(value){
+        if(value <= 0 || timerRunning == false){
+            setTimeout(() => {
+                stopTimer()
+
+                if (ffaRunning == true) { //if current question is a ffa send collected answers to gamemaster
+                    console.log("answer sent to clients");
+                    io.emit("answers", answers)
+                    answers = []
+                }
+            }, 1000);
+            }
+        else{
+            timerRec = setTimeout(function(){
+                setTimer(value-1)
+            },1000)
+        }
+
+        io.emit("setTimer", value)
+    }
 
     let imageMode = 0
 
@@ -123,6 +137,8 @@ io.on("connection", (socket) => {
         ffaRunning = false
         socket.broadcast.emit("closeQuestion")
         io.emit("loadQuestions", manager.questions)
+
+        if(timerRunning == true)
         stopTimer()
 
         safedId = null
@@ -258,9 +274,9 @@ io.on("connection", (socket) => {
 
 
 function stopTimer(){
-    clearInterval(timerOver)
     io.emit("stopTimer")
     timerRunning = false
+    clearTimeout(timerRec)
 }
 
 //SAVE DATA TO JSON FILES
