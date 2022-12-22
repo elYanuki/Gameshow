@@ -100,12 +100,6 @@ io.on("connection", (socket) => {
         if(value <= 0 || timerRunning == false){
             setTimeout(() => {
                 stopTimer()
-
-                if (ffaRunning == true) { //if current question is a ffa send collected answers to gamemaster
-                    console.log("answer sent to clients");
-                    io.emit("answers", answers)
-                    answers = []
-                }
             }, 1000);
             }
         else{
@@ -155,7 +149,6 @@ io.on("connection", (socket) => {
             io.emit("toggleImage", hint)
             imageMode = 0
         }
-        
     })
 
     socket.on("sendOpenRules", () => {
@@ -274,6 +267,12 @@ io.on("connection", (socket) => {
 
 
 function stopTimer(){
+    if (ffaRunning == true) { //if current question is a ffa send collected answers to gamemaster
+        console.log("answer sent to clients");
+        io.emit("answers", answers)
+        answers = []
+    }
+    
     io.emit("stopTimer")
     timerRunning = false
     clearTimeout(timerRec)

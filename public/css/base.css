@@ -60,9 +60,8 @@ main{
     overflow-y: auto;
     position: relative;
     height: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     width: 100%;
+
 }
 
 .player{
@@ -250,6 +249,7 @@ main{
 }
 
 #selected .image{
+    width: 100%;
     aspect-ratio: 4/3;
     background-size: contain;
     background-position: center;

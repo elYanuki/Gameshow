@@ -8,8 +8,6 @@
 
 ***************************************************************************************************************/
 
-sound.volume = 0.2;
-
 socket.on("connect", () => {
 })
 
@@ -60,11 +58,23 @@ socket.on('loadQuestions', (data) => { //loads the question overview
 
 socket.on('setTimer', (value) => {
     setTimer(value)
+
+    switch (value) {
+        case 10:
+        case 5:
+        case 4:
+        case 3:
+        case 2:
+        case 1:
+        case 0:
+            playSound("click")
+            break;
+    }
 })
 
 socket.on('stopTimer', () => {
     if(timerActive == true)
-        playSound("timeUp")
+        playSound("bell")
 
     killTimer()
 })
@@ -109,6 +119,20 @@ socket.on('scrollPlayers', (direction) => {
     }
 })
 
+socket.on('answers', (data) => { //displays the awnsers that users gave to the players
+    console.log("answers recieved", data);
+
+    let html = "<div class='head'>player</div><div class='head'>answer</div>"
+
+    for (let i = 0; i < data.length; i++) {
+       html += `
+        <div>${data[i].player}</div>
+        <div>${data[i].answer}</div>`
+    }
+
+    selected.querySelector('.results').innerHTML = html
+})
+
 function selectQuestion(data, catName){
     console.log("loading selected question", data);
 
@@ -133,7 +157,7 @@ function selectQuestion(data, catName){
                 break
         case 10:
         case 11:
-            selected.innerHTML= `<span class="header">${data.type == 10 ? "Schätzfrage" : "Ratefrage"}</span><p class="text">${data.question}</p>`
+            selected.innerHTML= `<span class="header">${data.type == 10 ? "Schätzfrage" : "Ratefrage"}</span><p class="text">${data.question}</p><div class="results"></div>`
             break
     }
 
@@ -142,11 +166,19 @@ function selectQuestion(data, catName){
     selected.style.border = "3rem solid var(--color-accent-1)"
 }
 
+let audio = new Audio()
+audio.volume = 0.2;
+
 function playSound(name){ //used to play sounds that acompany the gameplay
     console.log("sound", name);
     switch (name) {
-        case `timeUp`:
-            sound.src = "./sound/bell.wav"
+        case `bell`:
+            audio.src = "./sound/bell.wav"
+            break;
+        case `click`:
+            audio.src = "./sound/click.wav"
             break;
     }
+
+    audio.play()
 }

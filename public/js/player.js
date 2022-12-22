@@ -155,7 +155,10 @@ function deleteMe(){ //deletes selected player
 }
 
 function logout(){
-    
+    localStorage["gameshow-playername"]
+
+    main.style.display = "none"
+    login.style.display = "grid"
 }
 
 socket.on('loadFFA', (data) => {

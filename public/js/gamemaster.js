@@ -166,6 +166,7 @@ function selectQuestion(data){
                     <p onclick="sendCloseQuestion()">schließen</p>
                     <p onclick="socket.emit('sendToggleImage', '${data.img[0]}', '${data.img[1]}')">toggle</p>
                 </div>`
+                console.log("image");
             break;
         case 2: //multiple choice
             selected.innerHTML= `

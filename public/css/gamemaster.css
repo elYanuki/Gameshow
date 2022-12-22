@@ -113,7 +113,7 @@ article[data-position="left"]{
     color: var(--gray-6);
     font-family: standart;
     user-select: none;
-    font-size: 6vh;
+    font-size: 5vh;
     width: 100%;
 }
 
@@ -261,6 +261,18 @@ article[data-position="left"]{
 #players{
     flex-grow: 1;
     box-shadow: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr; */
+}
+
+.player{
+    width: 45%;
+    margin-block: .5rem;
+    margin-right: auto;
+    margin-left: 2.5%;
 }
 
 .player .fa-pen-to-square{

@@ -176,10 +176,6 @@ main{
     margin-inline: 2rem;
 }
 
-#selected .image{
-    width: 100%;
-}
-
 #waiting{
     position: absolute;
     width: 100%;

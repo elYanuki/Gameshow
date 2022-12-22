@@ -56,7 +56,7 @@ function killTimer(){
 
     timerBar.style.transition = `none`
     timerActive = false
-    firstTimerNum = false
+    firstTimerNum = true
     
     timerNumber.innerHTML = '0'
     
