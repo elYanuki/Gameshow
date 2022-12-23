@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./css/editmode.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/7796cb6c97.js" crossorigin="anonymous"></script>
+	<script src="/socket.io/socket.io.min.js" defer></script>
+
+	<script src='./js/editmode.js' defer></script>
+
+</head>
+<body>
+	<main>
+		<section id="questions">
+			<div class="catname one">category</div>
+			<div class="catname two">category</div>
+			<div class="catname three">category</div>
+			<div class="catname four">category</div>
+
+			<div class="points one">100</div>
+			<div class="points two">200</div>
+			<div class="points three">300</div>
+			<div class="points four">400</div>
+			<div class="points five">500</div>
+
+			<div class="content"></div>
+
+			<p class="empty">click on a board in the sidebar to open it</p>
+		</section>
+
+		<aside id="boards">
+			<p class="new" onclick="createBoard()">create new</p>
+		</aside>
+	</main>
+</body>
+</html>

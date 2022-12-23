@@ -95,7 +95,7 @@ socket.on('selectQuestion', (set, id) => {
 })
 
 function closeQuestion(){
-    selected.style.display = "none"
+    selected.style.opacity = 0
     selected.style.border = "0rem solid var(--color-accent-1)"
     
     ffaRunning = false
@@ -142,7 +142,7 @@ function selectQuestion(data, catName){
     }
     
     //move in selected question panel
-    selected.style.display = "flex"
+    selected.style.opacity = 1
     selected.style.border = "3rem solid var(--color-accent-1)"
 }
 
