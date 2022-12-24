@@ -13,7 +13,7 @@ const http = require("http")
 const fs = require('fs');
 
 const playerpath = "./src/player.json"
-const questionpath = "./src/questions_1.json"
+const questionpath = "./src/boards.json"
 const ffAPath = "./src/freeForAll_1.json"
 
 const app = express()
@@ -38,8 +38,8 @@ let safedId
 let categories = false
 let rules = false
 
-//defines var that will be used to check if timer has reached zero
-let timerOver = setTimeout(()=>{})
+//compiled list of name and uuid of all boards
+let boardList = []
 
 //all calls are named from client perspective: "send" - client sends to server | "get" - clients request data
 io.on("connection", (socket) => {
@@ -57,6 +57,8 @@ io.on("connection", (socket) => {
         socket.emit("openRules")
     if(categories == true)
         socket.emit("openCategories")
+
+    socket.emit("boardList", boardList)
 
     
     socket.on("sendFFA", () => {
@@ -221,15 +223,6 @@ io.on("connection", (socket) => {
         io.emit("loadPlayers", manager.players)
     })
 
-    socket.on("postQuestion", (name, text1, sol1, type1, text2, sol2, type2, text3, sol3, type3, text4, sol4, type4, text5, sol5, type5) => {
-
-        manager.addQuestionSet(name, text1, sol1, type1, text2, sol2, type2, text3, sol3, type3, text4, sol4, type4, text5, sol5, type5)
-
-        io.emit("loadQuestions", manager.questions)
-
-        updateQuestionFile()
-    })
-
     socket.on("postPlayer", (name) => {
         name = name.toLowerCase()
         
@@ -263,6 +256,29 @@ io.on("connection", (socket) => {
         io.emit("loadQuestions", manager.questions)
         io.emit("loadPlayers", manager.players)
     })
+
+    socket.on("update-board", (board) => {
+        manager.updateBoard(board)
+    })
+    
+    socket.on("add-board", (board) => {
+        manager.addBoard(board)
+    })
+
+    socket.on("request-board", (uuid) => {
+        manager.boards.forEach(item => {
+            if(item.uuid == uuid)
+                socket.emit("loadBoard", item)
+        })
+    })
+
+    socket.on("setQuestions", (uuid) => {
+        manager.setQuestions(uuid)
+    })
+    
+    socket.on("delete-board", (uuid) => {
+        manager.deleteBoard(uuid)
+    })
 })
 
 
@@ -276,6 +292,17 @@ function stopTimer(){
     io.emit("stopTimer")
     timerRunning = false
     clearTimeout(timerRec)
+}
+
+function createBoardList(){ //compiles list of all names and uuids of boards
+    boardList = []
+    manager.boards.forEach(item => {
+        boardList.push({"name" : item.name, "uuid": item.uuid})
+    });
+
+    io.emit("boardList", boardList)
+
+    console.log(boardList);
 }
 
 //SAVE DATA TO JSON FILES
@@ -302,8 +329,7 @@ function readQuestions(){
     
                 let data = JSON.parse(data_string);
     
-                console.log(data);
-                manager.setQuestions(data)
+                manager.setBoards(data)
 
                 resolve("file read")
             })
@@ -311,7 +337,7 @@ function readQuestions(){
     })
 }
 
-//initially reads ffa
+/* //initially reads ffa
 if (fs.existsSync(ffAPath)) {
     fs.readFile(ffAPath, 'utf-8', (err, data_string) => {
         if (err) throw err;
@@ -321,7 +347,7 @@ if (fs.existsSync(ffAPath)) {
         console.log(data);
         manager.setFFA(data)
     })
-}
+} */
 
 function updatePlayerFile(){
     fs.writeFile(playerpath, JSON.stringify(manager.players, 0, 2), 'utf8', (error => {
@@ -329,8 +355,8 @@ function updatePlayerFile(){
     }))
 }
 
-function updateQuestionFile(){
-    fs.writeFile(questionpath, JSON.stringify(manager.questions), 'utf8', (error=>{
+function updateBoardFile(){
+    fs.writeFile(questionpath, JSON.stringify(manager.boards, 0, 2), 'utf8', (error=>{
         if(error) throw error;
     }))
 }
@@ -338,9 +364,11 @@ function updateQuestionFile(){
 server.listen(port, () => {
     console.log(`listenin on port ${port}`)
 })
-
 class Manager {
+
     constructor() {
+        this.boards = new Array();
+
         this.players = new Array();
         this.questions = new Array();
         this.freeForAll = new Array();
@@ -426,8 +454,65 @@ class Manager {
         manager.players.splice(id,1)
     }
 
-    setQuestions(questions){
-        manager.questions = questions
+    setQuestions(uuid){ //sets currently used qustion set
+        this.boards.forEach(item => {
+            if(item.uuid == uuid)
+            this.questions = item.board
+            this.freeForAll = item.freeForAll
+
+            io.emit("loadQuestions", this.questions)
+        });
+    }
+
+    setBoards(boards){
+        this.boards = boards
+
+        createBoardList()
+    }
+
+    addBoard(board){
+        this.boards.push(board)
+
+        updateBoardFile()
+    }
+    
+    deleteBoard(uuid){
+        for (let i = 0; i < this.boards.length; i++) {
+            if(this.boards[i].uuid == uuid){ //uuids match
+                console.log("deleting");
+
+                this.boards.splice(i,1)
+            }
+        }
+
+        createBoardList()
+        updateBoardFile()
+    }
+
+    updateBoard(board){
+        console.log("update board");
+        for (let i = 0; i < this.boards.length; i++) {
+
+            if(this.boards[i].uuid == board.uuid){ //uuids match - item will be replaced
+                this.boards[i] = board
+
+                if(this.questions.uuid == this.boards[i].uuid){
+                    this.questions = this.boards[i]
+
+                    socket.emit("loadQuestions", manager.questions)
+                }
+
+                updateBoardFile()
+                createBoardList()
+            }
+        }
+    }
+    
+    addBoard(board){
+        this.boards.push(board)
+
+        updateBoardFile()
+        createBoardList()
     }
 
     setPlayers(players){

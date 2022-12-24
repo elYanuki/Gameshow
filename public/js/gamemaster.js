@@ -115,6 +115,17 @@ socket.on('loadFFA', (data) => {
     selectQuestion(data)
 })
 
+socket.on('boardList', (data) => {	
+	let html = ""
+	data.forEach(item => {
+		html += `<div class="board" onclick="socket.emit('setQuestions', '${item.uuid}'); document.querySelector('#questionsets').style.display = 'none'">${item.name}</div>`
+	})
+
+    html += `<p onclick="document.querySelector('#questionsets').style.display = 'none'">close</p>`
+
+	document.querySelector('#questionsets').innerHTML = html
+})
+
 socket.on('answers', (data) => { //displays the awnsers that users gave for the gamemaster
     console.log("answers recieved", data);
 

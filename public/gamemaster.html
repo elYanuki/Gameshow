@@ -53,6 +53,9 @@
                 <section id="questions">
                 </section>
                 <div id="selected"></div>
+                <div class="bar">
+                    <p onclick="document.querySelector('#questionsets').style.display = 'flex'">choose questionset</p>
+                </div>
             </article>
         </div>
         
@@ -85,6 +88,8 @@
         <p onclick="deletePlayer()" class="delete">delete Player</p>
     </div>
 
-    <div id="answers"><table><tbody><tr><th>player</th><th>answer</th></tr><tr><td>yanik</td><td>sdafdsaf</td></tr><tr><td>leon</td><td>asdfsafd</td></tr></tbody></table><p onclick="closeAwnsers()">close</p></div>
+    <div id="answers"></div>
+
+    <div id="questionsets"></div>
 </body>
 </html>

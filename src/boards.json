@@ -1,0 +1,200 @@
+[
+  {
+    "name": "Yanik Board 1",
+    "uuid": "cecff490-3652-46ec-aaf2-a7aeeef3ac8d",
+    "board": [
+      {
+        "name": "",
+        "questions": [
+          {
+            "type": 0,
+            "text": "hallo ",
+            "solution": "welt",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          }
+        ]
+      },
+      {
+        "name": "",
+        "questions": [
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          }
+        ]
+      },
+      {
+        "name": "",
+        "questions": [
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          }
+        ]
+      },
+      {
+        "name": "",
+        "questions": [
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          }
+        ]
+      }
+    ],
+    "ffa": [
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      }
+    ]
+  }
+]

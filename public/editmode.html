@@ -10,30 +10,69 @@
 	<script src="/socket.io/socket.io.min.js" defer></script>
 
 	<script src='./js/editmode.js' defer></script>
-
 </head>
 <body>
 	<main>
 		<section id="questions">
-			<div class="catname one">category</div>
-			<div class="catname two">category</div>
-			<div class="catname three">category</div>
-			<div class="catname four">category</div>
+			<header onclick="shakeEmpty();">
+				<input class="boardname" disabled onchange="renameBoard(this.value)" type="text" onclick="this.select()" placeholder="board name">
+				<p onclick="editFFA()">edit FreeForAll questions</p>
+				<p onclick="deleteBoard()">delete Board</p>
+			</header>
 
-			<div class="points one">100</div>
-			<div class="points two">200</div>
-			<div class="points three">300</div>
-			<div class="points four">400</div>
-			<div class="points five">500</div>
+			<div class="catname one">
+				<input type="text" disabled placeholder="" onchange="renameCategory(0, this.value)" spellcheck="false">
+			</div>
+			<div class="catname two">
+				<input type="text" disabled placeholder="" onchange="renameCategory(1, this.value)" spellcheck="false">
+			</div>
+			<div class="catname three">
+				<input type="text" disabled placeholder="" onchange="renameCategory(2, this.value)" spellcheck="false">
+			</div>
+			<div class="catname four">
+				<input type="text" disabled placeholder="" onchange="renameCategory(3, this.value)" spellcheck="false">
+			</div>
+
+			<div class="points one"><p>100</p></div>
+			<div class="points two"><p>200</p></div>
+			<div class="points three"><p>300</p></div>
+			<div class="points four"><p>400</p></div>
+			<div class="points five"><p>500</p></div>
 
 			<div class="content"></div>
+			
+			<div id="editor">
+				<label for="typesel">type</label>
+				<select class="typesel" name="typesel" onchange="changeQuestionType(this.value)">
+					<option value="0">Default</option>
+					<option value="1">Image</option>
+					<option value="2">Multiple choice</option>
+				</select>
+
+				<div class="content">
+				</div>
+
+				<div class="buttons">
+					<p onclick="closeEditor('save')">save</p>
+					<p onclick="closeEditor('cancel')">cancel</p>
+				</div>
+			</div>
+
+			<div id="ffa-editor">
+			</div>
 
 			<p class="empty">click on a board in the sidebar to open it</p>
 		</section>
 
 		<aside id="boards">
-			<p class="new" onclick="createBoard()">create new</p>
 		</aside>
 	</main>
+
+	<div id="popup">
+		<div class="popup-content">
+			<p class="text">you should not see this</p>
+			<div class="buttons"></div>
+		</div>
+	</div>
 </body>
 </html>

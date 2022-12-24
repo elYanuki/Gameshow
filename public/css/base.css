@@ -267,7 +267,7 @@ main{
 
 /**********Variables**********/
 :root {
-    --color-accent-1: rgb(197, 21, 206);--color-accent-2: rgb(0, 77, 178);
+    --color-accent-1: hsl(297, 81%, 45%);--color-accent-2: rgb(0, 77, 178);
     --color-contrast: white;
 
     --gray-1:rgb(30, 30, 30);

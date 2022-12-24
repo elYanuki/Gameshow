@@ -40,50 +40,130 @@ a{
 	#questions{
 		display: grid;
 		grid-template-columns: auto repeat(4, 1fr);
-		grid-template-rows: auto repeat(5,1fr);
+		grid-template-rows: auto auto repeat(5,1fr);
 		height: 100vh;
 		width: 80%;
 		background-color: var(--gray-200);
 		place-items: center;
 	}
 
-	#questions > .catname{
-		margin-block: .5vw;
+	#questions header{
+		grid-column: span 5;
+		padding: .5rem;
+		display: flex;
+		justify-content: space-evenly;
+		width: 100%;
 	}
+
+	#questions header input, #questions header p{
+		display: block;
+		background-color: var(--gray-250);
+		color: rgb(209, 209, 209);
+		text-align: center;
+		padding: .2rem .8rem;
+		border-radius: .5rem;
+		box-shadow: var(--shadow-button);
+		border: none;
+		outline: none;
+		border-bottom: .1rem solid transparent;
+		transition: all .2s;
+		font-size: .8rem;
+		margin-block: .1rem;
+		cursor: pointer;
+	}		
+	#questions header input:hover, #questions header p:hover{
+		background-color: hsl(0, 0%, 22%);
+	}
+
+	#questions header input:focus{
+		border-bottom: .1rem solid var(--color-accent);
+		background-color: hsl(0, 0%, 22%);
+	}
+
+	#questions header p{
+		user-select: none;
+		padding: .5rem 1rem;
+	}
+
+	#questions > .catname{
+		padding-block: .5vw;
+		font-size: .8rem;
+		padding: .2rem;
+		width: 100%;
+		text-align: center;
+	}
+	#questions > .catname.edit{
+		background-color: var(--gray-250);
+	}
+
+	#questions > .catname input{
+		border: none;
+		background-color: transparent;
+		outline: none;
+		text-align: center;
+		color:white;
+		border-bottom: .1rem solid transparent;
+		padding-block: .2rem;
+		border-radius: .2rem;
+		transition: all .2s;
+	}
+	#questions > .catname input:focus{
+		outline: none;
+		border-bottom: .1rem solid var(--color-accent);
+		box-sizing: border-box;
+		background-color: hsl(0, 0%, 18%);
+	}
+
+	#questions > .catname input:not(:disabled):hover{
+		background-color: hsl(0, 0%, 18.5%);
+	}
+
 	#questions > .catname.one{
-		grid-area: 1 / 2 / 2 / 3;
+		grid-area: 2 / 2 / 3 / 3;
 	}
 	#questions > .catname.two{
-		grid-area: 1 / 3 / 2 / 4;
+		grid-area: 2 / 3 / 3 / 4;
 	}
 	#questions > .catname.three{
-		grid-area: 1 / 4 / 2 / 5;
+		grid-area: 2 / 4 / 3 / 5;
 	}
 	#questions > .catname.four{
-		grid-area: 1 / 5 / 2 / 6;
+		grid-area: 2 / 5 / 3 / 6;
 	}
 
 	#questions > .points{
 		margin-inline: .5vw;
+		font-size: .8rem;
+		display: grid;
+		width: 100%;
+		height: 100%;
+		place-content: center;
 	}
+	#questions > .points.edit{
+		background-color: var(--gray-250);
+	}
+
 	#questions > .points.one{
-		grid-area: 2 / 1 / 3 / 2;
-	}
-	#questions > .points.two{
 		grid-area: 3 / 1 / 4 / 2;
 	}
-	#questions > .points.three{
+	#questions > .points.two{
 		grid-area: 4 / 1 / 5 / 2;
 	}
-	#questions > .points.four{
+	#questions > .points.three{
 		grid-area: 5 / 1 / 6 / 2;
 	}
-	#questions > .points.five{
+	#questions > .points.four{
 		grid-area: 6 / 1 / 7 / 2;
+	}
+	#questions > .points.five{
+		grid-area: 7 / 1 / 8 / 2;
 	}
 	
 	#questions .empty{
-		grid-area: 4 / 3 / 5 / 5;
+		grid-area: 5 / 3 / 6 / 5;
+		animation: shake 0.5s;
+		animation-iteration-count: infinite;
+		animation-play-state: paused;
 	}
 
 	/* #endregion */
@@ -93,20 +173,24 @@ a{
 /* #region*/
 
 	#questions > .content{
-		grid-area: 2 / 2 / 7 / 6;
+		grid-area: 3 / 2 / 8 / 6;
 		background-color: var(--gray-300);
+		background: radial-gradient(circle, var(--gray-300) 0%, hsl(0, 0%, 25%));
+
 		height: 100%;
 		width: 100%;
 		box-sizing: border-box;
-		padding: .3rem;
+		padding: 1rem;
 
 		display: grid;
 		grid-template-rows: repeat(5, 1fr);
 		grid-template-columns: repeat(4, 1fr);
+
+		box-shadow: 0 0 .5rem .5rem inset rgba(0, 0, 0, 0.4);
 	}
 
 	#questions > .content .question{
-		width: calc(100% - .6rem);
+		width: calc(100% - 1rem);
 		height: calc(100% - .6rem);
 		margin: auto;
 		background-color: var(--gray-250);
@@ -114,26 +198,45 @@ a{
 		flex-direction: column;
 		padding: .3rem;
 		box-sizing: border-box;
+		cursor: pointer;
+		transition: all .3s;
+		border-radius: .5rem;
+		box-shadow: 0 0 .1rem .1rem rgba(0, 0, 0, 0.2);
+	}
+	#questions > .content .question.edit{
+		background-color: var(--gray-400);
+	}
+
+	#questions > .content .question:hover{
+		box-shadow: 0 0 1rem 1rem inset rgba(0, 0, 0, 0.1);
 	}
 
 	#questions > .content .question p{
 		text-align: center;
+		font-size: .8rem;
+		margin-block: auto;
+
+		pointer-events: none;
+		user-select: none;
 
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;  
 		overflow: hidden;
-		font-size: .9rem;
-	}
-
-	#questions > .content .question .text{
-		margin-bottom: .3rem;
 	}
 
 	#questions > .content .question .type{
 			text-transform: uppercase;
-			margin-block: .5rem;
-			font-size: 1.2rem;
+			margin-block: .3rem;
+			color: var(--color-contrast);
+	}
+
+	#questions > .content .question .text, #questions > .content .question .solution{
+		margin-bottom: .5rem;
+	}
+
+	#questions > .content .question .solution{
+		color: var(--color-contrast);
 	}
 
 	#questions > .content .question .info{
@@ -152,28 +255,237 @@ a{
 #boards{
 	height: 100vh;
 	width: 20%;
-	background-color: var(--gray-200);
+	background-color: var(--gray-150);
+	font-size: .8rem;
 	padding: 1.5rem .5rem;
 	box-sizing: border-box;
+	overflow-y: auto;
+	box-shadow: 0 0 1rem .5rem rgba(0, 0, 0, 0.301);
 }
 
 #boards .new{
 	text-align: center;
 	padding: .7rem;
 	border-radius: .5rem;
-	background-color: var(--gray-100);
-	font-size: 1.2rem;
+	background-color: var(--gray-80);
+	font-size: 1rem;
 	cursor: pointer;
 	margin-top: 1.5rem;
+	color: var(--color-contrast);
 }
 
+#boards .board{
+	width: 90%;
+	margin: 1rem auto;
+	padding: .5rem;
+	text-align: center;
+	background-color: var(--gray-100);
+	color: var(--color-contrast);
+	border: none;
+	cursor: pointer;
+	border-radius: .5rem;
+	box-shadow: 0 0 .2rem .2rem rgba(0, 0, 0, 0.5);
+}
+#boards .board.selectedBoard{
+	outline: .1rem solid var(--color-accent);
+}
+#boards .board:hover{
+	background-color: hsl(0, 0%, 13%);
+}	
 
 /* #endregion */
+
+
+/*---------- editor ----------*/
+
+/* #region*/
+
+#editor, #ffa-editor{
+	grid-area: 3 / 2 / 8 / 6;
+	z-index: 50;
+	background-color: var(--gray-400);
+	width: calc(100% - var(--offset));
+	height: auto;
+	margin: auto;
+	margin-top: auto;
+	box-shadow: 0 0 1vw 1vw rgba(0, 0, 0, 0.2);
+	scale: 0;
+	opacity: 0;
+	transition: all .5s;
+	padding: 2vw;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+
+	--offset: 20vw;
+}
+#editor.active, #ffa-editor.active{
+	opacity: 1;
+	scale: 1;
+}
+
+#editor .typesel{
+	margin-bottom: 4vh;
+	margin-inline: auto;
+	display: block;
+	background-color: var(--gray-200);
+	color: white;
+	padding: .5rem 3rem;
+	text-align: center;
+	font-size: .8rem;
+	border-radius: .2rem;
+}
+#editor label{
+	text-align: center;
+	font-size: .7rem;
+	color: var(--color-contrast);
+	letter-spacing: .3rem;
+	text-transform: uppercase;
+}
+
+#editor .buttons{
+	display: flex;
+	justify-content:space-around;
+	margin-top: 5vh;
+}
+
+#editor .buttons p{
+	background-color: var(--gray-200);
+	padding: .5rem 2rem;
+	cursor: pointer;
+	box-shadow: .1rem .1rem .3rem .1rem rgba(0, 0, 0, 0.13);
+	border-radius: .3rem;
+}
+
+#editor .content{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#editor .content input, #editor .content textarea{
+	width: 45%;
+	box-sizing: border-box;
+	padding: .5rem;
+	margin: .5rem auto;
+	background-color: var(--gray-300);
+	color: white;
+	font-size: .9rem;
+	border-radius: .3rem;
+	resize: none;
+}
+
+#ffa-editor{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: repeat(12, auto);
+	place-items: center;
+}
+
+#ffa-editor div{
+	display: flex;
+	justify-content: space-evenly;
+}
+
+#ffa-editor input{
+	text-align: center;
+	background-color: var(--gray-300);
+	outline: none;
+	color: white;
+	accent-color: var(--color-accent);
+	font-size: .8rem;
+	padding: .2rem;
+	width: 130%;
+}
+#ffa-editor input:active{
+	outline: none;
+}
+
+#ffa-editor p{
+	margin-bottom: .5rem;
+	font-size: .8rem;
+}
+
+#ffa-editor .close{
+	text-align: center;
+	margin-top: 1.5vw; 
+	grid-column: span 3;
+	/* background-color: var(--gray-250);
+	padding: .3rem 1.5rem;
+	border-radius: .2rem;
+	cursor: pointer; */
+
+	background-color: var(--gray-200);
+	padding: .5rem 2rem;
+	cursor: pointer;
+	box-shadow: .1rem .1rem .3rem .1rem rgba(0, 0, 0, 0.13);
+	border-radius: .3rem;
+}
+
+/* #endregion */
+
+
+/*---------- popup ----------*/
+
+/* #region*/
+
+#popup{
+	position: absolute;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 100;
+
+	transition: all .5s;
+
+	display: none;
+	place-content: center;
+	border-radius: .5rem;
+}
+
+#popup .text{
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+.popup-content{
+	background-color: var(--gray-200);
+	padding: 2vw;
+}
+
+.popup-content .buttons{
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+}
+
+.popup-content .buttons p{
+	padding: .4rem;
+	background-color: var(--gray-150);
+	cursor: pointer;
+	border-radius: .3rem;
+}
+
+/* #endregion */
+
 
 
 /************ Imports ************/
 
 /************ Keyframes ************/
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-0.5deg); }
+  20% { transform: translate(-2px, 0px) rotate(1deg); }
+  30% { transform: translate(2px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(0.5deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(2px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(0.5deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-0.5deg); }
+}
 
 /************ Responsive ************/
 
@@ -186,13 +498,17 @@ a{
 /************ Variables ************/
 
 :root {
-		--color-accent: hsl(0, 100%, 100%);
-		--color-contrast: hsl(0, 0%, 100%);
+		--color-accent: hsl(297, 81%, 45%);
+		--color-contrast: hsl(0, 0%, 80%);
+		--gray-80: hsl(0, 0%, 6%);
 		--gray-100: hsl(0, 0%, 10%);
+		--gray-150: hsl(0, 0%, 15%);
 		--gray-200: hsl(0, 0%, 20%);
 		--gray-250: hsl(0, 0%, 25%);
 		--gray-300: hsl(0, 0%, 30%);
 		--gray-400: hsl(0, 0%, 40%);
 		--gray-500: hsl(0, 0%, 50%);
 		--gray-600: hsl(0, 0%, 60%);
+
+		--shadow-button: 0 0 .4rem .4rem rgba(0,0,0,0.1)
 }
