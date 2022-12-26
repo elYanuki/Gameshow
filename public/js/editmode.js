@@ -9,12 +9,35 @@ socket.on('boardList', (data) => {
 		html += `<div class="board" data-uuid="${item.uuid}" onclick="selectBoard(this)">${item.name}</div>`	
 	})
 
-	html += `<p class="new" onclick="createBoard()">create new</p>`
+	html += `
+	<p class="new" onclick="createBoard()">create new</p>
+	<div class="bottombar">
+		<p onclick="openInfo('rules')">rules</p>
+		<p onclick="openInfo('categories')">categories</p>
+		<p class="close" onclick="openInfo('close')">close</p>
+	</div>
+	`
 
 	document.querySelector('#boards').innerHTML = html
 
 	highlightSelectedBoard()
 })
+
+function openInfo(action){
+	document.querySelector('#rules').style.display = "none"
+	document.querySelector('#categories').style.display = "none"
+	document.querySelector('.bottombar .close').style.color = "var(--color-contrast)"
+
+	if(action == "rules"){
+		document.querySelector('#rules').style.display = "grid"
+	}
+	else if(action == "categories"){
+		document.querySelector('#categories').style.display = "grid"
+	}
+	else{
+		document.querySelector('.bottombar .close').style.color = "var(--gray-600)"
+	}
+}
 
 function selectBoard(elem){
 	let uuid = elem.dataset.uuid

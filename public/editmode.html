@@ -5,6 +5,8 @@
 	<title>Document</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./css/editmode.css">
+	<link rel="stylesheet" href="./css/rules-categories.css">
+
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/7796cb6c97.js" crossorigin="anonymous"></script>
 	<script src="/socket.io/socket.io.min.js" defer></script>
@@ -74,5 +76,144 @@
 			<div class="buttons"></div>
 		</div>
 	</div>
+
+	<article id="rules">
+		<h1>Spielablauf</h1>
+		<section class="big">
+				<h2>Runden</h2>
+				<ul>
+						<li>Fragen sind nach Kategorien und Punkten geordnet</li>
+						<li>Spieler 1 beginnt und wählt eine Frage von Board</li>
+						<li>Frage wird vorgelesen – sobald der Timer gestartet ist darf Spieler 1 antworten</li>
+				</ul>
+
+				<div class="two-way">
+						<div class="line"></div>
+						<div class="split"></div>
+						<div class="option">
+								<p>1 antwortet falsch oder nicht</p>
+								<ul>
+										<li>1 bekommt die Punkte abgezogen</li>
+										<li>Frage geht an Spieler 2</li>
+										<!-- <li>Wenn 2 nicht antwortet bekommt er keinen Abzug – Frage geht an 3 usw</li> -->
+								</ul>
+
+								<div class="two-way">
+										<div class="line"></div>
+										<div class="split"></div>
+										<div class="option">
+												<p>2 antwortet</p>
+												<ul>
+														<li>Wenn richtig bekommt er Punkte</li>
+														<li>Wenn falsch bekommt er Abzug</li>
+												</ul>
+										</div>
+										<div class="option">
+												<p>2 antwortet nicht</p>
+												<ul>
+														<li>Frage geht an Spieler 3</li>
+														<li>usw.</li>
+												</ul>
+										</div>
+								</div>
+						</div>
+						<div class="option">
+								<p>1 antwortet richtig</p>
+								<ul>
+										<li>1 bekommt die Punkte der Frage</li>
+										<li>1 hat das Board (max. 3-mal)</li>
+								</ul>
+						</div>
+				</div>
+		</section>
+		<section>
+				<h2>Multiplier</h2>
+				<ul>
+						<li>Wird eingesetzt, bevor die Frage vorgelesen wird</li>
+						<li>Spieler kann eine „beliebige“ Punktezahl auf die Frage setzten</li>
+						<li>Punktezahl muss kleiner als 1500 und kleiner als der Betrag der aktuellen Punkte sein</li>
+						<li>Gilt nur für den Spieler, der den Multiplier verwendet hat</li>
+				</ul>
+
+				<h2>free for all</h2>
+				<ul>
+						<li>nachdem jeder Spieler einmal das Board hatte wird eine ffa Frage gestellt</li>
+						<li><mark class="underline">Ratefrage</mark>
+								<ul>
+										<li>keine Abzüge, unendlich Guesses wer als erster errät bekommt 200 Punkte</li>
+								</ul>
+						</li>
+						<li><mark class="underline">Schätztfrage</mark>
+								<ul>
+										<li>30 sek Zeit</li>
+										<li>der reihe nach sagt jeder eine Zahl, der näheste bekommt 200 Punkte</li>
+								</ul>
+						</li>
+				</ul>
+		</section>
+</article>
+
+<article id="categories">
+		<div>
+				<h1>Kategorien</h1>
+				<p>Im zweifelsfall wird abgestimmt</p>
+		</div>
+
+		<div>
+				<h2>Synonyme</h2>
+				<ul>
+						<li>Nenne ein Synonym des genannten Wortes</li>
+						<li>Busch >> Strauch</li>
+				</ul>
+		</div>
+		<div>
+				<h2>connect 3</h2>
+				<ul>
+						<li>verbinde die drei genannten Dinge mit einem Begriff</li>
+						<li>Bauen - Waffen - Paragleiter >> FORTNITE</li>
+				</ul>
+		</div>
+		<div>
+				<h2>List a Lot</h2>
+				<ul>
+						<li>Nenne viele Dinge des vorgegebenen Themas</li>
+						<li>Jedes genannte Ding zählt 1/5 der Punkte</li>
+						<li>100 Punkte: 100/5 = 20 pro Ding</li>
+						<li>300 Punkte: 300/5 = 60 pro Ding</li>
+						<li>maximal 6 Dinge können genannt werden</li>
+						<li>nenne rote Dinge</li>
+				</ul>
+		</div>
+		<div>
+				<h2>Trippelwort</h2>
+				<ul>
+						<li>Verbinde zwei genannte Worte mit einem Wort zB. Butter & Laib</li>
+						<li>die Lösung muss Ende eines Doppelwortes mit dem ersten Wort sein <br>Butter >> Butter-BROT</li>
+						<li>..und der Anfang eines Doppelwortes mit dem zweiten Wort sein<br>Laib >> BROT-laib</li>
+						<li>Lösung: BROT</li>
+				</ul>
+		</div>
+		<div>
+				<h2>Famous Funfacts</h2>
+				<ul>
+						<li>Ordne dem Funfact eine bekannte Person zu</li>
+						<li>Wessen Gehirn wurde nach seinem Tod gestohlen >> Einstein</li>
+				</ul>
+		</div>
+		<div>
+				<h2>Bilder</h2>
+				<ul>
+						<li>beantworte eine Frage zu einem Bild</li>
+						<li>Welches Tier ist hier zu sehen?</li>
+				</ul>
+		</div>
+		<div>
+				<h2>Generic</h2>
+				<ul>
+						<li>Beantworte die gestellte Frage .-.</li>
+						<li>welche Farbe haben Yaniks Augen</li>
+				</ul>
+		</div>
+</article>
 </body>
 </html>

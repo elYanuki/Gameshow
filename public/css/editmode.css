@@ -213,7 +213,7 @@ a{
 
 	#questions > .content .question p{
 		text-align: center;
-		font-size: .8rem;
+		font-size: .9rem;
 		margin-block: auto;
 
 		pointer-events: none;
@@ -261,6 +261,8 @@ a{
 	box-sizing: border-box;
 	overflow-y: auto;
 	box-shadow: 0 0 1rem .5rem rgba(0, 0, 0, 0.301);
+	display: flex;
+	flex-direction: column;
 }
 
 #boards .new{
@@ -293,6 +295,35 @@ a{
 	background-color: hsl(0, 0%, 13%);
 }	
 
+#boards .bottombar{
+	display: flex;
+	margin-top: auto;
+	justify-content: space-evenly;
+}
+
+#boards .bottombar p{
+	font-size: .9rem;
+	color: var(--gray-600);
+	cursor: pointer;
+}
+
+#categories, #rules{
+	font-size: 1rem !important;
+	box-sizing: border-box;
+	width: 80%;
+	overflow: hidden;
+	grid-template-columns: 50% 50% !important;
+	padding: .5rem !important;
+}
+
+#rules .option{
+	margin-inline: .5rem !important;
+	font-size: .9rem;
+}
+
+#categories li{
+	font-size: inherit !important;
+}
 /* #endregion */
 
 
