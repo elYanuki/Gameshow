@@ -3,10 +3,13 @@ const socket = io();
 let boardContent = document.querySelector('#questions > .content')
 let selectedBoard = null
 
+/**
+ * listens for a new list of boardnames and their uuids then displays list in sidebar
+ */
 socket.on('boardList', (data) => {	
 	let html = ""
 	data.forEach(item => {
-		html += `<div class="board" data-uuid="${item.uuid}" onclick="selectBoard(this)">${item.name}</div>`	
+		html += `<div class="board" data-uuid="${item.uuid}" onclick="selectBoard('${item.uuid}', '${item.name}')">${item.name}</div>`
 	})
 
 	html += `
@@ -23,6 +26,10 @@ socket.on('boardList', (data) => {
 	highlightSelectedBoard()
 })
 
+/**
+ * toggles visibility of rules and categorie info
+ * @param {String} action what to open "rules" "categories" or "close"
+ */
 function openInfo(action){
 	document.querySelector('#rules').style.display = "none"
 	document.querySelector('#categories').style.display = "none"
@@ -39,40 +46,53 @@ function openInfo(action){
 	}
 }
 
-function selectBoard(elem){
-	let uuid = elem.dataset.uuid
-
-	if(localStorage["gameshow-bord-used"]){
-		let data = JSON.parse(localStorage["gameshow-bord-used"])
-
-		for (let i = 0; i < data.length; i++) {
-			if(data[i] == uuid){
-				socket.emit('request-board', uuid);
-				return
-			}
-		}
+function selectBoard(uuid, name){
+	//check if board is already opened
+	if(selectedBoard != null && selectedBoard.name == name){
+		socket.emit('request-board', uuid)
+		return
 	}
 
-	//not found in localstorrage - prompt
-	createPopup('You have never edited this board, are you sure you want to open "' + elem.innerHTML +'" ?', () => {
-		socket.emit('request-board', uuid);
-		addKnownUUID(uuid);
-	})
+	let safedUUIDs = JSON.parse(localStorage["gameshow-bord-used"] || null)
+	
+	//check if board is in list of safed UUIDs
+	if (safedUUIDs == null || !safedUUIDs.includes(uuid)) {
+		createPopup(1, 'You have never edited this board, are you sure you want to open "' + name +'" ?', () => {
+			socket.emit('request-board', uuid);
+
+			if(popupCheckBox == false)
+				addKnownUUID(uuid);
+		})
+		return
+	}
+
+	//is in list of knows uuids
+	socket.emit('request-board', uuid);
 }
 
+/**
+ * recievs data for whole gameboard and displays it
+ */
 socket.on('loadBoard', (board) => {
 	console.log("new board recieved", board);
 
 	selectedBoard = board
 
-	console.log(selectedBoard.ffa);
-
 	renderBoard()
 	generateFFAEditor(selectedBoard.ffa)
+
+	openInfo("close")
+	closeEditor("cancel")
+
+	if(ffaEditOpen == true)
+		editFFA()
 
 	highlightSelectedBoard()
 })
 
+/**
+ * iterates over all boards and higlights the one that is "selectedBoard"
+ */
 function highlightSelectedBoard(){
 	if(selectedBoard == null) return
 
@@ -296,32 +316,26 @@ function createBoard(){
 	console.log(selectedBoard);
 }
 
+/**
+ * generates inputs to edit free for all questions
+ * @param data if given
+ */
 function generateFFAEditor(data){
-	 document.querySelector('#ffa-editor').innerHTML = "<p>no input</p><p>question</p><p>solution</p>"
+	document.querySelector('#ffa-editor').innerHTML = "<p>no input</p><p>question</p><p>solution</p><i class='fa-solid fa-circle-info info-popup'></i>"
 	
+	let html = ""
+
 	for (let i = 0; i < 10; i++) {
-			let i1 = document.createElement("input")
-				i1.classList.add("type")
-				i1.type = "checkbox"
-				i1.checked = (data[i].type == 11)
+			console.log(data[i])
 
-			let i2 = document.createElement("input")
-				i2.classList.add("text")
-				i2.placeholder = i
-				i2.value = data[i].question
-				console.log(data[i].question);
-
-			let i3 = document.createElement("input")
-				i3.classList.add("solution")
-				i3.placeholder = i
-				i3.value = data[i].solution
-
-			document.querySelector('#ffa-editor').appendChild(i1)
-			document.querySelector('#ffa-editor').appendChild(i2)
-			document.querySelector('#ffa-editor').appendChild(i3)
+			html+= `
+			<input class="type" type="checkbox" ${(data[i].type == 11 ? "checked" : "")}>
+			<input class="text" type="text" placeholder="${i+1}" value="${data[i].question}">
+			<input class="solution" type="text" placeholder="${i+1}" value="${data[i].solution}">
+			`
 	}
 
-	document.querySelector('#ffa-editor').innerHTML += `<p onclick="editFFA()" class="close">close</p>`
+	document.querySelector('#ffa-editor').innerHTML += html + `<p onclick="editFFA()" class="close">close</p>`
 }
 
 let ffaEditOpen = false
@@ -329,7 +343,6 @@ function editFFA(){
 	if(selectedBoard == null){
 		return
 	}
-		
 
 	document.querySelector('#ffa-editor').classList.toggle("active")
 
@@ -386,19 +399,31 @@ function editQuestion(elem){
 	}
 }
 
-function changeQuestionType(type, data){
-	let html = `
-	<textarea placeholder="question" class="textar" name="w3review" rows="3" cols="50">${data ? data.text : ""}</textarea>
-	<textarea placeholder="solution" class="textar" name="w3review" rows="3" cols="50">${data ? data.solution : ""}</textarea>`
+const typeInfos = [
+	"'Default questions allow you to input a question and a solution - the question will be visible to all players - the solution only to the gamemaster.'",
+	"'Image questions have the option to input a question image for example a picture of many people. You can then ask the question - where is the policeman - and set a image with the policeman highlighted as the solution image. Images should be providet as urls(the easiest way to use custom images is to upload them to https://imgur.com/ - right click and copy image url) you can easily right click any image from google and copy its link.  If no solution image is providet it will automatically be set to the question image.'",
+	"'Multiple choice questions allow you to enter 4 options which will be displayed algonside the question.  All 4 of these should be providet for style reasons but it doesnt break anything if you leave one out.'"
+]
 
-	/* <input type="text" placeholder="question" ${data ? "value='" + data.text + "'" : ""}>
-	<input type="text" placeholder="solution" ${data ? "value='" + data.solution + "'" : ""}> */
+function changeQuestionType(type, data){
+	let questionText = editor.querySelectorAll('.content .textar')[0]?.value || ""
+	let solutionText = editor.querySelectorAll('.content .textar')[1]?.value || ""
+
+	console.log(questionText, solutionText);
+	
+	let html = `
+	<textarea placeholder="question" class="textar" name="w3review" rows="2" cols="40">${data ? data.text : questionText}</textarea>
+	<textarea placeholder="solution" class="textar" name="w3review" rows="2" cols="40">${data ? data.solution : solutionText}</textarea>`
+
+	document.querySelector('.info-popup').style.setProperty("--content", typeInfos[0])
 
 	switch(parseInt(type)){
 		case 1:
 			html += `
 			<input type="text" placeholder="image one (question)" ${data ? "value='" + data.img[0] + "'" : ""}>
 			<input type="text" placeholder="image two (solution)" ${data ? "value='" + data.img[1] + "'" : ""}>`
+			
+			document.querySelector('.info-popup').style.setProperty("--content", typeInfos[1])
 			break
 		case 2:
 			html += `
@@ -406,6 +431,8 @@ function changeQuestionType(type, data){
 			<input type="text" placeholder="choice two" ${data ? "value='" + data.options[1] + "'" : ""}>
 			<input type="text" placeholder="choice three" ${data ? "value='" + data.options[2] + "'" : ""}>
 			<input type="text" placeholder="choice four" ${data ? "value='" + data.options[3] + "'" : ""}>`
+			
+			document.querySelector('.info-popup').style.setProperty("--content", typeInfos[2])
 			break
 	}
 
@@ -457,6 +484,9 @@ function renderBoard(){
 	document.querySelector('#questions .empty').style.display = "none"
 }
 
+/**
+ * @param {String} action either save or cancel decides what to do with the data
+ */
 function closeEditor(action){
 	if(action == "save"){
 		let data
@@ -475,7 +505,7 @@ function closeEditor(action){
 				}
 				break
 			case 1://image
-				if(inputs[1] == "" || inputs[1] == " ") inputs[1] == inputs[0]
+				if(inputs[1].value == "" || inputs[1].value == " ") {inputs[1].value = inputs[0].value}
 				data = {
 					"type": 1,
 					"text": areas[0].value,
@@ -500,6 +530,13 @@ function closeEditor(action){
 	
 		renderBoard()
 
+		//sets al question usages to false in case a running game changed them
+		selectedBoard.board.forEach((category)=>{
+			category.questions.forEach((question)=>{
+				question.used = false
+			})
+		})
+
 		updateServer()
 	}
 	
@@ -518,7 +555,7 @@ function closeEditor(action){
 
 function deleteBoard(){
 	if(selectedBoard != null)
-	createPopup('Delete board "' + selectBoard.name + '" ? this action is irreversable', () => {
+	createPopup(0, 'Delete board "' + selectedBoard.name + '" ? this action is irreversable', () => {
 		socket.emit("delete-board", selectedBoard.uuid)
 
 		document.querySelector('.boardname').value = ""
@@ -552,7 +589,7 @@ function updateServer(){
 	socket.emit("update-board", selectedBoard)
 }
 
-//----------- utility -----------//
+//************ utility ************//
 
 function uuidv4() {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
@@ -585,25 +622,58 @@ function addKnownUUID(uuid){
 	}
 }
 
+
+//----------- popup -----------//
+
+let popupCheckBox = false
+
 /**
  * 
  * @param {String} text will be displayed to the user
  * @param {function} confirm will be executed if the user confirms
  */
-function createPopup(text, confirm){
-	document.querySelector('.popup-content .buttons').innerHTML = ""
+function createPopup(type, text, confirm){
+	popupCheckBox = false
+
+	document.querySelector('.popup-content').innerHTML = ""
+
+	let b = document.createElement("div")
+	b.classList.add("buttons")
 
 	let p1 = document.createElement("p")
-	p1.innerHTML = "confirm"
 	p1.onclick = function(){closePopup(confirm)}
+	p1.innerHTML = "confirm"
 
 	let p2 = document.createElement("p")
-	p2.innerHTML = "cancel"
 	p2.onclick = function(){closePopup()}
+	p2.innerHTML = "cancel"
+	
+	let t = document.createElement("p")
+	t.classList.add("text")
+	t.innerHTML = text
 
-	document.querySelector('.popup-content .buttons').appendChild(p1)
-	document.querySelector('.popup-content .buttons').appendChild(p2)
-	document.querySelector('.popup-content p').innerHTML = text
+	
+	b.appendChild(p1)
+	b.appendChild(p2)
+	document.querySelector('.popup-content').append(t)
+	document.querySelector('.popup-content').append(b)
+
+	if(type == 1){
+		let c = document.createElement("input")
+		c.type = "checkbox"
+		c.classList.add("show-again")
+		c.name = "show-again"
+		c.onchange = function() {popupCheckBox = this.checked}
+		
+		let l = document.createElement("label")
+		l.innerHTML = "warn me again next time"
+		l.classList.add("show-again-label")
+		l.for = "show-again"
+
+		document.querySelector('.popup-content').append(c)
+		document.querySelector('.popup-content').append(l)
+	}
+	
 	document.querySelector('#popup').style.display = "grid"
 }
 
@@ -613,3 +683,21 @@ function closePopup(run){
 
 	document.querySelector('#popup').style.display = "none"
 }
+
+
+//************ listerners ************//
+
+document.addEventListener("keydown", e => {
+	switch (e.key) {
+		case "Escape":
+			closeEditor("cancel")
+			if(ffaEditOpen == true)
+				editFFA()
+			break;
+		case "Enter":
+			closeEditor("save")
+			if(ffaEditOpen == true)
+				editFFA()
+			break;
+	}
+})

@@ -170,12 +170,12 @@ function selectQuestion(data){
             break;
         case 1: //image
             selected.innerHTML = `
-                <div style="background-image: ${data.img[0]};" class="image"></div>
+                <div style="background-image: url(${data.img[0]});" class="image"></div>
                 <p class="text">${data.text}</p>
                 <p class="sol">${data.solution}</p>
                 <div class="buttons">
                     <p onclick="sendCloseQuestion()">schließen</p>
-                    <p onclick="socket.emit('sendToggleImage', '${data.img[0]}', '${data.img[1]}')">toggle</p>
+                    <p onclick="socket.emit('sendToggleImage', 'url(${data.img[0]})', 'url(${data.img[1]})')">toggle</p>
                 </div>`
                 console.log("image");
             break;

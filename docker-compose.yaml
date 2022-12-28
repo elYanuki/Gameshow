@@ -1,0 +1,9 @@
+services:
+  gameshow-backend:
+    build: ./
+    container_name: gameshow-backend
+    volumes:
+      - "gameshow-data:/src"
+
+volumes:
+  gameshow-data:

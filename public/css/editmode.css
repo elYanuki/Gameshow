@@ -28,10 +28,26 @@ a{
 
 /************ Main Style ************/
 
+.home{
+	position: absolute;
+	top: .5rem;
+	left: .5rem;
+	padding: .5rem;
+	color: var(--color-contrast);
+	cursor: pointer;
+	background-color: transparent;
+	border-radius: 30%;
+	font-size: 1.3rem;
+	transition: all .1s;
+}
+
+.home:hover{
+	color: hsl(0, 0%, 75%);
+}
 
 /*---------- questions ----------*/
 
-/* #region*/
+/* #region */
 
 	main{
 		display: flex;
@@ -67,7 +83,7 @@ a{
 		outline: none;
 		border-bottom: .1rem solid transparent;
 		transition: all .2s;
-		font-size: .8rem;
+		font-size: .9rem;
 		margin-block: .1rem;
 		cursor: pointer;
 	}		
@@ -87,7 +103,7 @@ a{
 
 	#questions > .catname{
 		padding-block: .5vw;
-		font-size: .8rem;
+		font-size: .9rem;
 		padding: .2rem;
 		width: 100%;
 		text-align: center;
@@ -170,7 +186,7 @@ a{
 
 /*---------- question content ----------*/
 
-/* #region*/
+/* #region */
 
 	#questions > .content{
 		grid-area: 3 / 2 / 8 / 6;
@@ -202,6 +218,7 @@ a{
 		transition: all .3s;
 		border-radius: .5rem;
 		box-shadow: 0 0 .1rem .1rem rgba(0, 0, 0, 0.2);
+		transition: all .2s;
 	}
 	#questions > .content .question.edit{
 		background-color: var(--gray-400);
@@ -213,7 +230,7 @@ a{
 
 	#questions > .content .question p{
 		text-align: center;
-		font-size: .9rem;
+		font-size: 1rem;
 		margin-block: auto;
 
 		pointer-events: none;
@@ -256,7 +273,7 @@ a{
 	height: 100vh;
 	width: 20%;
 	background-color: var(--gray-150);
-	font-size: .8rem;
+	font-size: .9rem;
 	padding: 1.5rem .5rem;
 	box-sizing: border-box;
 	overflow-y: auto;
@@ -308,21 +325,10 @@ a{
 }
 
 #categories, #rules{
-	font-size: 1rem !important;
 	box-sizing: border-box;
 	width: 80%;
 	overflow: hidden;
-	grid-template-columns: 50% 50% !important;
-	padding: .5rem !important;
-}
-
-#rules .option{
-	margin-inline: .5rem !important;
-	font-size: .9rem;
-}
-
-#categories li{
-	font-size: inherit !important;
+	z-index: 1000 !important;
 }
 /* #endregion */
 
@@ -356,23 +362,64 @@ a{
 	scale: 1;
 }
 
+#editor .top-bar{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 1vw;
+}
+
 #editor .typesel{
-	margin-bottom: 4vh;
-	margin-inline: auto;
 	display: block;
 	background-color: var(--gray-200);
 	color: white;
 	padding: .5rem 3rem;
 	text-align: center;
-	font-size: .8rem;
+	font-size: .9rem;
 	border-radius: .2rem;
+	grid-column: 2 / 3;
 }
-#editor label{
-	text-align: center;
-	font-size: .7rem;
+
+.info-popup{
+	margin-left: 1vw;
+	color: var(--gray-600);
+	width: fit-content;
+
+	--content: "you should not see this lol";
+	height: 1rem;
+	width: 1rem;
+}
+.info-popup:hover::after{
+	display: block;
+}
+.info-popup::after{
+	display: none;
+	content: var(--content);
+	position: absolute;
+	transform: translateX(-50%) translateY(-130%);
+	font-size: 1rem;
 	color: var(--color-contrast);
-	letter-spacing: .3rem;
-	text-transform: uppercase;
+	background-color: var(--gray-300);
+	font-family: calibri, sans-serif;
+	max-width: 20vw;
+	width: max-content;
+	line-height: 130%;
+	padding: .5rem;
+	white-space: pre-wrap;
+	box-shadow: 0 0 .3rem .3rem rgba(0, 0, 0, 0.3);
+	pointer-events: none;
+}
+
+#ffa-editor .info-popup{
+	position: absolute;
+	top: 1vw;
+	left: 1vw;
+	font-size: 1.2rem;
+}
+#ffa-editor .info-popup::after{
+	transform: translateX(-50%) translateY(-120%);
+	content: 'FFA questions are called after every player had the board once. With 4 Players that equals a maximum of 5 (can be lower cause players may get the board twice) but you can enter more if you expect less Players. Players can enter their guesses for the FFA on their phones, if you dont want that input to show up just tick the box. Its best/easiest to make FFAs guessing questions like "how heavy was the bigest pumkin ever".';
 }
 
 #editor .buttons{
@@ -401,7 +448,7 @@ a{
 	margin: .5rem auto;
 	background-color: var(--gray-300);
 	color: white;
-	font-size: .9rem;
+	font-size: 1rem;
 	border-radius: .3rem;
 	resize: none;
 }
@@ -424,9 +471,10 @@ a{
 	outline: none;
 	color: white;
 	accent-color: var(--color-accent);
-	font-size: .8rem;
+	font-size: 1rem;
 	padding: .2rem;
 	width: 130%;
+	font-size: .8rem;
 }
 #ffa-editor input:active{
 	outline: none;
@@ -434,7 +482,7 @@ a{
 
 #ffa-editor p{
 	margin-bottom: .5rem;
-	font-size: .8rem;
+	font-size: 1rem;
 }
 
 #ffa-editor .close{
@@ -454,7 +502,6 @@ a{
 }
 
 /* #endregion */
-
 
 /*---------- popup ----------*/
 
@@ -494,11 +541,22 @@ a{
 	background-color: var(--gray-150);
 	cursor: pointer;
 	border-radius: .3rem;
+	user-select: none;
+}
+
+.popup-content .show-again{
+	accent-color: var(--color-accent);
+	margin-top: 1rem;
+}
+.popup-content .show-again-label{
+	width: max-content;
+	color: var(--gray-600);
+	font-size: .9rem;
+	transform: translateY(-50%);
+	margin-left: .5rem;
 }
 
 /* #endregion */
-
-
 
 /************ Imports ************/
 

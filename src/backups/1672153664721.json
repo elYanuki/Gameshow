@@ -89,13 +89,13 @@
           {
             "type": 0,
             "text": "ich bin cool",
-            "solution": "sdf asdf asdf sad fdsa f asd asdf asdf asdfa sdfasdf a dfassdf a dfa dfa das fasdf asdf adsf adadsf  af dsa f das f asd fda sf ad sf asdf ads fdas fa dsf ad s fa ds saf dsa fd saf das fa sdf asf dasf as dfasd f asdf dsaf s f asdf  dsaf ",
+            "solution": " asdf dsa f",
             "used": false
           },
           {
             "type": 2,
-            "text": "dasfafd asd f asdf asd f adsf asd f adsf asdf assdf asdf sa df sadf asd fasdf sd afd saf asd fasdf as dfasd fsdaf sdaf dsaf sdaf sda",
-            "solution": "dasfafd asd f asdf asd f adsf asd f adsf asdf assdf asdf sa df sadf asd fasdf sd afd saf asd fasdf as dfasd fsdaf sdaf dsaf sdaf sda",
+            "text": "",
+            "solution": "",
             "options": [
               "fasdf",
               "",
@@ -105,13 +105,9 @@
             "used": false
           },
           {
-            "type": 1,
+            "type": 0,
             "text": "",
             "solution": "",
-            "img": [
-              "asdfdsaf",
-              "a"
-            ],
             "used": false
           },
           {
@@ -166,38 +162,18 @@
     ],
     "ffa": [
       {
-        "type": 11,
+        "type": 10,
         "question": "",
         "solution": ""
       },
       {
         "type": 10,
-        "question": "asdf",
-        "solution": "dsaf"
-      },
-      {
-        "type": 11,
         "question": "",
         "solution": ""
       },
       {
         "type": 10,
-        "question": "asdf",
-        "solution": ""
-      },
-      {
-        "type": 11,
         "question": "",
-        "solution": "asdf"
-      },
-      {
-        "type": 10,
-        "question": "",
-        "solution": "fasdf"
-      },
-      {
-        "type": 10,
-        "question": "as",
         "solution": ""
       },
       {
@@ -213,7 +189,27 @@
       {
         "type": 10,
         "question": "",
-        "solution": "asdf"
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
+      },
+      {
+        "type": 10,
+        "question": "",
+        "solution": ""
       }
     ]
   },

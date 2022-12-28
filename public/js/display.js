@@ -143,7 +143,7 @@ function selectQuestion(data, catName){
             selected.innerHTML= `<span class="header">${catName}</span><p class="text">${data.text}</p>`    
             break;
         case 1:
-            selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: ${data.img[0]};" class="image"></div><p class="text">${data.text}</p>`
+            selected.innerHTML= `<span class="header">${catName}</span><div style="background-image: url(${data.img[0]});" class="image"></div><p class="text">${data.text}</p>`
             break
         case 2:
             selected.innerHTML= `<span class="header">${catName}</span>

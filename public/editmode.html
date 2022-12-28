@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Gameshow - Editmode</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./css/editmode.css">
 	<link rel="stylesheet" href="./css/rules-categories.css">
@@ -44,21 +44,27 @@
 			<div class="content"></div>
 			
 			<div id="editor">
-				<label for="typesel">type</label>
-				<select class="typesel" name="typesel" onchange="changeQuestionType(this.value)">
-					<option value="0">Default</option>
-					<option value="1">Image</option>
-					<option value="2">Multiple choice</option>
-				</select>
+
+				<div class="top-bar">
+					<select class="typesel" name="typesel" onchange="changeQuestionType(this.value)">
+						<option value="0">Default</option>
+						<option value="1">Image</option>
+						<option value="2">Multiple choice</option>
+					</select>
+		
+					<i class="fa-solid fa-circle-info info-popup"></i>
+				</div>
 
 				<div class="content">
 				</div>
 
 				<div class="buttons">
-					<p onclick="closeEditor('save')">save</p>
-					<p onclick="closeEditor('cancel')">cancel</p>
+					<p onclick="closeEditor('save')" title="enter">save</p>
+					<p onclick="closeEditor('cancel')" title="escape">cancel</p>
 				</div>
 			</div>
+
+			<a href="./index.html" class="home"><i class="fa-solid fa-house"></i></a>
 
 			<div id="ffa-editor">
 			</div>
@@ -72,8 +78,6 @@
 
 	<div id="popup">
 		<div class="popup-content">
-			<p class="text">you should not see this</p>
-			<div class="buttons"></div>
 		</div>
 	</div>
 

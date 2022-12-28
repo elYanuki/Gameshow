@@ -1,5 +1,4 @@
 FROM node:18-alpine
-WORKDIR /gameshow
 COPY . .
-RUN yarn install --production
+RUN npm install --production
 CMD ["node", "server.js"]

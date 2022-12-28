@@ -116,7 +116,7 @@ function selectQuestion(data, catName){
         case 1: //image
             selected.innerHTML= `
                 <span class="header">${catName}</span>
-                <div style="background-image: ${data.img[0]};" class="image"></div>
+                <div style="background-image: url(${data.img[0]});" class="image"></div>
                 <p class="text">${data.text}</p>`
             break
         case 2: //multiple choice

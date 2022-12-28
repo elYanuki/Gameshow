@@ -14,12 +14,11 @@ const fs = require('fs');
 
 const playerpath = "./src/player.json"
 const questionpath = "./src/boards.json"
-const ffAPath = "./src/freeForAll_1.json"
 
 const app = express()
 const server = http.createServer(app)
 const io = require("socket.io")(server)
-const port = 4000
+const port = 80
 
 app.use(express.static("public"))
 
@@ -279,8 +278,11 @@ io.on("connection", (socket) => {
     socket.on("delete-board", (uuid) => {
         manager.deleteBoard(uuid)
     })
+    
+    socket.on("force-backup", () => {
+        backUpBoards(true)
+    })
 })
-
 
 function stopTimer(){
     if (ffaRunning == true) { //if current question is a ffa send collected answers to gamemaster
@@ -306,6 +308,55 @@ function createBoardList(){ //compiles list of all names and uuids of boards
 }
 
 //SAVE DATA TO JSON FILES
+
+try {
+    if (!fs.existsSync("./src/backups")) {
+        fs.mkdirSync("./src/backups");
+    }
+}
+catch (err) {
+    console.error(err);
+}
+
+const secsInADay = 86400000
+const secsInHour = 3600000
+const daysToKeepBackups = 7
+let lastCheck = Date.now()
+
+function backUpBoards(force = false){
+    const now = Date.now()
+
+    if(now - lastCheck < secsInHour && force === false) return
+    
+    lastCheck = now
+
+    let newestBackup = -1
+    let backupContents = fs.readdirSync("./src/backups/")
+    let backupsToDelete = []
+
+    backupContents.forEach(item => {
+        let timeInt = parseInt(item)
+
+        if(timeInt > newestBackup)
+            newestBackup = timeInt
+
+        if(timeInt < now - (secsInADay * daysToKeepBackups))
+            backupsToDelete.push(item)
+    });
+
+
+    if(now - newestBackup > secsInADay || force === true){
+        fs.writeFile(`./src/backups/${now}.json`, JSON.stringify(manager.boards, 0, 2), 'utf8', ( (error) => {
+            if(error) throw error;
+        }))
+    }
+
+    backupsToDelete.forEach((item) => {
+        fs.unlink("./src/backups/" + item, (err) => {
+            if (err) throw err;
+        });
+    })
+}
 
 //initially reads players
 if (fs.existsSync(playerpath)) {
@@ -337,18 +388,6 @@ function readQuestions(){
     })
 }
 
-/* //initially reads ffa
-if (fs.existsSync(ffAPath)) {
-    fs.readFile(ffAPath, 'utf-8', (err, data_string) => {
-        if (err) throw err;
-
-        let data = JSON.parse(data_string);
-
-        console.log(data);
-        manager.setFFA(data)
-    })
-} */
-
 function updatePlayerFile(){
     fs.writeFile(playerpath, JSON.stringify(manager.players, 0, 2), 'utf8', (error => {
         if (error) throw error;
@@ -364,6 +403,7 @@ function updateBoardFile(){
 server.listen(port, () => {
     console.log(`listenin on port ${port}`)
 })
+
 class Manager {
 
     constructor() {
@@ -372,6 +412,8 @@ class Manager {
         this.players = new Array();
         this.questions = new Array();
         this.freeForAll = new Array();
+
+        this.currentBoardUUID = null
     }
 
     addPlayer(name) {
@@ -385,61 +427,6 @@ class Manager {
 
             this.players.push(newPlayer);
         }
-    }
-
-    addQuestionSet(name, text1, sol1, text2, sol2, text3, sol3, text4, sol4, text5, sol5) {
-        if (this.questions.length < 4) {
-            console.log(name.toLowerCase());
-            name = name.toLowerCase()
-
-            let newSet = {
-                name: name,
-                questions: [
-                    {
-                        "type": type1,
-                        "text": text1,
-                        "solution": sol1,
-                        "used": false
-                    },
-                    {
-                        "type": type2,
-                        "text": text2,
-                        "solution": sol2,
-                        "used": false
-                    },
-                    {
-                        "type": type3,
-                        "text": text3,
-                        "solution": sol3,
-                        "used": false
-                    },
-                    {
-                        "type": type4,
-                        "text": text4,
-                        "solution": sol4,
-                        "used": false
-                    },
-                    {
-                        "type": type5,
-                        "text": text5,
-                        "solution": sol5,
-                        "used": false
-                    },
-                ]
-            };
-
-            this.questions.push(newSet);
-        }
-    }
-
-    addFreeForAll(type, question, solution) {
-        let newFFA = {
-            type: type,
-            question: question,
-            solution: solution
-        };
-
-        this.freeForAll.push(newFFA);
     }
 
     deletePlayer(name){
@@ -456,11 +443,14 @@ class Manager {
 
     setQuestions(uuid){ //sets currently used qustion set
         this.boards.forEach(item => {
-            if(item.uuid == uuid)
-            this.questions = item.board
-            this.freeForAll = item.freeForAll
+            if(item.uuid == uuid){
+                this.questions = item.board
+                this.freeForAll = item.freeForAll
 
-            io.emit("loadQuestions", this.questions)
+                this.currentBoardUUID = uuid
+
+                io.emit("loadQuestions", this.questions)
+            }
         });
     }
 
@@ -496,14 +486,17 @@ class Manager {
             if(this.boards[i].uuid == board.uuid){ //uuids match - item will be replaced
                 this.boards[i] = board
 
-                if(this.questions.uuid == this.boards[i].uuid){
+                if(this.currentBoardUUID == this.boards[i].uuid){
                     this.questions = this.boards[i]
 
-                    socket.emit("loadQuestions", manager.questions)
+                    this.setQuestions(this.currentBoardUUID)
+                    io.emit("loadQuestions", manager.questions)
                 }
 
                 updateBoardFile()
                 createBoardList()
+
+                backUpBoards()
             }
         }
     }

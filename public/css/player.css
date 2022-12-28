@@ -230,7 +230,6 @@ main{
 .bottom-bar p{
     color: var(--gray-6);
     text-align: center;
-    font-size: 110%;
     font-family: standart;
     margin-bottom: .5rem;
 }
