@@ -2,7 +2,7 @@
 
 NodeJS based Gameshow
 
-**Latest stabel version: V3.0**
+**version: V3.0**
 
 3 main pages
 - display: 
