@@ -218,6 +218,8 @@ article[data-position="left"]{
 
 #selected .image{
     flex-shrink: 2;
+    aspect-ratio: 4/3;
+    max-height: 18vh;
 }
 
 #selected .sol{
@@ -225,6 +227,7 @@ article[data-position="left"]{
     font-size: clamp(1rem, 4vw, 1.5rem);
     color: white;
     word-wrap: break-word;
+    font-style: italic;
 }
 
 #selected .hidden{

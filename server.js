@@ -445,7 +445,8 @@ class Manager {
         this.boards.forEach(item => {
             if(item.uuid == uuid){
                 this.questions = item.board
-                this.freeForAll = item.freeForAll
+                this.freeForAll = item.ffa
+                console.log(item);
 
                 this.currentBoardUUID = uuid
 
