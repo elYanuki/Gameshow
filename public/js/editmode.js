@@ -530,13 +530,6 @@ function closeEditor(action){
 	
 		renderBoard()
 
-		//sets al question usages to false in case a running game changed them
-		selectedBoard.board.forEach((category)=>{
-			category.questions.forEach((question)=>{
-				question.used = false
-			})
-		})
-
 		updateServer()
 	}
 	

@@ -100,7 +100,7 @@ io.on("connection", (socket) => {
     function setTimer(value){
         if(value <= 0 || timerRunning == false){
             setTimeout(() => {
-                stopTimer()
+                stopTimer(true)
             }, 1000);
             }
         else{
@@ -237,14 +237,13 @@ io.on("connection", (socket) => {
             manager.players[i].score = 0
             manager.players[i].special = true
         }
+        io.emit("loadPlayers", manager.players)
 
-        readQuestions().then(()=>{
-            updatePlayerFile()
-    
-            io.emit("loadQuestions", manager.questions)
-            io.emit("loadPlayers", manager.players)
+        manager.questions.forEach((category)=>{
+            category.questions.forEach((question)=>{
+                question.used = false
+            })
         })
-
     })
 
     socket.on("deleteAll", () => {
@@ -284,14 +283,14 @@ io.on("connection", (socket) => {
     })
 })
 
-function stopTimer(){
+function stopTimer(sound = false){
     if (ffaRunning == true) { //if current question is a ffa send collected answers to gamemaster
         console.log("answer sent to clients");
         io.emit("answers", answers)
         answers = []
     }
     
-    io.emit("stopTimer")
+    io.emit("stopTimer", sound)
     timerRunning = false
     clearTimeout(timerRec)
 }
@@ -445,6 +444,15 @@ class Manager {
         this.boards.forEach(item => {
             if(item.uuid == uuid){
                 this.questions = item.board
+                
+                //sets al question usages to false in case a running game changed them
+                this.questions.forEach((category)=>{
+                    category.questions.forEach((question)=>{
+                        question.used = false
+                    })
+                })
+                updateBoardFile()
+
                 this.freeForAll = item.ffa
                 console.log(item);
 

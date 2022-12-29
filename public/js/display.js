@@ -72,8 +72,8 @@ socket.on('setTimer', (value) => {
     }
 })
 
-socket.on('stopTimer', () => {
-    if(timerActive == true)
+socket.on('stopTimer', (sound) => {
+    if(timerActive == true && sound == true)
         playSound("bell")
 
     killTimer()

@@ -17,8 +17,8 @@ let touchstartX = 0
 let touchendX = 0
     
 function checkDirection() {
-  if (touchendX - touchstartX < -100) swipe(0)//left
-  if (touchendX - touchstartX > 100) swipe(1)//left
+  if (touchendX - touchstartX < -80) swipe(0)//left
+  if (touchendX - touchstartX > 80) swipe(1)//left
 }
 
 document.addEventListener('touchstart', e => {
@@ -208,8 +208,6 @@ function selectQuestion(data){
     
     selected.style.display = "flex"
     selected.style.border = "3rem solid var(--color-accent-1)"
-    
-    selected.scrollIntoView(false)
 }
 
 function sendSelectQuestion(set, id){ //set: x coords (categorie) id: y coords (question)
