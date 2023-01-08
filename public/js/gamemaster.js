@@ -118,10 +118,13 @@ socket.on('loadFFA', (data) => {
 socket.on('boardList', (data) => {	
 	let html = ""
 	data.forEach(item => {
-		html += `<div class="board" onclick="socket.emit('setQuestions', '${item.uuid}'); document.querySelector('#questionsets').style.display = 'none'">${item.name}</div>`
+		html += `<p class="board" onclick="socket.emit('setQuestions', '${item.uuid}'); document.querySelector('#questionsets').style.display = 'none'">${item.name}</p>`
 	})
 
-    html += `<p onclick="document.querySelector('#questionsets').style.display = 'none'">close</p>`
+    html += `
+        <p onclick="socket.emit('setQuestions', 'clear'); document.querySelector('#questionsets').style.display = 'none'" class="none">none</p>
+        <p onclick="document.querySelector('#questionsets').style.display = 'none'" class="close">close</p>
+    `
 
 	document.querySelector('#questionsets').innerHTML = html
 })

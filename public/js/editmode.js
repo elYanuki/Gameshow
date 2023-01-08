@@ -313,6 +313,8 @@ function createBoard(){
 
 	addKnownUUID(selectedBoard.uuid)
 
+	generateFFAEditor(selectedBoard.ffa)
+
 	console.log(selectedBoard);
 }
 
