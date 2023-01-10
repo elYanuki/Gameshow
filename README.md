@@ -25,6 +25,7 @@ NodeJS based Gameshow
   - the last used player is saved for auto login
 - editmode:
   - select questionboard to edit and change all parts of the game
+  - create, delete and rename gameboards
   - change the type of each question
     - default: question and answer
     - image: question, answer and one as the "question-image" and a "solution-image"
@@ -32,6 +33,7 @@ NodeJS based Gameshow
   - change FreeForAll questions
     - FFA gets called after every player chose a question once
     - everyone can give an answer to the FFA on their own phone one the player page
+  - get a warning when clicking on a board you have never opened before
   - not yet functional on mobile
 
 ---
@@ -39,7 +41,5 @@ NodeJS based Gameshow
 ![image](https://user-images.githubusercontent.com/70104756/193749890-80727808-8d49-439a-aeb2-f95de4d4ac04.png)
 *Display view of the gameshow*
 
-![editmode](https://user-images.githubusercontent.com/70104756/211500452-baa098ea-c538-462d-a799-32831ade0b8f.jpg)
+![editmode](https://user-images.githubusercontent.com/70104756/211500913-fb9661e4-97ee-4489-8f49-a1a7e713557d.jpg)
 *Editmode while changing content of a question in the gameboard "yaniks fun thing"*
-
-
