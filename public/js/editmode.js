@@ -107,205 +107,11 @@ function highlightSelectedBoard(){
 }
 
 function createBoard(){
+	/* this way of creating a json might seem dumb but after struggeling for literal days because multiple 
+	parts of this fucker referenced the same thing and all the data got duplicated and
+	things changed that should not change and.. *sobbing* :c*/
 	selectedBoard = 
-	{
-		"name" : "new board",
-		"uuid" : uuidv4(),
-		"board" : [
-			{
-				"name": "",
-				"questions": [
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-				]
-			},
-			{
-				"name": "",
-				"questions": [
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-				]
-			},
-			{
-				"name": "",
-				"questions": [
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-				]
-			},
-			{
-				"name": "",
-				"questions": [
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-					{
-						"type": 0,
-						"text": "",
-						"solution": "",
-						"used": false
-					},
-				]
-			},
-		],
-		"ffa" : [
-			{
-				type: 10,
-				question: "",
-				solution: ""
-			},
-			{
-				type: 10,
-				question: "",
-				solution: ""
-			},
-			{
-				type: 10,
-				question: "",
-				solution: ""
-			},
-			{
-				type: 10,
-				question: "",
-				solution: ""
-			},
-			{
-				type: 10,
-				question: "",
-				solution: ""
-			},
-			{
-				type: 10,
-				question: "",
-				solution: ""
-			},
-			{
-				type: 10,
-				question: "",
-				solution: ""
-			},
-			{
-				type: 10,
-				question: "",
-				solution: ""
-			},
-			{
-				type: 10,
-				question: "",
-				solution: ""
-			},
-			{
-				type: 10,
-				question: "",
-				solution: ""
-			},
-		]
-	}
+	{"name" : "new board","uuid" : uuidv4(),"board" : [{"name": "","questions": [{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},]},{"name": "","questions": [{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},]},{"name": "","questions": [{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},]},{"name": "","questions": [{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},{"type": 0,"text": "","solution": "","used": false},]},],"ffa" : [{"type": 10,"question": "","solution": ""},{"type": 10,"question": "","solution": ""},{"type": 10,"question": "","solution": ""},{"type": 10,"question": "","solution": ""},{"type": 10,"question": "","solution": ""},{"type": 10,"question": "","solution": ""},{"type": 10,"question": "","solution": ""},{"type": 10,"question": "","solution": ""},{"type": 10,"question": "","solution": ""},{"type": 10,"question": "","solution": ""},]}
 
 	renderBoard()
 
@@ -451,7 +257,7 @@ function renderBoard(){
 
 			switch(selectedBoard.board[i].questions[j].type){
 				case 0:
-					type = "default"
+type = "default"
 					break
 				case 1:
 					type = "image"
@@ -576,7 +382,8 @@ function renameCategory(cat, value){
 }
 
 function renameBoard(value){
-	selectedBoard.name = value;
+	value.replace(/['"]+/g, '')
+	selectedBoard.name = value
 	updateServer()
 }
 

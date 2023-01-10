@@ -304,6 +304,7 @@ a{
 	cursor: pointer;
 	border-radius: .5rem;
 	box-shadow: 0 0 .2rem .2rem rgba(0, 0, 0, 0.5);
+	user-select: none;
 }
 #boards .board.selectedBoard{
 	outline: .1rem solid var(--color-accent);
