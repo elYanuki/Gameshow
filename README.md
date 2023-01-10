@@ -38,3 +38,8 @@ NodeJS based Gameshow
 
 ![image](https://user-images.githubusercontent.com/70104756/193749890-80727808-8d49-439a-aeb2-f95de4d4ac04.png)
 *Display view of the gameshow*
+
+![editmode](https://user-images.githubusercontent.com/70104756/211500452-baa098ea-c538-462d-a799-32831ade0b8f.jpg)
+*Editmode while changing content of a question in the gameboard "yaniks fun thing"*
+
+
