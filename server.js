@@ -7,7 +7,6 @@ DEPENDS ON: socket, express, filsystem, npm
 
 ***************************************************************************************************************/
 
-
 const express = require("express")
 const http = require("http")
 const fs = require('fs');
@@ -349,7 +348,8 @@ function backUpBoards(force = false){
         if(timeInt > newestBackup)
             newestBackup = timeInt
 
-        if(timeInt < now - (secsInADay * daysToKeepBackups))
+        if(backupContents.length - backupsToDelete.length > 7 && 
+           timeInt < now - (secsInADay * daysToKeepBackups))
             backupsToDelete.push(item)
     });
 
