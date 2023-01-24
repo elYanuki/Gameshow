@@ -1,6 +1,6 @@
 [
   {
-    "name": "Yanik Board 1",
+    "name": "peters cool board",
     "uuid": "cecff490-3652-46ec-aaf2-a7aeeef3ac8d",
     "board": [
       {
@@ -218,7 +218,7 @@
     ]
   },
   {
-    "name": "new board",
+    "name": "yaniks fun thing",
     "uuid": "ab3fe7f9-82ad-414c-aec7-46c41fb464ef",
     "board": [
       {
@@ -226,8 +226,8 @@
         "questions": [
           {
             "type": 0,
-            "text": "qqwererqwre",
-            "solution": "weq",
+            "text": "what is your name",
+            "solution": "bob",
             "used": false
           },
           {
@@ -250,8 +250,47 @@
           },
           {
             "type": 0,
+            "text": "i actually use this, just cant really screenshot it",
+            "solution": "names are a bit weird",
+            "used": false
+          }
+        ]
+      },
+      {
+        "name": "",
+        "questions": [
+          {
+            "type": 1,
+            "text": "image question",
+            "solution": "hehe",
+            "img": [
+              "",
+              ""
+            ],
+            "used": false
+          },
+          {
+            "type": 0,
             "text": "",
             "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "",
+            "solution": "",
+            "used": false
+          },
+          {
+            "type": 0,
+            "text": "yesssir",
+            "solution": "another one",
             "used": false
           }
         ]
@@ -261,8 +300,8 @@
         "questions": [
           {
             "type": 0,
-            "text": "mein pp bick ",
-            "solution": "pp",
+            "text": "also a question",
+            "solution": "i guess",
             "used": false
           },
           {
@@ -285,7 +324,7 @@
           },
           {
             "type": 0,
-            "text": "",
+            "text": "this app is cool isnt it",
             "solution": "",
             "used": false
           }
@@ -295,9 +334,15 @@
         "name": "",
         "questions": [
           {
-            "type": 0,
-            "text": "",
-            "solution": "",
+            "type": 2,
+            "text": "another type",
+            "solution": "yeah boy",
+            "options": [
+              "",
+              "",
+              "",
+              ""
+            ],
             "used": false
           },
           {
@@ -320,43 +365,8 @@
           },
           {
             "type": 0,
-            "text": "",
-            "solution": "",
-            "used": false
-          }
-        ]
-      },
-      {
-        "name": "",
-        "questions": [
-          {
-            "type": 0,
-            "text": "",
-            "solution": "",
-            "used": false
-          },
-          {
-            "type": 0,
-            "text": "",
-            "solution": "",
-            "used": false
-          },
-          {
-            "type": 0,
-            "text": "",
-            "solution": "",
-            "used": false
-          },
-          {
-            "type": 0,
-            "text": "",
-            "solution": "",
-            "used": false
-          },
-          {
-            "type": 0,
-            "text": "",
-            "solution": "",
+            "text": "ran out of ideas",
+            "solution": "sadge :c",
             "used": false
           }
         ]

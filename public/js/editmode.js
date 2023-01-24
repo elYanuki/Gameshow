@@ -255,7 +255,7 @@ function renderBoard(){
 
 			switch(selectedBoard.board[i].questions[j].type){
 				case 0:
-type = "default"
+					type = "default"
 					break
 				case 1:
 					type = "image"

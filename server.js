@@ -140,7 +140,7 @@ io.on("connection", (socket) => {
         safedSet = null
     })
 
-    socket.on("sendToggleImage", (hint, solution) => {
+    socket.on("toggleImage", (hint, solution) => {
         console.log("toggle image");
         if(imageMode == 0){
             imageMode = 1
