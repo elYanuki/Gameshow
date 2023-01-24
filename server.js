@@ -7,7 +7,6 @@ DEPENDS ON: socket, express, filsystem, npm
 
 ***************************************************************************************************************/
 
-
 const express = require("express")
 const http = require("http")
 const fs = require('fs');
@@ -238,6 +237,7 @@ io.on("connection", (socket) => {
             manager.players[i].special = true
         }
         io.emit("loadPlayers", manager.players)
+        updatePlayerFile()
 
         manager.questions.forEach((category)=>{
             category.questions.forEach((question)=>{
@@ -250,6 +250,12 @@ io.on("connection", (socket) => {
         manager.players = []
 
         updatePlayerFile()
+
+        manager.questions.forEach((category)=>{
+            category.questions.forEach((question)=>{
+                question.used = false
+            })
+        })
 
         io.emit("loadQuestions", manager.questions)
         io.emit("loadPlayers", manager.players)
@@ -284,13 +290,16 @@ io.on("connection", (socket) => {
 })
 
 function stopTimer(sound = false){
-    if (ffaRunning == true) { //if current question is a ffa send collected answers to gamemaster
-        console.log("answer sent to clients");
-        io.emit("answers", answers)
-        answers = []
-    }
-    
     io.emit("stopTimer", sound)
+
+    setTimeout(function(){//super ugly but should fix things and im drunk rn so doesnt matter
+        if (ffaRunning == true) { //if current question is a ffa send collected answers to gamemaster
+            console.log("answer sent to clients");
+            io.emit("answers", answers)
+            answers = []
+        }
+    },500)
+
     timerRunning = false
     clearTimeout(timerRec)
 }
@@ -339,7 +348,8 @@ function backUpBoards(force = false){
         if(timeInt > newestBackup)
             newestBackup = timeInt
 
-        if(timeInt < now - (secsInADay * daysToKeepBackups))
+        if(backupContents.length - backupsToDelete.length > 7 && 
+           timeInt < now - (secsInADay * daysToKeepBackups))
             backupsToDelete.push(item)
     });
 
@@ -440,12 +450,20 @@ class Manager {
         manager.players.splice(id,1)
     }
 
-    setQuestions(uuid){ //sets currently used qustion set
+    setQuestions(uuid){ //sets currently used question set
+        if(uuid == "clear"){
+            this.questions = []
+            this.freeForAll = []
+            this.currentBoardUUID = null
+            io.emit("loadQuestions", this.questions)
+            return
+        }
+
         this.boards.forEach(item => {
             if(item.uuid == uuid){
                 this.questions = item.board
                 
-                //sets al question usages to false in case a running game changed them
+                //sets all question usages to false in case a running game changed them
                 this.questions.forEach((category)=>{
                     category.questions.forEach((question)=>{
                         question.used = false
@@ -454,7 +472,6 @@ class Manager {
                 updateBoardFile()
 
                 this.freeForAll = item.ffa
-                console.log(item);
 
                 this.currentBoardUUID = uuid
 
