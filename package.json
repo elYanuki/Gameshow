@@ -2,10 +2,11 @@
   "name": "hello_socket",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"test passed i guess\"",
-    "ngrok": "ngrok.exe http 4000 -region eu"
+    "ngrok": "ngrok.exe http 4000 -region eu",
+    "start": "npm server.js"
   },
   "author": "",
   "license": "ISC",
