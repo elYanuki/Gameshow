@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"test passed i guess\"",
     "ngrok": "ngrok.exe http 4000 -region eu",
-    "start": "npm server.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
