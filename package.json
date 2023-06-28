@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "ngrok": "ngrok.exe http 4000 -region eu"
   },
+  "test": "echo 'whatever'",
   "author": "",
   "license": "ISC",
   "dependencies": {
