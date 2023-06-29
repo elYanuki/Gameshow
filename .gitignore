@@ -2,3 +2,4 @@
 /.idea
 /.vscode
 .dockerignore
+node_modules/
