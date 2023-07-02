@@ -25,6 +25,13 @@ const port = 80
 
 app.use(express.static("public"))
 
+io.listen(8000)
+
+server.listen(port, () => {
+    console.log(`listenin on port ${port}`)
+})
+
+
 let ffACount = 0 //used to automatically display a new ffa
 let ffaRunning = false //used to only collect and send awnsers if question is ffa
 
@@ -412,10 +419,6 @@ function updateBoardFile(){
         if(error) throw error;
     }))
 }
-
-server.listen(port, () => {
-    console.log(`listenin on port ${port}`)
-})
 
 class Manager {
 
