@@ -18,7 +18,7 @@ const app = express()
 const server = http.createServer(app)
 const io = require("socket.io")(server, {
     cors: {
-      origin: "https://gameshow-elyanuki.vercel.app/"
+      origin: "https://gameshow-fv89jlbyp-elyanuki.vercel.app/"
     }
   })
 const port = 80
