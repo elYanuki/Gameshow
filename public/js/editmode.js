@@ -1,3 +1,4 @@
+console.log(io)
 const socket = io();
 
 let boardContent = document.querySelector('#questions > .content')
