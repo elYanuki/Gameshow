@@ -1,6 +1,6 @@
 # Gameshow
 
-NodeJS based Gameshow
+NodeJS based Tool for hosting a irl gameshow simmilar to jeopardy. Stream Gameboard to a tv, update scores and open questions with your phone.
 
 **version: V3.1**
 
